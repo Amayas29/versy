@@ -87,3 +87,18 @@ body {
   justify-content: space-between;
   align-items: center;
 }
+
+#emailInput {
+  background-image: url(./mail_icon.png);
+  position: left;
+  padding-left: 28px;
+  background-size: 25px;
+  background-repeat: no-repeat;
+}
+#nameInput , #lastnameInput{
+  background-image: url(./user_icon.png);
+  position: left;
+  padding-left: 28px;
+  background-size: 25px;
+  background-repeat: no-repeat;
+}
