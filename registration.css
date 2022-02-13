@@ -13,7 +13,7 @@ body{
     background: #7d2ae8;
     padding: 30px;
   }
-  .container{
+.container{
     position: relative;
     max-width: 850px;
     width: 100%;
@@ -21,8 +21,8 @@ body{
     padding: 40px 30px;
     box-shadow: 0 5px 10px rgba(0,0,0,0.2);
     perspective: 2700px;
-  }
-  .container .cover{
+}
+.container .cover{
     position: absolute;
     top: 0;
     left: 50%;
@@ -32,10 +32,10 @@ body{
     transition: all 1s ease;
     transform-origin: left;
     transform-style: preserve-3d;
-  }
-  .container #flip:checked ~ .cover{
+}
+.container #flip:checked ~ .cover{
     transform: rotateY(-180deg);
-  }
+}
 .container .cover .front,
 .container .cover .back{
     position: absolute;
@@ -101,6 +101,7 @@ body{
     align-items: center;
     justify-content: space-between;
 }
+
 .form-content .login-form,
 .form-content .signup-form{
     width: calc(100% / 2 - 25px);
@@ -147,7 +148,6 @@ body{
 }
   
 .form-content .input-box input:focus,
-
 .form-content .input-box input:valid{
     border-color: #7d2ae8;
 }
@@ -193,13 +193,17 @@ body{
     color: #5b13b9;
     cursor: pointer;
 }
+
+#conditions {
+    font-size: 15px;
+    color: #333;
+}
  
 .forms .form-content label:hover{
     text-decoration: underline;
 }
 
 .forms .form-content .login-text,
-
 .forms .form-content .sign-up-text{
     text-align: center;
     margin-top: 25px;
