@@ -2,6 +2,9 @@
 @import "./components/containers/_MainContainer.css";
 @import "./components/containers/_FeedContainer.css";
 @import "./components/containers/_SugestContainer.css";
+@import "./components/containers/_PrivateMessages.css";
+@import "./components/containers/_LoginFormContainer.css";
+@import "./components/_Input.css";
 @import "./components/_Action.css";
 
 * {
@@ -20,6 +23,18 @@ body {
   margin-left: 15%;
   margin-right: 15%;
   display: flex;
+}
+
+.app.login {
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.app.register {
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
 }
 
 @media only screen and (max-width: 1200px) {

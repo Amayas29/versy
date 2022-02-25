@@ -1,0 +1,14 @@
+.private_message-container {
+  width: 100%;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.private_message-header {
+}
+
+.private_message-list {
+  overflow: auto;
+}

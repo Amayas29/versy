@@ -1,17 +1,24 @@
-import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import React, { Component } from "react";
 import Home from "./pages/Home";
-import NotFound from "./pages/NotFound";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import ResetPassword from "./pages/ResetPassword";
 
-function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" exact element={<Home />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </BrowserRouter>
-  );
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      page: <Home />,
+    };
+  }
+
+  setPage(page) {
+    this.setState({ page });
+  }
+
+  render() {
+    return this.state.page;
+  }
 }
 
 export default App;

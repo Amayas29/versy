@@ -9,7 +9,7 @@ const PublishMessage = (props) => {
       <MessageAvatar avatar={props.avatar} />
       <div className="message-content">
         <div
-          className="input"
+          className="message-input"
           contentEditable="true"
           spellCheck="false"
           data-placeholder="What's happening?"
