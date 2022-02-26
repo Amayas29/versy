@@ -53,12 +53,12 @@ body {
 
 .linear:hover span {
   border-radius: 50px;
-  filter: drop-shadow(0 0 0.4rem #1a1a1a);
+  filter: drop-shadow(0 0 0.4rem #09070f);
 }
 
 .linear:hover em {
   transition: 0.2s;
-  filter: drop-shadow(0 0 0.5rem #1a1a1a);
+  filter: drop-shadow(0 0 0.5rem #09070f);
   color: #dfe4eb;
 }
 
@@ -95,7 +95,7 @@ body {
 .main .feed .msg-list article {
   padding: 20px 10px;
   width: calc(100% - 20px);
-  background-color: #1a1a1a6c;
+  background-color: #09070f6c;
   border-radius: 10px;
 }
 
@@ -156,7 +156,7 @@ body {
   padding: 10px;
   width: calc(100% - 20px);
   border: 1px solid transparent;
-  background: #1a1a1a8c;
+  background: #09070f8c;
   min-height: 100px;
   max-height: 500px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
@@ -190,19 +190,19 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #1a1a1a;
+  color: #09070f;
 }
 
 .action:hover {
   transition: 0.2s;
-  filter: drop-shadow(0 0 0.4rem #1a1a1a);
+  filter: drop-shadow(0 0 0.4rem #09070f);
   color: #dfe4eb;
 }
 
 .btn {
   padding: 0.3em 1.2em;
   color: #dfe4eb;
-  background-color: #1a1a1a;
+  background-color: #09070f;
   transition: all 0.2s;
   letter-spacing: 2px;
   border: none;
@@ -213,8 +213,8 @@ body {
 
 .btn:hover,
 .btn:active {
-  box-shadow: 0px 0px 10px 5px #1a1a1a;
-  color: #1a1a1a;
+  box-shadow: 0px 0px 10px 5px #09070f;
+  color: #09070f;
   background-color: #dfe4eb;
 }
 

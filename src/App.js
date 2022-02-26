@@ -7,13 +7,16 @@ import ResetPassword from "./pages/ResetPassword";
 class App extends Component {
   constructor(props) {
     super(props);
+    this.setPage.bind(this);
+
     this.state = {
-      page: <Home />,
+      page: <Home setPage={this.setPage} />,
+      token: "",
     };
   }
 
   setPage(page) {
-    this.setState({ page });
+    this.setState({ page: page });
   }
 
   render() {

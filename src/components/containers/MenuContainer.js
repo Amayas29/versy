@@ -2,7 +2,7 @@ import React from "react";
 import Logo from "../Logo";
 import MenuItem from "../MenuItem";
 
-const MenuContainer = () => {
+const MenuContainer = (props) => {
   return (
     <aside className="menu">
       <Logo />
@@ -13,7 +13,7 @@ const MenuContainer = () => {
         <MenuItem title="Profile" iconName="fa-user" />
         <MenuItem title="More" iconName="fa-ellipsis" />
       </div>
-      <div>USER : TODO</div>
+      <div style={{ color: "white" }}>USER : TODO</div>
     </aside>
   );
 };

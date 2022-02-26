@@ -1,7 +1,7 @@
 import React from "react";
 import FeedContainer from "./FeedContainer";
-import SugestContainer from "./SugestContainer";
-import logo from "../../assets/logo.png";
+import SuggestContainer from "./SuggestContainer";
+import logo from "../../assets/avatar.jpg";
 
 const MainContainer = () => {
   return (
@@ -97,7 +97,7 @@ const MainContainer = () => {
           },
         ]}
       />
-      <SugestContainer />
+      <SuggestContainer />
     </main>
   );
 };

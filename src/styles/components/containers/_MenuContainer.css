@@ -18,16 +18,17 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
+  color: #dfe4eb;
 }
 
 .menu-item:hover span {
   border-radius: 50px;
-  filter: drop-shadow(0 0 0.4rem #1a1a1a);
+  filter: drop-shadow(0 0 0.4rem #5d63ff);
 }
 
 .menu-item:hover em {
   transition: 0.2s;
-  filter: drop-shadow(0 0 0.5rem #1a1a1a);
+  filter: drop-shadow(0 0 0.5rem #5d63ff);
   color: #dfe4eb;
 }
 
@@ -38,5 +39,19 @@
 
   .menu-item {
     justify-content: center;
+  }
+}
+
+.logo {
+  animation: 5s infinite rotate;
+}
+
+@keyframes rotate {
+  to {
+    transform: perspective(500px) rotateY(360deg);
+    -webkit-transform: perspective(500px) rotateY(360deg);
+    -moz-transform: perspective(500px) rotateY(360deg);
+    -ms-transform: perspective(500px) rotateY(360deg);
+    -o-transform: perspective(500px) rotateY(360deg);
   }
 }

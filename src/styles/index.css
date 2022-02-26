@@ -1,8 +1,7 @@
 @import "./components/containers/_MenuContainer.css";
 @import "./components/containers/_MainContainer.css";
 @import "./components/containers/_FeedContainer.css";
-@import "./components/containers/_SugestContainer.css";
-@import "./components/containers/_PrivateMessages.css";
+@import "./components/containers/_SuggestContainer.css";
 @import "./components/containers/_LoginFormContainer.css";
 @import "./components/_Input.css";
 @import "./components/_Action.css";
@@ -16,7 +15,7 @@
 }
 
 body {
-  background-color: #dfe4eb;
+  background-color: #09070f;
 }
 
 .app {
@@ -37,7 +36,7 @@ body {
   height: 100vh;
 }
 
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1300px) {
   .app {
     margin-left: 10%;
     margin-right: 10%;

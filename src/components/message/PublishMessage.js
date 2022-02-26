@@ -15,7 +15,7 @@ const PublishMessage = (props) => {
           data-placeholder="What's happening?"
         ></div>
       </div>
-      <MessageActions>
+      <MessageActions hasButton={true}>
         <Action name="fa-face-smile" size="fa-xl" />
         <Action name="fa-image" size="fa-xl" />
         <Action name="fa-square-poll-vertical" size="fa-xl" />

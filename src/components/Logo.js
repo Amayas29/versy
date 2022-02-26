@@ -1,11 +1,11 @@
 import React from "react";
-import logo from "../assets/logo.png";
+import versy from "../assets/versy.png";
 
 const Logo = () => {
   return (
     <div className="logo">
       <a href="/">
-        <img src={logo} alt="Versy Logo" />
+        <img src={versy} alt="Versy Logo" />
       </a>
     </div>
   );
