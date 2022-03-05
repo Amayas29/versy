@@ -3,7 +3,7 @@ import MessageAvatar from "./MessageAvatar";
 import MessageContent from "./MessageContent";
 import MessageActions from "./MessageActions";
 import MessageHeader from "./MessageHeader";
-import Action from "../Action";
+import MessageAction from "./MessageAction";
 
 const Message = (props) => {
   return (
@@ -16,9 +16,9 @@ const Message = (props) => {
       />
       <MessageContent content={props.content} />
       <MessageActions>
-        <Action name="fa-comment" size="fa-xl" />
-        <Action name="fa-heart" size="fa-xl" />
-        <Action name="fa-share" size="fa-xl" />
+        <MessageAction name="fa-comment" list={props.comments} />
+        <MessageAction name="fa-heart" list={props.likes} />
+        <MessageAction name="fa-share" list={props.shares} />
       </MessageActions>
     </article>
   );

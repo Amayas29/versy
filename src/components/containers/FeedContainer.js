@@ -25,6 +25,9 @@ class FeedContainer extends React.Component {
               name={message.name}
               username={message.username}
               time={timeElapsed(message.time)}
+              likes={message.likes}
+              comments={message.comments}
+              shares={message.shares}
             />
           ))}
         </ul>
