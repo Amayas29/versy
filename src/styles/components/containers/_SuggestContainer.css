@@ -77,6 +77,16 @@
   align-items: center;
   color: #f3f4f6;
   gap: 40px;
+  border-top: 1px solid #f3f3f3;
+  border-bottom: 1px solid #f3f3f3;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  border-radius: 10px;
+}
+
+.suggestion-panel-header {
+  font-size: 1.5rem;
+  font-style: italic;
 }
 
 .suggestion-panel-list {
@@ -91,6 +101,18 @@
   display: flex;
   align-items: center;
   gap: 20px;
+  position: relative;
+}
+
+.suggest-item::after {
+  content: "";
+  width: 50%;
+  height: 1px;
+  background: #f3f4f6;
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .suggest-user_info {
