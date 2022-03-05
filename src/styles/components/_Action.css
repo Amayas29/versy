@@ -1,11 +1,11 @@
 .action {
   cursor: pointer;
   padding: 5px;
-  color: #4705ff;
+  color: #f3f4f6;
 }
 
 .action:hover {
   transition: 0.2s;
-  filter: drop-shadow(0 0 0.4rem #5d63ff);
-  color: #dfe4eb;
+  filter: drop-shadow(0 0 0.4rem #f3f4f6);
+  color: #f3f4f6;
 }

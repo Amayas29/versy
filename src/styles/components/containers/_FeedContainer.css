@@ -1,26 +1,44 @@
 .feed {
+  position: relative;
   width: 60%;
-  margin-top: 20px;
+  padding-top: 30px;
+}
+
+.feed:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -10%;
+  width: 1px;
+  height: 100%;
+  background-color: #f3f4f6;
 }
 
 .publish {
   margin-bottom: 20px;
 }
 
-.message-list article {
-  margin-bottom: 30px;
+.message-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
 }
 
 .message-list article {
   padding: 20px 10px;
   width: calc(100% - 20px);
-  background-color: #dfe4eb;
+  background-color: #f3f4f6;
   border-radius: 10px;
 }
 
-@media only screen and (max-width: 1060px) {
+@media only screen and (max-width: 1100px) {
   .feed {
     width: 100%;
+  }
+
+  .feed:after {
+    display: none;
   }
 }
 
@@ -70,7 +88,7 @@
   padding: 10px;
   width: calc(100% - 20px);
   border: 1px solid transparent;
-  background: #dfe4eb;
+  background: #f3f4f6;
   min-height: 100px;
   max-height: 500px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
@@ -104,21 +122,21 @@
 
 .btn {
   padding: 0.3em 1.2em;
-  color: #dfe4eb;
-  background-color: #5d63ff;
-  transition: all 0.2s;
+  color: #111827;
+  background-color: #f3f4f6;
+  transition: all 0.1s;
   letter-spacing: 2px;
   border: none;
   cursor: pointer;
   border-radius: 20px;
-  transition: box-shadow 1s;
+  transition: box-shadow 0.6s;
 }
 
 .btn:hover,
 .btn:active {
-  box-shadow: 0px 0px 10px 5px #09070f;
-  color: #09070f;
-  background-color: #dfe4eb;
+  box-shadow: 0px 0px 10px 5px #f3f4f6;
+  color: #111827;
+  background-color: #f3f4f6;
 }
 
 .btn:active {

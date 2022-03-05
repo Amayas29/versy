@@ -7,7 +7,7 @@
 }
 
 body {
-  background-color: #dfe4eb;
+  background-color: #f3f4f6;
 }
 
 #root {
@@ -59,10 +59,10 @@ body {
 .linear:hover em {
   transition: 0.2s;
   filter: drop-shadow(0 0 0.5rem #09070f);
-  color: #dfe4eb;
+  color: #f3f4f6;
 }
 
-@media only screen and (max-width: 1100px) {
+@media only screen and (max-width: 1000px) {
   .linear > span {
     display: none;
   }
@@ -196,12 +196,12 @@ body {
 .action:hover {
   transition: 0.2s;
   filter: drop-shadow(0 0 0.4rem #09070f);
-  color: #dfe4eb;
+  color: #f3f4f6;
 }
 
 .btn {
   padding: 0.3em 1.2em;
-  color: #dfe4eb;
+  color: #f3f4f6;
   background-color: #09070f;
   transition: all 0.2s;
   letter-spacing: 2px;
@@ -215,7 +215,7 @@ body {
 .btn:active {
   box-shadow: 0px 0px 10px 5px #09070f;
   color: #09070f;
-  background-color: #dfe4eb;
+  background-color: #f3f4f6;
 }
 
 .btn:active {
