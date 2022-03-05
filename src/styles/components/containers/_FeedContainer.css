@@ -120,6 +120,24 @@
   justify-content: space-between;
 }
 
+.message-actions .actions > em {
+  color: #111827;
+}
+
+.publish .message-actions .actions > em {
+  color: #f3f4f6;
+}
+
+.publish .message-actions .actions > em:hover {
+  transition: 0.2s;
+  filter: drop-shadow(0 0 0.4rem #f3f4f6);
+}
+
+.message-actions .actions > em:hover {
+  transition: 0.2s;
+  filter: drop-shadow(0 0 0.4rem #111827);
+}
+
 .btn {
   padding: 0.3em 1.2em;
   color: #111827;

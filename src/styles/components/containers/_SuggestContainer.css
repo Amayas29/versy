@@ -32,9 +32,13 @@
   font-size: 16px;
   line-height: 1.5;
   background: #f3f4f6;
-  color: #09070f;
-  border: 1px solid #09070f;
+  color: #111827;
+  border: 1px solid #111827;
   border-radius: 100px;
+}
+
+.search-container em {
+  color: #111827;
 }
 
 .search-container em:nth-child(2) {
@@ -51,14 +55,19 @@
   justify-content: center;
 }
 
+.search-container em:hover {
+  transition: 0.2s;
+  color: #f3f4f6;
+  filter: drop-shadow(0 0 0.1rem #111827);
+}
+
 .search-container .search-input::placeholder {
-  color: #09070f;
+  color: #111827;
 }
 
 .search-container .search-input:focus {
   outline: none;
-  background-color: #fff;
-  border: 1px solid #84a2fa;
+  border: 1px solid #5a00ee;
 }
 
 .suggestion-panel {
