@@ -2,7 +2,7 @@
 
 .vscode/
 
-tmp/
+tmp_files
 
 # dependencies
 /node_modules
