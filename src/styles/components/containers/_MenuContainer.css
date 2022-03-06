@@ -2,10 +2,11 @@
   position: sticky;
   height: 100vh;
   top: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+  padding-top: 20px;
+  display: grid;
+  grid-template-rows: 20% 50% 20%;
   align-items: center;
+  justify-content: center;
   gap: 40px;
 }
 
@@ -122,8 +123,19 @@
 }
 
 .linear:hover {
-  transition: 0.2s;
   background-color: #f3f4f6;
   filter: drop-shadow(0 0 0.4rem #f3f4f6);
   color: #111827;
+}
+
+.linear:hover > em:nth-child(1) {
+  display: none;
+}
+
+.linear:hover > em:nth-child(2) {
+  display: block;
+}
+
+.linear > em:nth-child(2) {
+  display: none;
 }

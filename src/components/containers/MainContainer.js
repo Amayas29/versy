@@ -69,7 +69,7 @@ const MainContainer = (props) => {
           },
         ]}
       />
-      <SuggestContainer />
+      <SuggestContainer token={props.token} />
     </main>
   );
 };

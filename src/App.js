@@ -6,7 +6,7 @@ class App extends Component {
     this.setPage.bind(this);
 
     this.state = {
-      token: "",
+      token: "s",
       page: null,
     };
   }

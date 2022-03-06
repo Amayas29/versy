@@ -2,11 +2,11 @@ import React from "react";
 import Search from "../Search";
 import SuggestionPanel from "../suggestion/SuggestionPanel";
 
-const SuggestContainer = () => {
+const SuggestContainer = (props) => {
   return (
     <section className="suggest">
       <Search />
-      <SuggestionPanel />
+      {props.token && <SuggestionPanel />}
     </section>
   );
 };

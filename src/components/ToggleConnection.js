@@ -6,12 +6,14 @@ const ToggleConnexion = (props) => {
     <div className="toggle-connection">
       {props.token ? (
         <span className="linear">
-          <Action name="fa-right-from-bracket" size="fa-2xl" />
+          <Action name="fa-arrow-right-from-bracket" size="fa-2xl" />
+          <Action name="fa-arrow-right" size="fa-2xl" />
           Logout
         </span>
       ) : (
         <span className="linear">
-          <Action name="fa-right-to-bracket" size="fa-2xl" />
+          <Action name="fa-arrow-right-to-bracket" size="fa-2xl" />
+          <Action name="fa-arrow-right" size="fa-2xl" />
           Login
         </span>
       )}

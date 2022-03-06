@@ -11,7 +11,6 @@ const SuggestionPanel = () => {
         <UserSuggestion avatar={avatar} name="Amayas" username="@Amayas29" />
         <UserSuggestion avatar={avatar} name="Amayas" username="@Amayas29" />
         <UserSuggestion avatar={avatar} name="Amayas" username="@Amayas29" />
-        <UserSuggestion avatar={avatar} name="Amayas" username="@Amayas29" />
       </ul>
     </div>
   );
