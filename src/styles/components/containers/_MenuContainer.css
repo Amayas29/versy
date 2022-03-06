@@ -2,7 +2,6 @@
   position: sticky;
   height: 100vh;
   top: 0;
-  padding-top: 20px;
   display: grid;
   grid-template-rows: 20% 50% 20%;
   align-items: center;
