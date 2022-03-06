@@ -89,7 +89,7 @@
   }
 }
 
-.toggle-connexion {
+.toggle-connection {
   color: #f3f4f6;
   width: 100%;
   display: flex;
@@ -98,7 +98,7 @@
   position: relative;
 }
 
-.toggle-connexion::before {
+.toggle-connection::before {
   content: "";
   position: absolute;
   top: -20px;

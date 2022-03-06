@@ -1,7 +1,7 @@
 import React from "react";
 import Logo from "../Logo";
 import MenuItem from "../MenuItem";
-import ToggleConnexion from "../ToggleConnexion";
+import ToggleConnection from "../ToggleConnection";
 
 const MenuContainer = (props) => {
   return (
@@ -14,7 +14,7 @@ const MenuContainer = (props) => {
         <MenuItem title="Profile" iconName="fa-user" />
         <MenuItem title="More" iconName="fa-ellipsis" />
       </div>
-      <ToggleConnexion token={props.token} />
+      <ToggleConnection token={props.token} />
     </aside>
   );
 };
