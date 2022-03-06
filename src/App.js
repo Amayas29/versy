@@ -10,9 +10,13 @@ class App extends Component {
     this.setPage.bind(this);
 
     this.state = {
-      page: <Home setPage={this.setPage} />,
       token: "",
+      page: null,
     };
+  }
+
+  componentDidMount() {
+    this.setPage(<Home setPage={this.setPage} token={this.state.token} />);
   }
 
   setPage(page) {

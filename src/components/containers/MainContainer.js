@@ -3,10 +3,11 @@ import FeedContainer from "./FeedContainer";
 import SuggestContainer from "./SuggestContainer";
 import logo from "../../assets/avatar.jpg";
 
-const MainContainer = () => {
+const MainContainer = (props) => {
   return (
     <main className="main">
       <FeedContainer
+        token={props.token}
         user={{ avatar: logo }}
         messages={[
           {

@@ -1,6 +1,7 @@
 import React from "react";
 import Logo from "../Logo";
 import MenuItem from "../MenuItem";
+import ToggleConnexion from "../ToggleConnexion";
 
 const MenuContainer = (props) => {
   return (
@@ -13,7 +14,7 @@ const MenuContainer = (props) => {
         <MenuItem title="Profile" iconName="fa-user" />
         <MenuItem title="More" iconName="fa-ellipsis" />
       </div>
-      <div style={{ color: "white" }}>USER : TODO</div>
+      <ToggleConnexion token={props.token} />
     </aside>
   );
 };

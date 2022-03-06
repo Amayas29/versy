@@ -15,7 +15,8 @@ class FeedContainer extends React.Component {
   render() {
     return (
       <section className="feed">
-        <PublishMessage avatar={this.state.user.avatar} />
+        {this.props.token && <PublishMessage avatar={this.state.user.avatar} />}
+
         <ul className="message-list">
           {this.state.messages.map((message, index) => (
             <Message
