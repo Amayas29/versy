@@ -1,6 +1,6 @@
 .central-container {
   position: relative;
-  width: 70%;
+  width: 100%;
   padding-top: 30px;
   display: flex;
   flex-direction: column;
