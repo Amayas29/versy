@@ -1,6 +1,7 @@
 import React from "react";
 import Message from "../message/Message";
 import timeElapsed from "../../utils/DateUtils";
+import UserBanner from "../banner/UserBanner";
 
 class ProfileContainer extends React.Component {
   constructor(props) {
@@ -14,6 +15,7 @@ class ProfileContainer extends React.Component {
   render() {
     return (
       <section className="central-container">
+        <UserBanner user={this.state.user} />
         <ul className="message-list">
           {this.state.messages.map((message, index) => (
             <Message

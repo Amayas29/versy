@@ -1,5 +1,5 @@
 import React from "react";
-import versy from "../assets/versy.png";
+import versy from "../assets/images/versy.png";
 
 const Logo = () => {
   return (

@@ -1,6 +1,6 @@
 import React from "react";
 import UserSuggestion from "./UserSuggestion";
-import avatar from "../../assets/avatar.jpg";
+import avatar from "../../assets/images/avatar.jpg";
 
 const SuggestionPanel = () => {
   return (

@@ -16,10 +16,17 @@
   outline: none;
   user-select: none;
   border: none;
+  letter-spacing: 0.05rem;
+}
+
+@font-face {
+  font-family: Montserrat;
+  src: url(../assets/fonts/Montserrat-Light.ttf);
 }
 
 body {
   background-color: #111827;
+  font-family: Montserrat, sans-serif;
 }
 
 .app {

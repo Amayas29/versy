@@ -6,11 +6,11 @@ import ToggleConnection from "../ToggleConnection";
 const MenuContainer = (props) => {
   let items = [];
   if (props.token) {
-    items.push(<MenuItem title="Home" iconName="fa-house" />);
-    items.push(<MenuItem title="Notifications" iconName="fa-bell" />);
-    items.push(<MenuItem title="Messages" iconName="fa-envelope" />);
-    items.push(<MenuItem title="Profile" iconName="fa-user" />);
-    items.push(<MenuItem title="More" iconName="fa-ellipsis" />);
+    items.push(<MenuItem key={0} title="Home" iconName="fa-house" />);
+    items.push(<MenuItem key={1} title="Notifications" iconName="fa-bell" />);
+    items.push(<MenuItem key={2} title="Messages" iconName="fa-envelope" />);
+    items.push(<MenuItem key={3} title="Profile" iconName="fa-user" />);
+    items.push(<MenuItem key={4} title="More" iconName="fa-ellipsis" />);
   }
 
   return (
