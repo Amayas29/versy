@@ -2,7 +2,11 @@
 @import "./components/containers/_MainContainer.css";
 @import "./components/containers/_FeedContainer.css";
 @import "./components/containers/_SuggestContainer.css";
+@import "./components/containers/_ProfileContainer.css";
+@import "./components/containers/_CentralContainer.css";
 @import "./components/containers/_LoginFormContainer.css";
+@import "./components/_Messages.css";
+@import "./components/_Buttons.css";
 @import "./components/_Input.css";
 @import "./components/_Action.css";
 

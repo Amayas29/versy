@@ -1,0 +1,23 @@
+.btn {
+  padding: 0.3em 1.2em;
+  color: #111827;
+  background-color: #f3f4f6;
+  transition: all 0.1s;
+  letter-spacing: 2px;
+  border: none;
+  cursor: pointer;
+  border-radius: 20px;
+  transition: box-shadow 0.6s;
+}
+
+.btn:hover,
+.btn:active {
+  box-shadow: 0px 0px 10px 5px #f3f4f6;
+  color: #111827;
+  background-color: #f3f4f6;
+}
+
+.btn:active {
+  transform: scale(1.05, 1.05);
+  animation: anim 5s ease forwards;
+}

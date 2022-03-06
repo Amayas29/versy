@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Home from "./pages/Home";
+import Profile from "./pages/Profile";
 class App extends Component {
   constructor(props) {
     super(props);
@@ -12,7 +13,8 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.setPage(<Home setPage={this.setPage} token={this.state.token} />);
+    // this.setPage(<Home setPage={this.setPage} token={this.state.token} />);
+    this.setPage(<Profile setPage={this.setPage} token={this.state.token} />);
   }
 
   setPage(page) {

@@ -1,17 +1,16 @@
 import React from "react";
 import MenuContainer from "../components/containers/MenuContainer";
 import MainContainer from "../components/containers/MainContainer";
-import FeedContainer from "../components/containers/FeedContainer";
+import ProfileContainer from "../components/containers/ProfileContainer";
 import logo from "../assets/avatar.jpg";
 
-const Home = (props) => {
+const Profile = (props) => {
   return (
     <div className="app">
       <MenuContainer setPage={props.setPage} token={props.token} />
       <MainContainer token={props.token}>
-        <FeedContainer
+        <ProfileContainer
           token={props.token}
-          user={{ avatar: logo }}
           messages={[
             {
               content: "Hello world",
@@ -77,4 +76,4 @@ const Home = (props) => {
   );
 };
 
-export default Home;
+export default Profile;

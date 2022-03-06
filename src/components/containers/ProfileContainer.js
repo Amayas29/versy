@@ -1,9 +1,8 @@
 import React from "react";
 import Message from "../message/Message";
-import PublishMessage from "../message/PublishMessage";
 import timeElapsed from "../../utils/DateUtils";
 
-class FeedContainer extends React.Component {
+class ProfileContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -15,8 +14,6 @@ class FeedContainer extends React.Component {
   render() {
     return (
       <section className="central-container">
-        {this.props.token && <PublishMessage avatar={this.state.user.avatar} />}
-
         <ul className="message-list">
           {this.state.messages.map((message, index) => (
             <Message
@@ -37,4 +34,4 @@ class FeedContainer extends React.Component {
   }
 }
 
-export default FeedContainer;
+export default ProfileContainer;
