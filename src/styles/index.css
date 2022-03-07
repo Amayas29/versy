@@ -10,6 +10,7 @@
 @import "./components/_Buttons.css";
 @import "./components/_Input.css";
 @import "./components/_Action.css";
+@import "./components/_MorePanel.css";
 
 * {
   margin: 0;

@@ -3,6 +3,7 @@ import MenuContainer from "../components/containers/MenuContainer";
 import MainContainer from "../components/containers/MainContainer";
 import NotificationsContainer from "../components/containers/NotificationsContainer";
 import logo from "../assets/images/avatar.jpg";
+import MorePanel from "../components/more-panel/MorePanel";
 
 const Profile = (props) => {
   return (

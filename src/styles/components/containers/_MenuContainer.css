@@ -3,7 +3,7 @@
   height: 100vh;
   top: 0;
   display: grid;
-  grid-template-rows: 20% 50% 20%;
+  grid-template-rows: 20% 50% auto;
   align-items: center;
   justify-content: center;
   gap: 40px;
@@ -44,6 +44,7 @@
   background-color: #f3f4f6;
   filter: drop-shadow(0 0 0.4rem #f3f4f6);
   color: #111827;
+  cursor: pointer;
 }
 
 .menu-item:hover em {
@@ -125,6 +126,7 @@
   background-color: #f3f4f6;
   filter: drop-shadow(0 0 0.4rem #f3f4f6);
   color: #111827;
+  cursor: pointer;
 }
 
 .linear:hover > em:nth-child(1) {
