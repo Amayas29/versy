@@ -3,11 +3,12 @@ import Notification from "../notifications/Notification";
 import logo from "../../assets/images/avatar.jpg";
 
 const NotificationsContainer = () => {
+  const user = { avatar: logo, name: "John Doe", username: "@johndoe" };
   return (
     <div className="central-container">
-      <Notification user={{ name: "Amayas", avatar: logo }} type="like" />
-      <Notification user={{ name: "Amayas", avatar: logo }} type="follow" />
-      <Notification user={{ name: "Amayas", avatar: logo }} type="comment" />
+      <Notification user={user} type="like" />
+      <Notification user={user} type="follow" />
+      <Notification user={user} type="comment" />
     </div>
   );
 };

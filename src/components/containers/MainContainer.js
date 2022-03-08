@@ -5,7 +5,7 @@ const MainContainer = (props) => {
   return (
     <main className="main">
       {props.children}
-      <SuggestContainer token={props.token} />
+      <SuggestContainer />
     </main>
   );
 };

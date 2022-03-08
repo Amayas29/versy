@@ -2,13 +2,24 @@ import React from "react";
 import Search from "../Search";
 import SuggestionPanel from "../suggestion/SuggestionPanel";
 
-const SuggestContainer = (props) => {
-  return (
-    <section className="suggest">
-      <Search />
-      {props.token && <SuggestionPanel />}
-    </section>
-  );
-};
+class SuggestContainer extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      token: "a",
+      setPage: props.setPage,
+    };
+  }
+
+  render() {
+    return (
+      <section className="suggest">
+        <Search />
+        {this.state.token && <SuggestionPanel />}
+      </section>
+    );
+  }
+}
 
 export default SuggestContainer;

@@ -3,7 +3,7 @@ import React from "react";
 const MessageAvatar = (props) => {
   return (
     <div className="message-avatar">
-      <img src={props.avatar} alt="avatar" />
+      <img src={props.user.avatar} alt="avatar" />
     </div>
   );
 };

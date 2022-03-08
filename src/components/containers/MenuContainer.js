@@ -31,8 +31,8 @@ class MenuContainer extends React.Component {
       <aside className="menu">
         <Logo />
         <div className="items">{items}</div>
-        <MorePanel />;
-        <ToggleConnection token={this.props.token} />
+        {/* <MorePanel />; */}
+        <ToggleConnection />
       </aside>
     );
   }

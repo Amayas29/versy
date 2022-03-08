@@ -4,10 +4,10 @@ const UserSuggestion = (props) => {
   return (
     <li className="suggest-item">
       <div className="suggest-user">
-        <img className="suggest-avatar" src={props.avatar} alt="avatar" />
+        <img className="suggest-avatar" src={props.user.avatar} alt="avatar" />
         <div className="suggest-user_info">
-          <span className="suggest-name">{props.name}</span>
-          <span className="suggest-username">{props.username}</span>
+          <span className="suggest-name">{props.user.name}</span>
+          <span className="suggest-username">{props.user.username}</span>
         </div>
       </div>
       <div className="btn">Follow</div>

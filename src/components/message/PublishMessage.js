@@ -6,7 +6,7 @@ import Action from "../Action";
 const PublishMessage = (props) => {
   return (
     <article className="message publish">
-      <MessageAvatar avatar={props.avatar} />
+      <MessageAvatar user={props.user} />
       <div className="message-content">
         <div
           className="message-input"

@@ -1,9 +1,12 @@
 import React from "react";
+import MainContainer from "../components/containers/MainContainer";
+import MenuContainer from "../components/containers/MenuContainer";
 
-const ResetPassword = () => {
+const ResetPassword = (props) => {
   return (
     <div className="app">
-      <h1>Reset Password</h1>
+      <MenuContainer setPage={props.setPage} />
+      <MainContainer></MainContainer>
     </div>
   );
 };

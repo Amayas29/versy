@@ -5,24 +5,26 @@ import NotificationsContainer from "../components/containers/NotificationsContai
 import logo from "../assets/images/avatar.jpg";
 import MorePanel from "../components/more-panel/MorePanel";
 
-const Profile = (props) => {
-  return (
-    <div className="app">
-      <MenuContainer setPage={props.setPage} token={props.token} />
-      <MainContainer token={props.token}>
-        <NotificationsContainer
-          token={props.token}
-          user={{
-            avatar: logo,
-            name: "Amayas",
-            username: "@amayas29",
-            bio: "Hey",
-          }}
-          notifications={[]}
-        />
-      </MainContainer>
-    </div>
-  );
-};
+class Profile extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      token: "a",
+      setPage: props.setPage,
+    };
+  }
+
+  render() {
+    return (
+      <div className="app">
+        <MenuContainer setPage={this.state.setPage} />
+        <MainContainer>
+          <NotificationsContainer />
+        </MainContainer>
+      </div>
+    );
+  }
+}
 
 export default Profile;
