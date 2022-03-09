@@ -20,7 +20,7 @@
 .message {
   display: grid;
   grid-template-columns: 80px auto;
-  grid-gap: 15px;
+  grid-gap: 25px;
   grid-template-areas:
     "avatar header"
     "avatar content"
@@ -57,6 +57,7 @@
 
 .message-content {
   grid-area: content;
+  text-align: justify;
 }
 
 .message-content > .message-input {

@@ -1,10 +1,10 @@
 import React from "react";
-import Action from "../Action";
+import Icon from "../Icon";
 
 const MessageAction = (props) => {
   return (
     <span className="message-action">
-      <Action name={props.name} size="fa-xl" />
+      <Icon name={props.name} size="fa-xl" />
       {props.list.length}
     </span>
   );

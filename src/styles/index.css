@@ -5,12 +5,10 @@
 @import "./components/containers/_ProfileContainer.css";
 @import "./components/containers/_NotificationsContainer.css";
 @import "./components/containers/_CentralContainer.css";
-@import "./components/containers/_LoginFormContainer.css";
 @import "./components/_Messages.css";
 @import "./components/_Buttons.css";
 @import "./components/_Input.css";
-@import "./components/_Action.css";
-@import "./components/_MorePanel.css";
+@import "./components/_Icon.css";
 
 * {
   margin: 0;
@@ -32,8 +30,7 @@ body {
 }
 
 .app {
-  margin-left: 5%;
-  margin-right: 5%;
+  margin-right: 1%;
   display: flex;
   gap: 30px;
 }

@@ -1,18 +1,14 @@
 import React from "react";
-import Action from "./Action";
+import Icon from "./Icon";
 
-const handleClick = (props, ref) => {
-  if (props.title === "More") {
-    const rect = ref.current.getBoundingClientRect();
-    console.log(rect);
+class MenuItem extends React.Component {
+  render() {
+    return (
+      <div className="menu-item" onClick={this.props.onClick}>
+        <Icon name={this.props.icon} size="fa-2xl" />
+        <span>{this.props.title}</span>
+      </div>
+    );
   }
-};
-
-const MenuItem = React.forwardRef((props, ref) => (
-  <div ref={ref} className="menu-item" onClick={() => handleClick(props, ref)}>
-    <Action name={props.iconName} size="fa-2xl" />
-    <span>{props.title}</span>
-  </div>
-));
-
+}
 export default MenuItem;

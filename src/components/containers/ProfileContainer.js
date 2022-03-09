@@ -29,19 +29,6 @@ const messages = [
     comments: [],
     shares: [],
   },
-  {
-    content:
-      "Un jeton non fongible1,2,3 (JNF1 ou NFT, de l’anglais non-fungible token) est une donnée valorisée composée d'un type de jeton cryptographique qui représente un objet (souvent numérique), auquel est rattachée une identité numérique (reliée à au moins un propriétaire). Cette donnée est stockée et authentifiée grâce à un protocole de chaîne de blocs (blockchain), qui lui accorde par là-même sa première valeur. En d'autres termes, il s'agit d'un acte de propriété consigné dans un registre numérique public et décentralisé.",
-    user: {
-      name: "John Doe",
-      username: "@johndoe",
-      avatar: avatar,
-    },
-    publishDate: new Date(),
-    likes: [],
-    comments: [],
-    shares: [],
-  },
 ];
 
 class ProfileContainer extends React.Component {
@@ -53,14 +40,21 @@ class ProfileContainer extends React.Component {
   }
 
   render() {
+    const user = {
+      avatar: avatar,
+      name: "John Doe",
+      username: "@johndoe",
+      bio: "He",
+    };
     return (
       <section className="central-container">
-        <UserBanner user={this.state.user} />
+        <UserBanner user={user} />
         <ul className="message-list">
           {messages.map((message, index) => (
             <Message
               key={index}
               user={message.user}
+              content={message.content}
               publishDate={message.publishDate}
               likes={message.likes}
               comments={message.comments}

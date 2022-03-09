@@ -1,5 +1,5 @@
 import React from "react";
-import Action from "../Action";
+import Icon from "../Icon";
 
 const UserBanner = (props) => {
   return (
@@ -39,7 +39,7 @@ const UserHeader = (props) => {
 const UserMetadata = (props) => {
   return (
     <div className="user-metadata">
-      <Action name={props.name} size="fa-lg" />
+      <Icon name={props.name} size="fa-lg" />
       <span>{props.data}</span>
     </div>
   );

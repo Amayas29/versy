@@ -1,7 +1,7 @@
 import React from "react";
 import MessageAvatar from "./MessageAvatar";
 import MessageActions from "./MessageActions";
-import Action from "../Action";
+import Icon from "../Icon";
 
 const PublishMessage = (props) => {
   return (
@@ -16,9 +16,9 @@ const PublishMessage = (props) => {
         ></div>
       </div>
       <MessageActions hasButton={true}>
-        <Action name="fa-face-smile" size="fa-xl" />
-        <Action name="fa-image" size="fa-xl" />
-        <Action name="fa-square-poll-vertical" size="fa-xl" />
+        <Icon name="fa-face-smile" size="fa-xl" />
+        <Icon name="fa-image" size="fa-xl" />
+        <Icon name="fa-square-poll-vertical" size="fa-xl" />
       </MessageActions>
     </article>
   );

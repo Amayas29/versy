@@ -8,7 +8,6 @@ class SuggestContainer extends React.Component {
 
     this.state = {
       token: "a",
-      setPage: props.setPage,
     };
   }
 

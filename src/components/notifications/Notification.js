@@ -1,5 +1,5 @@
 import React from "react";
-import Action from "../Action";
+import Icon from "../Icon";
 
 const Notification = (props) => {
   let name = "";
@@ -27,7 +27,7 @@ const Notification = (props) => {
   return (
     <div className="notification-container">
       <div className="notification-header">
-        <Action name={name} size="fa-2xl" />
+        <Icon name={name} size="fa-2xl" />
       </div>
 
       <div className="notification-body">
