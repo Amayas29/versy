@@ -9,11 +9,12 @@ class Message extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: props.user,
       content: props.content,
+      image: props.image,
+      user: props.user,
       publishDate: props.publishDate,
-      comments: props.comments,
       likes: props.likes,
+      comments: props.comments,
       shares: props.shares,
     };
   }

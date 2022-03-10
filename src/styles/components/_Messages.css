@@ -126,12 +126,7 @@
 }
 
 .message-image-holder {
-  display: none;
-}
-
-.message-image-holder-displayed {
   width: 100%;
   height: 100%;
   border-radius: 10px;
-  display: block;
 }

@@ -3,6 +3,7 @@ import MessageAvatar from "./MessageAvatar";
 import MessageActions from "./MessageActions";
 import Icon from "../Icon";
 import { ImagePicker } from "react-file-picker";
+import ImageHolder from "./ImageHolder";
 
 class PublishMessage extends React.Component {
   constructor(props) {
@@ -26,7 +27,7 @@ class PublishMessage extends React.Component {
             spellCheck="false"
             data-placeholder="What's happening?"
           ></div>
-          <ImageHolder image={this.state.image} />
+          {this.state.image && <ImageHolder image={this.state.image} />}
         </div>
 
         <MessageActions hasButton={true}>
@@ -47,18 +48,6 @@ class PublishMessage extends React.Component {
     );
   }
 }
-
-const ImageHolder = (props) => {
-  return (
-    <img
-      className={
-        "message-image-holder" + (props.image !== "" ? "-displayed" : "")
-      }
-      src={props.image}
-      alt=""
-    ></img>
-  );
-};
 
 const ImagePickerContainer = (props) => {
   return (
