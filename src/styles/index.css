@@ -31,7 +31,8 @@ body {
 }
 
 .app {
-  margin-right: 1%;
+  margin-right: 15%;
+  margin-left: 10%;
   display: flex;
   gap: 30px;
 }
