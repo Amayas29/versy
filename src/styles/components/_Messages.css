@@ -58,6 +58,9 @@
 .message-content {
   grid-area: content;
   text-align: justify;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .message-content > .message-input {
@@ -66,7 +69,7 @@
   border: 1px solid transparent;
   background: #f3f4f6;
   min-height: 100px;
-  max-height: 500px;
+  max-height: 400px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   border-radius: 9px;
   font-size: 1.1rem;
@@ -103,20 +106,32 @@
   color: #f3f4f6;
 }
 
-.message-actions .actions > em {
+.message-actions .actions em {
   color: #f3f4f6;
 }
 
-.message-actions .actions > em:hover {
+.message-actions .actions em:hover {
   transition: 0.2s;
   filter: drop-shadow(0 0 0.4rem #f3f4f6);
 }
 
-.message-actions .actions > .message-action > em {
+.hide {
+  background-color: transparent;
   color: #f3f4f6;
 }
 
-.message-actions .actions > .message-action > em:hover {
+.hide:hover {
   transition: 0.2s;
   filter: drop-shadow(0 0 0.4rem #f3f4f6);
+}
+
+.message-image-holder {
+  display: none;
+}
+
+.message-image-holder-displayed {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  display: block;
 }

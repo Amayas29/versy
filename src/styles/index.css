@@ -9,6 +9,7 @@
 @import "./components/_Buttons.css";
 @import "./components/_Input.css";
 @import "./components/_Icon.css";
+@import "./components/_Footer.css";
 
 * {
   margin: 0;
