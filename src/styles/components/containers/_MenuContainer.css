@@ -68,7 +68,7 @@
   filter: drop-shadow(0 0 0.4rem #f3f4f6);
 }
 
-@media only screen and (max-width: 1500px) {
+@media only screen and (max-width: 1700px) {
   .menu-item > span {
     display: none;
   }

@@ -1,15 +1,11 @@
 import React from "react";
 
-class Icon extends React.Component {
-  render() {
-    return (
-      <em
-        ref={this.props.ref}
-        className={`icon fa-solid ${this.props.name} ${this.props.size}`}
-        onClick={this.props.onClick}
-      ></em>
-    );
-  }
-}
+const Icon = React.forwardRef((props, ref) => (
+  <em
+    ref={ref}
+    className={`icon fa-solid ${props.name} ${props.size}`}
+    onClick={props.onClick}
+  ></em>
+));
 
 export default Icon;
