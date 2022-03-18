@@ -8,27 +8,24 @@ import MessageAction from "./MessageAction";
 class Message extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      content: props.content,
-      image: props.image,
-      user: props.user,
-      publishDate: props.publishDate,
-      likes: props.likes,
-      comments: props.comments,
-      shares: props.shares,
-    };
   }
 
   render() {
     return (
       <article className="message">
-        <MessageAvatar user={this.state.user} />
-        <MessageHeader message={this.state} />
-        <MessageContent message={this.state} />
+        <MessageAvatar
+          user={this.props.data.user}
+          setMainContainer={this.props.setMainContainer}
+        />
+        <MessageHeader
+          message={this.props.data}
+          setMainContainer={this.props.setMainContainer}
+        />
+        <MessageContent message={this.props.data} />
         <MessageActions>
-          <MessageAction name="fa-comment" list={this.state.comments} />
-          <MessageAction name="fa-heart" list={this.state.likes} />
-          <MessageAction name="fa-share" list={this.state.shares} />
+          <MessageAction name="fa-comment" list={this.props.data.comments} />
+          <MessageAction name="fa-heart" list={this.props.data.likes} />
+          <MessageAction name="fa-share" list={this.props.data.shares} />
         </MessageActions>
       </article>
     );

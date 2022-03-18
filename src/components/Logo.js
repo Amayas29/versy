@@ -4,9 +4,7 @@ import versy from "../assets/images/versy.png";
 const Logo = () => {
   return (
     <div className="logo">
-      <a href="/">
-        <img src={versy} alt="Versy Logo" />
-      </a>
+      <img src={versy} alt="Versy Logo" />
     </div>
   );
 };

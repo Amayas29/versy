@@ -27,8 +27,6 @@ class PublishMessage extends React.Component {
 
   onEmojiClick(event, emojiObject) {
     this.setState((prevState) => {
-      this.inputRef.current.focus();
-      this.inputRef.current.textContent = "";
       this.inputRef.current.textContent = prevState.content + emojiObject.emoji;
       this.positionCursor();
 
@@ -54,7 +52,10 @@ class PublishMessage extends React.Component {
   render() {
     return (
       <article className="message publish">
-        <MessageAvatar user={this.props.user} />
+        <MessageAvatar
+          user={this.props.user}
+          setMainContainer={this.props.setMainContainer}
+        />
         <div className="message-content">
           <div
             className="message-input"

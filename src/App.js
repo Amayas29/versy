@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-// import MainLayout from "./layouts/MainLayout";
-import AuthentificationLayout from "./layouts/AuthentificationLayout";
-import LoginContainer from "./components/containers/LoginContainer";
+import MainLayout from "./layouts/MainLayout";
 
 class App extends Component {
   constructor(props) {
@@ -14,13 +12,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    // this.setPage(<MainLayout setPage={this.setPage} />);
-    this.setPage(
-      <AuthentificationLayout
-        setPage={this.setPage}
-        container={<LoginContainer />}
-      />
-    );
+    this.setPage(<MainLayout setPage={this.setPage} />);
   }
 
   setPage(page) {

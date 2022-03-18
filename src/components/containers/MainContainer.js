@@ -5,7 +5,7 @@ const MainContainer = (props) => {
   return (
     <main className="main">
       {props.children}
-      <SuggestContainer />
+      <SuggestContainer setMainContainer={props.setMainContainer} />
     </main>
   );
 };

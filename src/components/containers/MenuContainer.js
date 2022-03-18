@@ -3,7 +3,6 @@ import Logo from "../Logo";
 import MenuItem from "../MenuItem";
 import ToggleConnection from "../ToggleConnection";
 import FeedContainer from "./FeedContainer";
-import MessagesContainer from "./MessagesContainer";
 import ProfileContainer from "./ProfileContainer";
 import NotificationsContainer from "./NotificationsContainer";
 import AboutUsContainer from "./AboutUsContainer";
@@ -31,7 +30,7 @@ class MenuContainer extends React.Component {
     if (!this.state.morePanelDisplay)
       return (
         <MenuItem
-          key={4}
+          key={3}
           icon="fa-angles-down"
           title="More"
           onClick={this.toggleMorePanelDisplay}
@@ -40,7 +39,7 @@ class MenuContainer extends React.Component {
 
     return [
       <MenuItem
-        key={4}
+        key={3}
         icon="fa-chart-line"
         title="Analytics"
         onClick={() =>
@@ -53,7 +52,7 @@ class MenuContainer extends React.Component {
       />,
 
       <MenuItem
-        key={5}
+        key={4}
         icon="fa-circle-info"
         title="About us"
         onClick={() =>
@@ -64,7 +63,7 @@ class MenuContainer extends React.Component {
       />,
 
       <MenuItem
-        key={6}
+        key={5}
         icon="fa-angles-up"
         title="Less"
         onClick={this.toggleMorePanelDisplay}
@@ -106,21 +105,6 @@ class MenuContainer extends React.Component {
       items.push(
         <MenuItem
           key={2}
-          title="Messages"
-          icon="fa-envelope"
-          onClick={() =>
-            this.props.setMainContainer(
-              <MessagesContainer
-                setMainContainer={this.props.setMainContainer}
-              />
-            )
-          }
-        />
-      );
-
-      items.push(
-        <MenuItem
-          key={3}
           title="Profile"
           icon="fa-user"
           onClick={() =>
@@ -140,7 +124,7 @@ class MenuContainer extends React.Component {
       <aside className="menu">
         <Logo />
         <div className="items">{items}</div>
-        <ToggleConnection />
+        <ToggleConnection setPage={this.props.setPage} />
       </aside>
     );
   }

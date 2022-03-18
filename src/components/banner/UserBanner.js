@@ -1,5 +1,36 @@
 import React from "react";
 import Icon from "../Icon";
+import dateFormat from "dateformat";
+import versy from "../../assets/images/versy.png";
+
+const user = {
+  id: 2,
+  avatar: versy,
+  name: "Hamid",
+  username: "@kolli",
+  bio: "Djaffer",
+  birthday: new Date(2001, 4, 29),
+  location: "Paris, France",
+  joinedDate: new Date(2019, 6, 1),
+};
+
+const followers = [
+  user,
+  user,
+  user,
+  user,
+  user,
+  user,
+  user,
+  user,
+  user,
+  user,
+  user,
+  user,
+  user,
+  user,
+];
+const following = [user, user, user, user, user, user, user];
 
 const UserBanner = (props) => {
   return (
@@ -10,14 +41,20 @@ const UserBanner = (props) => {
       <span className="user-bio">{props.user.bio}</span>
 
       <div className="user-metadatas">
-        <UserMetadata name="fa-location-dot" data="Paris, France" />
-        <UserMetadata name="fa-cake-candles" data="Born May 29, 2001" />
-        <UserMetadata name="fa-calendar-days" data="Joined June 1, 2019" />
+        <UserMetadata name="fa-location-dot" data={props.user.location} />
+        <UserMetadata
+          name="fa-cake-candles"
+          data={"Born " + dateFormat(props.user.birthday, "mmm d, yyyy")}
+        />
+        <UserMetadata
+          name="fa-calendar-days"
+          data={"Joined " + dateFormat(props.user.joinedDate, "mmm d, yyyy")}
+        />
       </div>
 
       <div className="user-stats">
-        <UserStat value="10" name="Following" />
-        <UserStat value="10" name="Followers" />
+        <UserStat list={followers} name="Following" />
+        <UserStat list={following} name="Followers" />
       </div>
     </div>
   );
@@ -47,8 +84,13 @@ const UserMetadata = (props) => {
 
 const UserStat = (props) => {
   return (
-    <div className="user-stat">
-      <span>{props.value}</span>
+    <div
+      className="user-stat"
+      onClick={() => {
+        return;
+      }}
+    >
+      <span>{props.list.length}</span>
       <span>{props.name}</span>
     </div>
   );

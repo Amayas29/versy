@@ -1,11 +1,18 @@
 import React from "react";
 import Icon from "./Icon";
+import AuthentificationLayout from "../layouts/AuthentificationLayout";
+import LoginContainer from "../components/containers/LoginContainer";
 
 const ToggleConnexion = (props) => {
   const token = "a";
 
   return (
-    <div className="toggle-connection">
+    <div
+      className="toggle-connection"
+      onClick={() =>
+        props.setPage(<AuthentificationLayout container={<LoginContainer />} />)
+      }
+    >
       <span className="menu-separator"></span>
       {token ? (
         <span className="linear">

@@ -24,8 +24,8 @@
 }
 
 .user-banner-container .user-header .user-avatar {
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
 }
 
@@ -69,6 +69,11 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  border-bottom: 1px solid transparent;
+}
+
+.user-banner-container .user-stats .user-stat:hover {
+  border-bottom: 1px solid #f3f4f6;
 }
 
 .user-banner-container .user-stats .user-stat > span:nth-child(1) {
