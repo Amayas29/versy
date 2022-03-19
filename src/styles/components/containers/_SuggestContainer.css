@@ -99,10 +99,6 @@
 
 .suggest-item {
   width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  gap: 20px;
   position: relative;
 }
 
@@ -115,38 +111,4 @@
   bottom: -10px;
   left: 50%;
   transform: translateX(-50%);
-}
-
-.suggest-user {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.suggest-user_info {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  color: #f3f4f6;
-}
-
-.suggest-user_info span:nth-child(1) {
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.suggest-user_info span:nth-child(1):hover {
-  text-decoration: underline;
-}
-
-.suggest-user_info span:nth-child(2) {
-  font-style: italic;
-  font-size: 0.8em;
-}
-
-.suggest-avatar {
-  width: 65px;
-  height: 65px;
-  border-radius: 50%;
-  cursor: pointer;
 }

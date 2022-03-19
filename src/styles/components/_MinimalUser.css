@@ -1,0 +1,40 @@
+.minimal-user-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.minimal-user {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.minimal-user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: #f3f4f6;
+}
+
+.minimal-user-info span:nth-child(1) {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.minimal-user-info span:nth-child(1):hover {
+  text-decoration: underline;
+}
+
+.minimal-user-info span:nth-child(2) {
+  font-style: italic;
+  font-size: 0.8em;
+}
+
+.minimal-user-avatar {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  cursor: pointer;
+}

@@ -6,10 +6,6 @@ import MessageHeader from "./MessageHeader";
 import MessageAction from "./MessageAction";
 
 class Message extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <article className="message">

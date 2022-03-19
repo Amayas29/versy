@@ -1,8 +1,7 @@
 import React from "react";
-import Search from "../Search";
+import Search from "../search/Search";
 import SuggestionPanel from "../suggestion/SuggestionPanel";
 import Footer from "../footer/Footer";
-import SearchContainer from "../containers/SearchContainer";
 
 class SuggestContainer extends React.Component {
   constructor(props) {
@@ -16,11 +15,7 @@ class SuggestContainer extends React.Component {
   render() {
     return (
       <section className="suggest">
-        <Search
-          search={() => {
-            this.props.setMainContainer(<SearchContainer />);
-          }}
-        />
+        <Search setMainContainer={this.props.setMainContainer} />
         {this.state.token ? (
           <SuggestionPanel setMainContainer={this.props.setMainContainer} />
         ) : (

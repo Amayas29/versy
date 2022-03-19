@@ -5,19 +5,12 @@
   gap: 50px;
 }
 
-.message-list article {
+.message {
   padding-bottom: 20px;
   width: calc(100% - 20px);
   color: #f3f4f6;
   border-radius: 10px;
   border-bottom: 1px solid #f3f4f6;
-}
-
-.message-list article:hover {
-  border-bottom: 1px solid #5a00ee;
-}
-
-.message {
   display: grid;
   grid-template-columns: 80px auto;
   grid-gap: 25px;
@@ -25,6 +18,14 @@
     "avatar header"
     "avatar content"
     "avatar actions";
+}
+
+.message:hover {
+  border-bottom: 1px solid #5a00ee;
+}
+
+.message.publish {
+  border: none;
 }
 
 .message-header {

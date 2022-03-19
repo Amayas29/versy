@@ -1,5 +1,6 @@
 import React from "react";
-import Icon from "./Icon";
+import Icon from "../Icon";
+import SearchContainer from "../containers/SearchContainer";
 
 class Search extends React.Component {
   constructor(props) {
@@ -24,7 +25,16 @@ class Search extends React.Component {
         <Icon
           name="fa-magnifying-glass"
           size="fa-lg"
-          onClick={this.props.search}
+          onClick={() => {
+            if (!this.state.content) return;
+
+            this.props.setMainContainer(
+              <SearchContainer
+                setMainContainer={this.props.setMainContainer}
+                query={this.state.content}
+              />
+            );
+          }}
         />
         <Icon
           name="fa-xmark"

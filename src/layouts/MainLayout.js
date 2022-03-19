@@ -1,7 +1,6 @@
 import React from "react";
 import MenuContainer from "../components/containers/MenuContainer";
 import MainContainer from "../components/containers/MainContainer";
-
 import FeedContainer from "../components/containers/FeedContainer";
 
 class MainLayout extends React.Component {
