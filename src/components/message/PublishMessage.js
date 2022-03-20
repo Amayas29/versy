@@ -136,6 +136,8 @@ class PublishMessage extends React.Component {
   }
 
   publish() {
+    if (!this.state.content && !this.state.image) return;
+
     this.props.publish({
       user: this.props.user,
       content: this.state.content,
