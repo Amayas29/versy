@@ -15,7 +15,7 @@ const user = {
   joinedDate: new Date(2019, 6, 1),
 };
 
-const message = {
+const msg = {
   content: "Hello world Hey",
   image: "",
   user: user,
@@ -25,18 +25,38 @@ const message = {
   shares: [],
 };
 
-const MessageViewContainer = (props) => {
-  const messages = [message, message];
-  return (
-    <div className="central-container message-view-container">
-      <Message data={props.message} />
-      <PublishMessage user={user} />
-      <MessagesList
-        messages={messages}
-        setMainContainer={props.setMainContainer}
-      />
-    </div>
-  );
-};
+const messages = [msg, msg];
+
+class MessageViewContainer extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      message: this.props.message,
+      comments: messages,
+    };
+
+    this.publish = this.publish.bind(this);
+  }
+
+  publish(message) {
+    this.setState({
+      comments: [message, ...this.state.comments],
+    });
+  }
+
+  render() {
+    return (
+      <div className="central-container message-view-container">
+        <Message data={this.state.message} />
+        <PublishMessage user={user} publish={this.publish} />
+        <MessagesList
+          messages={this.state.comments}
+          setMainContainer={this.props.setMainContainer}
+        />
+      </div>
+    );
+  }
+}
 
 export default MessageViewContainer;

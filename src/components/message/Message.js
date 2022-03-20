@@ -16,14 +16,14 @@ class Message extends React.Component {
         <Popup
           trigger={
             <div className="message-options">
-              <Icon name="fa-ellipsis-vertical" size="fa-xl" />
+              <Icon name="fa-ellipsis-h" size="fa-xl" />
             </div>
           }
           closeOnDocumentClick
           closeOnEscape
           position="bottom right"
         >
-          {(close) => <MessageOptions />}
+          <MessageOptions />
         </Popup>
 
         <MessageAvatar
