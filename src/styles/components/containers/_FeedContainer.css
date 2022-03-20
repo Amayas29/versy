@@ -1,13 +1,4 @@
 .publish {
-  position: relative;
-}
-
-.publish::after {
-  content: "";
-  position: absolute;
-  bottom: -25px;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  border-bottom: 1px dashed #f3f4f6;
+  padding-bottom: 30px !important;
+  border-bottom: 1px dashed #f3f4f6 !important;
 }

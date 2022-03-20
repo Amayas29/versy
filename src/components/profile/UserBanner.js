@@ -69,6 +69,7 @@ class UserBanner extends React.Component {
           contentStyle={style}
           modal
           closeOnDocumentClick
+          closeOnEscape
         >
           {(close) => (
             <EditProfile

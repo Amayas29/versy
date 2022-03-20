@@ -8,7 +8,7 @@ class SuggestContainer extends React.Component {
     super(props);
 
     this.state = {
-      token: "a",
+      token: "s",
     };
   }
 

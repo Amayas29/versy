@@ -10,10 +10,49 @@
     "avatar header"
     "avatar content"
     "avatar actions";
+  position: relative;
 }
 
 .message:hover {
   border-bottom: 1px solid #5a00ee;
+}
+
+.message .message-options {
+  position: absolute;
+  right: 0;
+}
+
+.message .message-options .icon:hover {
+  transition: 0.2s;
+  filter: drop-shadow(0 0 0.4rem #f3f4f6);
+}
+
+.message-options-popup {
+  background-color: #111827;
+  color: #f3f4f6;
+  border: 1px solid #f3f4f6;
+  width: 100%;
+  height: 100%;
+  padding: 20px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+.message-options-popup .message-option {
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto 15%;
+  align-items: center;
+  gap: 10px;
+  color: #f3f4f6;
+}
+
+.message-options-popup .message-option:hover {
+  transition: 0.2s;
+  filter: drop-shadow(0 0 0.4rem #f3f4f6);
+  cursor: pointer;
 }
 
 .message.publish {

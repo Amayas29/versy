@@ -19,6 +19,18 @@ const NotificationsContainer = () => {
       <Notification user={user} type="like" />
       <Notification user={user} type="follow" />
       <Notification user={user} type="comment" />
+      <Notification user={user} type="like" />
+      <Notification user={user} type="follow" />
+      <Notification user={user} type="comment" />
+      <Notification user={user} type="like" />
+      <Notification user={user} type="follow" />
+      <Notification user={user} type="comment" />
+      <Notification user={user} type="like" />
+      <Notification user={user} type="follow" />
+      <Notification user={user} type="comment" />
+      <Notification user={user} type="like" />
+      <Notification user={user} type="follow" />
+      <Notification user={user} type="comment" />
     </div>
   );
 };

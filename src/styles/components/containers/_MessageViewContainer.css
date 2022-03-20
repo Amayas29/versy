@@ -1,0 +1,29 @@
+.message-view-container .message {
+  color: #f3f4f6;
+}
+
+.message-view-container {
+  padding-top: 20px;
+  height: 100%;
+}
+
+.message-view-container:before {
+  content: "";
+  position: absolute;
+  top: 20px;
+  left: -5px;
+  width: 1px;
+  height: calc(100% - 20px);
+  background-color: #f3f4f6;
+}
+
+.message-view-container .message.publish {
+  padding-left: 60px;
+  width: calc(100% - 60px);
+  color: #111827;
+}
+
+.message-view-container .message-list {
+  padding-left: 60px;
+  width: calc(100% - 60px);
+}

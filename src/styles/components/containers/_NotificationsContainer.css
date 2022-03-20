@@ -2,17 +2,8 @@
   color: #f3f4f6;
   display: flex;
   gap: 15px;
-  position: relative;
-}
-
-.notification-container::after {
-  content: "";
-  position: absolute;
-  bottom: -25px;
-  right: 0;
-  width: 100%;
-  height: 1px;
-  background-color: #f3f4f6;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #f3f4f6;
 }
 
 .notification-container .notification-header {

@@ -1,28 +1,17 @@
 .central-container {
-  position: relative;
   width: 100%;
   padding-top: 30px;
   display: flex;
   flex-direction: column;
   gap: 70px;
-}
-
-.central-container:after {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: -30px;
-  width: 1px;
-  height: 100%;
-  background-color: #f3f4f6;
+  padding-right: 30px;
+  border-right: 1px solid #f3f4f6;
 }
 
 @media only screen and (max-width: 1200px) {
   .central-container {
     width: 100%;
-  }
-
-  .central-container:after {
-    display: none;
+    border-right: none;
+    padding-right: 0;
   }
 }
