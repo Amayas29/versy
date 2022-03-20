@@ -5,7 +5,7 @@ const MessageActions = (props) => {
     <div className="message-actions">
       <div className="actions">{props.children}</div>
       {props.hasButton !== undefined && (
-        <div className="btn" onClick={() => {}}>
+        <div className="btn" onClick={props.publish}>
           Publish
         </div>
       )}

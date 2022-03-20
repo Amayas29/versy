@@ -1,14 +1,6 @@
-.message-list {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 50px;
-}
-
 .message {
   padding-bottom: 20px;
   width: calc(100% - 20px);
-  color: #f3f4f6;
   border-radius: 10px;
   border-bottom: 1px solid #f3f4f6;
   display: grid;
@@ -87,6 +79,11 @@
   word-break: break-all;
   outline: none;
   overflow-y: auto;
+}
+
+.message-content > .message-input:active,
+.message-content > .message-input:focus {
+  border: 1px solid #5a00ee;
 }
 
 .message-content > .message-input:empty:before {

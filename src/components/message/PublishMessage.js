@@ -2,7 +2,7 @@ import React from "react";
 import MessageAvatar from "./MessageAvatar";
 import MessageActions from "./MessageActions";
 import Icon from "../Icon";
-import { ImagePicker } from "react-file-picker";
+import ImagePickerContainer from "../ImagePickerContainer";
 import ImageHolder from "./ImageHolder";
 import Picker from "emoji-picker-react";
 
@@ -23,6 +23,9 @@ class PublishMessage extends React.Component {
 
     this.emojiRectRef = React.createRef();
     this.inputRef = React.createRef();
+
+    this.publish = this.publish.bind(this);
+    this.getImage = this.getImage.bind(this);
   }
 
   onEmojiClick(event, emojiObject) {
@@ -49,6 +52,12 @@ class PublishMessage extends React.Component {
     sel.addRange(range);
   }
 
+  getImage(base64) {
+    this.setState({
+      image: base64,
+    });
+  }
+
   render() {
     return (
       <article className="message publish">
@@ -71,7 +80,7 @@ class PublishMessage extends React.Component {
           {this.state.image && <ImageHolder image={this.state.image} />}
         </div>
 
-        <MessageActions hasButton={true}>
+        <MessageActions hasButton={true} publish={this.publish}>
           <Icon
             name="fa-face-smile"
             size="fa-xl"
@@ -103,7 +112,7 @@ class PublishMessage extends React.Component {
             </div>
           )}
 
-          <ImagePickerContainer setState={this.setState} />
+          <ImagePickerContainer getImage={this.getImage} icon="fa-image" />
           {this.state.image && (
             <Icon
               name="fa-xmark"
@@ -125,28 +134,25 @@ class PublishMessage extends React.Component {
         this.emojiRectRef.current.getBoundingClientRect().left + 15,
     });
   }
-}
 
-const ImagePickerContainer = (props) => {
-  return (
-    <ImagePicker
-      extensions={["jpg", "jpeg", "png"]}
-      onChange={(base64) => {
-        props.setState({ image: base64 });
-      }}
-      dims={{
-        minWidth: 0,
-        maxWidth: 40000,
-        minHeight: 0,
-        maxHeight: 40000,
-      }}
-      onError={(errMsg) => {
-        alert(errMsg);
-      }}
-    >
-      <button className="icon fa-solid fa-image fa-xl hide"></button>
-    </ImagePicker>
-  );
-};
+  publish() {
+    this.props.publish({
+      user: this.props.user,
+      content: this.state.content,
+      image: this.state.image,
+      publishDate: new Date(),
+      likes: [],
+      comments: [],
+      shares: [],
+    });
+
+    this.inputRef.current.textContent = "";
+
+    this.setState({
+      content: "",
+      image: "",
+    });
+  }
+}
 
 export default PublishMessage;

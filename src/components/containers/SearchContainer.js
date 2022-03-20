@@ -1,6 +1,6 @@
 import React from "react";
-import Message from "../message/Message";
-import MinimalUser from "../MinimalUser";
+import UsersList from "../UsersList";
+import MessagesList from "../MessagesList";
 import avatar from "../../assets/images/avatar.jpg";
 
 const u = {
@@ -94,44 +94,22 @@ class SearchContainer extends React.Component {
   }
 }
 
-const SearchUser = (props) => {
-  return (
-    <li className="user-list-item">
-      <MinimalUser
-        key={props.index}
-        user={props.user}
-        setMainContainer={props.setMainContainer}
-      />
-      <span className="user-list-item-bio">{props.user.bio}</span>
-    </li>
-  );
-};
-
 const MessagesResult = (props) => {
   return (
-    <ul className="message-list">
-      {props.messages.map((message, index) => (
-        <Message
-          key={index}
-          data={message}
-          setMainContainer={props.setMainContainer}
-        />
-      ))}
-    </ul>
+    <MessagesList
+      messages={props.messages}
+      setMainContainer={props.setMainContainer}
+    />
   );
 };
 
 const UsersResult = (props) => {
   return (
-    <ul className="user-list">
-      {props.users.map((user, index) => (
-        <SearchUser
-          key={index}
-          user={user}
-          setMainContainer={props.setMainContainer}
-        />
-      ))}
-    </ul>
+    <UsersList
+      users={props.users}
+      setMainContainer={props.setMainContainer}
+      hasBio={true}
+    />
   );
 };
 
