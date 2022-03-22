@@ -32,16 +32,29 @@ const bios = [
 
 const generateUser = () => {
   const name = names[Math.floor(Math.random() * names.length)];
+  let uid;
+  let id = `${userIdCpt++}`;
 
   let followers = [];
-  for (let i = 0; i < Math.floor(Math.random() * userIdCpt); i++)
-    followers.push(Math.floor(Math.random() * userIdCpt));
+  for (let i = 0; i < Math.floor(Math.random() * 12); ) {
+    uid = `${Math.floor(Math.random() * 12)}`;
+
+    if (uid !== id) {
+      followers.push(uid);
+      i++;
+    }
+  }
 
   let following = [];
-  for (let i = 0; i < Math.floor(Math.random() * userIdCpt); i++)
-    following.push(Math.floor(Math.random() * userIdCpt));
+  for (let i = 0; i < Math.floor(Math.random() * 12); ) {
+    uid = `${Math.floor(Math.random() * 12)}`;
 
-  const id = userIdCpt++;
+    if (uid !== id) {
+      following.push(uid);
+      i++;
+    }
+  }
+
   return {
     id: id,
     avatar: avatars[Math.floor(Math.random() * avatars.length)],
@@ -115,6 +128,12 @@ const users = [
   generateUser(),
   generateUser(),
   generateUser(),
+  generateUser(),
+  generateUser(),
+  generateUser(),
+  generateUser(),
+  generateUser(),
+  generateUser(),
 ];
 
 let stats = {};
@@ -128,7 +147,7 @@ users.forEach((user) => {
 });
 
 const getUser = (id) => {
-  return users.find((user) => user.id == id);
+  return users.find((user) => user.id === id);
 };
 
 const getUserStats = (id) => {

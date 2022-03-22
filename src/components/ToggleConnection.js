@@ -1,7 +1,6 @@
 import React from "react";
 import Icon from "./Icon";
 import AuthentificationLayout from "../layouts/AuthentificationLayout";
-import LoginContainer from "../components/containers/LoginContainer";
 
 const ToggleConnexion = (props) => {
   const token = "0";

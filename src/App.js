@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import AuthentificationLayout from "./layouts/AuthentificationLayout";
 import MainLayout from "./layouts/MainLayout";
 
 class App extends Component {
@@ -14,7 +13,6 @@ class App extends Component {
 
   componentDidMount() {
     this.setPage(<MainLayout setPage={this.setPage} />);
-    this.setPage(<AuthentificationLayout setPage={this.setPage} />);
   }
 
   setPage(page) {

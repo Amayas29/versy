@@ -4,10 +4,10 @@ import MessagesList from "../MessagesList";
 import { getUser, getUserMessages } from "../../data/data";
 
 let users = [];
-for (let i = 0; i < 3; i++) users.push(getUser(i));
+for (let i = 0; i < 3; i++) users.push(getUser(`${i}`));
 
 let messages = [];
-for (let i = 0; i < 3; i++) messages.push(...getUserMessages(i));
+for (let i = 0; i < 3; i++) messages.push(...getUserMessages(`${i}`));
 
 class SearchContainer extends React.Component {
   render() {

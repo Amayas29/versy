@@ -25,8 +25,8 @@ class Input extends React.Component {
           <span>{this.props.label}</span>
         </div>
         <input
-          className={`input ${
-            this.props.hasShowPassword ? "has-password" : ""
+          className={`${
+            this.props.hasShowPassword ? "input-password" : "input"
           }`}
           type={this.state.type}
           name={this.props.name}

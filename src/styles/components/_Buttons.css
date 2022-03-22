@@ -1,25 +1,22 @@
 .btn {
+  color: #f3f4f6;
   padding: 0.3em 1.2em;
-  color: #111827;
-  background-color: #f3f4f6;
-  transition: all 0.1s;
+  background: linear-gradient(to right, #5a00ee, #111827);
+  cursor: pointer;
+  transition: all 0.6s;
   letter-spacing: 2px;
   border: none;
   cursor: pointer;
   border-radius: 20px;
-  transition: box-shadow 0.6s;
   text-align: center;
 }
 
-.btn:hover,
-.btn:active {
-  box-shadow: 0px 0px 10px 5px #f3f4f6;
+.btn:hover {
+  background: #5a00ee;
   color: #111827;
-  background-color: #f3f4f6;
-  cursor: pointer;
+  font-weight: bold;
 }
 
 .btn:active {
-  transform: scale(1.05, 1.05);
-  animation: anim 5s ease forwards;
+  transform: scale(1.1, 1.1);
 }

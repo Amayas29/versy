@@ -139,6 +139,7 @@ class SignupContainer extends React.Component {
           name="password"
           type="password"
           icon="fa-key"
+          hasShowPassword={true}
           handleChange={(e) => this.setValue("password", e.target.value)}
           error={this.state.errors.password}
         />
@@ -148,6 +149,7 @@ class SignupContainer extends React.Component {
           name="passwordconfirmation"
           type="password"
           icon="fa-key"
+          hasShowPassword={true}
           handleChange={(e) =>
             this.setValue("passwordconfirmation", e.target.value)
           }

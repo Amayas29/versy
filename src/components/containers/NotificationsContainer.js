@@ -3,9 +3,9 @@ import Notification from "../notifications/Notification";
 import { getUser, getUserMessages } from "../../data/data";
 
 const NotificationsContainer = (props) => {
-  const user = getUser(1);
+  const user = getUser("1");
 
-  const message = getUserMessages(2)[0];
+  const message = getUserMessages("2")[0];
 
   return (
     <div className="central-container">
