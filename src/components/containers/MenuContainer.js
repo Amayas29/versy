@@ -13,7 +13,7 @@ class MenuContainer extends React.Component {
     super(props);
 
     this.state = {
-      token: "a",
+      token: "0",
       morePanelDisplay: false,
     };
 

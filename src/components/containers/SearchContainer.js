@@ -1,63 +1,13 @@
 import React from "react";
 import UsersList from "../UsersList";
 import MessagesList from "../MessagesList";
-import avatar from "../../assets/images/avatar.jpg";
+import { getUser, getUserMessages } from "../../data/data";
 
-const u = {
-  id: 1,
-  avatar: avatar,
-  name: "Amayas",
-  username: "@sadi",
-  bio:
-    "Hey bro how are u ? I am fine, and you ? :) what about you ? :) where are you from ? :) Hey bro how are u ? I am fine, and you ? :) what about you ? :) where are you from ? :) Hey bro how are u ? I am fine, and you ? :) what about you ? :) where are you from ? :) Hey bro how are u ? I am fine, and you ? :) what about you ? :) where are you from ? :)",
-  birthday: new Date(2001, 4, 29),
-  location: "Paris, France",
-  joinedDate: new Date(2019, 6, 1),
-};
+let users = [];
+for (let i = 0; i < 3; i++) users.push(getUser(i));
 
-let users = [u, u, u, u, u, u, u, u, u];
-
-let messages = [
-  {
-    content: "Hey bro",
-    image: avatar,
-    user: u,
-    publishDate: new Date(),
-    likes: [],
-    comments: [],
-    shares: [],
-  },
-
-  {
-    content: "Hey bro",
-    image: avatar,
-    user: u,
-    publishDate: new Date(),
-    likes: [],
-    comments: [],
-    shares: [],
-  },
-
-  {
-    content: "Hey bro",
-    image: avatar,
-    user: u,
-    publishDate: new Date(),
-    likes: [],
-    comments: [],
-    shares: [],
-  },
-
-  {
-    content: "Hey bro",
-    image: avatar,
-    user: u,
-    publishDate: new Date(),
-    likes: [],
-    comments: [],
-    shares: [],
-  },
-];
+let messages = [];
+for (let i = 0; i < 3; i++) messages.push(...getUserMessages(i));
 
 class SearchContainer extends React.Component {
   render() {

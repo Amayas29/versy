@@ -49,7 +49,7 @@ class Message extends React.Component {
             }}
           />
           <MessageAction name="fa-heart" list={this.props.data.likes} />
-          <MessageAction name="fa-share" list={this.props.data.shares} />
+          {/* <MessageAction name="fa-share" list={this.props.data.shares} /> */}
         </MessageActions>
       </article>
     );

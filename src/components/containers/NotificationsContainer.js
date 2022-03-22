@@ -1,28 +1,11 @@
 import React from "react";
 import Notification from "../notifications/Notification";
-import avatar from "../../assets/images/avatar.jpg";
+import { getUser, getUserMessages } from "../../data/data";
 
 const NotificationsContainer = (props) => {
-  const user = {
-    id: 1,
-    avatar: avatar,
-    name: "Amayas",
-    username: "@sadi",
-    bio: "Hey bro",
-    birthday: new Date(2001, 4, 29),
-    location: "Paris, France",
-    joinedDate: new Date(2019, 6, 1),
-  };
+  const user = getUser(1);
 
-  const message = {
-    content: "Hey bg",
-    image: "",
-    user: user,
-    publishDate: new Date(),
-    likes: [],
-    comments: [],
-    shares: [],
-  };
+  const message = getUserMessages(2)[0];
 
   return (
     <div className="central-container">

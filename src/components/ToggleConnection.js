@@ -4,13 +4,13 @@ import AuthentificationLayout from "../layouts/AuthentificationLayout";
 import LoginContainer from "../components/containers/LoginContainer";
 
 const ToggleConnexion = (props) => {
-  const token = "a";
+  const token = "0";
 
   return (
     <div
       className="toggle-connection"
       onClick={() =>
-        props.setPage(<AuthentificationLayout container={<LoginContainer />} />)
+        props.setPage(<AuthentificationLayout setPage={props.setPage} />)
       }
     >
       <span className="menu-separator"></span>

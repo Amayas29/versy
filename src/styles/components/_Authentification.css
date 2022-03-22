@@ -1,6 +1,109 @@
-.auth-container {
-  height: 100vh;
+.auth {
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 100vh;
+  background: #111827;
+}
+
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 70px;
+  background-color: #f3f4f6;
+  box-sizing: border-box;
+  border-radius: 30px;
+  padding: 40px;
+}
+
+.auth-wrapper {
+  width: 30%;
+  min-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.auth-title,
+.move-to span {
+  text-align: center;
+  background: -webkit-linear-gradient(#5a00ee, #111827);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+}
+
+.move-to span:hover {
+  cursor: pointer;
+  text-decoration: underline;
+  -webkit-text-fill-color: #5a00ee;
+}
+
+.input-container {
+  color: #111827;
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  position: relative;
+}
+
+.input-container .input {
+  height: 32px;
+  font-size: 20px;
+  outline: none;
+  width: 100%;
+  border-bottom: 2px solid rgb(155, 155, 155);
+  background-color: #f3f4f6;
+  color: #111827;
+  background-color: red;
+}
+
+.input-container .input.has-password {
+  background-color: green;
+  padding-right: 40px;
+  width: calc(100%- 40px);
+}
+
+.input-container .input-name {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.input-container .icon:nth-child(3) {
+  position: absolute;
+  right: 0px;
+  top: 32px;
+}
+
+.auth-errors {
+  color: red;
+}
+
+.auth-submit {
+  display: flex;
+  text-transform: uppercase;
+  font-size: 20px;
+  border-radius: 25px;
+  color: #f3f4f6;
+  padding: 10px 60px;
+  background: linear-gradient(to right, #5a00ee, #111827);
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+    rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  margin: auto;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.1s;
+}
+
+.auth-submit:active {
+  transform: translateY(2px);
+}
+
+.move-to-login a {
+  font-weight: bold;
+  cursor: pointer;
 }

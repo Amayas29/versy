@@ -1,102 +1,17 @@
 import React from "react";
 import PublishMessage from "../message/PublishMessage";
 import MessagesList from "../MessagesList";
-import avatar from "../../assets/images/avatar.jpg";
-
-const user = {
-  id: 1,
-  avatar: avatar,
-  name: "Amayas",
-  username: "@sadi",
-  bio: "Hey bro",
-  birthday: new Date(2001, 4, 29),
-  location: "Paris, France",
-  joinedDate: new Date(2019, 6, 1),
-};
+import { getUser, getUserMessages } from "../../data/data";
 
 class FeedContainer extends React.Component {
   constructor(props) {
     super(props);
 
-    // get from server
-    const messages = [
-      {
-        content: "Hello world Hey",
-        image: avatar,
-        user: user,
-        publishDate: new Date(),
-        likes: [],
-        comments: [],
-        shares: [],
-      },
-      {
-        content: "Hello world Hey",
-        image: avatar,
-        user: user,
-        publishDate: new Date(),
-        likes: [],
-        comments: [],
-        shares: [],
-      },
-      {
-        content: "Hello world Hey",
-        image: avatar,
-        user: user,
-        publishDate: new Date(),
-        likes: [],
-        comments: [],
-        shares: [],
-      },
-      {
-        content: "Hello world Hey",
-        image: avatar,
-        user: user,
-        publishDate: new Date(),
-        likes: [],
-        comments: [],
-        shares: [],
-      },
-      {
-        content: "Hello world Hey",
-        image: avatar,
-        user: user,
-        publishDate: new Date(),
-        likes: [],
-        comments: [],
-        shares: [],
-      },
-      {
-        content: "Hello world Hey",
-        image: avatar,
-        user: user,
-        publishDate: new Date(),
-        likes: [],
-        comments: [],
-        shares: [],
-      },
-      {
-        content: "Hello world Hey",
-        image: avatar,
-        user: user,
-        publishDate: new Date(),
-        likes: [],
-        comments: [],
-        shares: [],
-      },
-      {
-        content: "Hello world Hey",
-        image: avatar,
-        user: user,
-        publishDate: new Date(),
-        likes: [],
-        comments: [],
-        shares: [],
-      },
-    ];
-
+    const token = "0";
     this.state = {
-      token: "a",
-      messages: messages,
+      token: token,
+      user: getUser(token),
+      messages: getUserMessages(token),
     };
 
     this.publish = this.publish.bind(this);
@@ -107,7 +22,7 @@ class FeedContainer extends React.Component {
       <section className="central-container">
         {this.state.token && (
           <PublishMessage
-            user={user}
+            user={this.state.user}
             setMainContainer={this.props.setMainContainer}
             publish={this.publish}
           />
