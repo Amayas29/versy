@@ -12,6 +12,7 @@ const UsersList = (props) => {
           hasBio={props.hasBio}
         />
       ))}
+      {props.more}
     </ul>
   );
 };
@@ -37,9 +38,9 @@ const UserVue = (props) => {
           />
           <div className="minimal-user-info">
             <span
-              onClick={() => {
-                redirectUserProfile(props.data, props.setMainContainer);
-              }}
+              onClick={() =>
+                redirectUserProfile(props.data, props.setMainContainer)
+              }
             >
               {props.data.name}
             </span>

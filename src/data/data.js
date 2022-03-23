@@ -3,6 +3,7 @@ import a from "../assets/images/a.jpg";
 import b from "../assets/images/b.jpg";
 import c from "../assets/images/c.png";
 import d from "../assets/images/d.png";
+import dateFormat from "dateformat";
 
 let userIdCpt = 0;
 let messageIdCpt = 0;
@@ -60,10 +61,11 @@ const generateUser = () => {
     avatar: avatars[Math.floor(Math.random() * avatars.length)],
     name: name,
     username: `@${name.toLowerCase()}${id}`,
+    email: `${name.toLowerCase()}@gmail.com`,
+    password: "123456",
     bio: bios[Math.floor(Math.random() * bios.length)],
-    birthday: new Date(2001, 4, 29),
-    location: "Paris, France",
-    joinedDate: new Date(2019, 6, 1),
+    birthday: "29/05/2001",
+    joinedDate: "01/06/2019",
     followers: followers,
     following: following,
   };
@@ -88,6 +90,12 @@ const generateStats = () => {
       "2022-02": Math.floor(Math.random() * 50) + 20,
       "2022-01": Math.floor(Math.random() * 20) + 5,
     },
+
+    likesPerMonth: {
+      "2022-03": Math.floor(Math.random() * 100) + 90,
+      "2022-02": Math.floor(Math.random() * 50) + 20,
+      "2022-01": Math.floor(Math.random() * 20) + 5,
+    },
   };
 };
 
@@ -100,7 +108,10 @@ const generateMessages = (user) => {
         ? ""
         : avatars[Math.floor(Math.random() * avatars.length)];
 
-    const date = Math.random() > 0.5 ? new Date() : user.joinedDate;
+    const date =
+      Math.random() > 0.5
+        ? dateFormat(new Date(), "dd/mm/yyyy")
+        : user.joinedDate;
 
     let likes = [];
     for (let j = 0; j < Math.floor(Math.random() * userIdCpt); j++)

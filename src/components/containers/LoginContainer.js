@@ -2,7 +2,7 @@ import React from "react";
 import MainLayout from "../../layouts/MainLayout";
 import { validateEmail, validatePassword } from "../../utils/Validations";
 import Form from "../authentification/Form";
-import Input from "../authentification/Input";
+import Input from "../Input";
 import SignupContainer from "./SignupContainer";
 
 class LoginContainer extends React.Component {

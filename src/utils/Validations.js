@@ -73,8 +73,15 @@ const validateUsername = (username) => {
   return { status: true, message: "" };
 };
 
+const validateDate = (date) => {
+  date = String(date);
+  if (!date) return { status: false, message: "Date is required." };
+  return { status: true, message: "" };
+};
+
 export {
   validateEmail,
+  validateDate,
   validatePassword,
   validatePasswordConfirmation,
   validateName,

@@ -22,7 +22,7 @@
   min-width: 500px;
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 25px;
 }
 
 .auth-title,
@@ -38,48 +38,6 @@
   cursor: pointer;
   text-decoration: underline;
   -webkit-text-fill-color: #5a00ee;
-}
-
-.input-container {
-  color: #111827;
-  font-size: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-  position: relative;
-}
-
-.input-container .input {
-  height: 32px;
-  font-size: 20px;
-  outline: none;
-  width: 100%;
-  border-bottom: 2px solid rgb(155, 155, 155);
-  background-color: #f3f4f6;
-  color: #111827;
-}
-
-.input-container .input-password {
-  height: 32px;
-  font-size: 20px;
-  outline: none;
-  border-bottom: 2px solid rgb(155, 155, 155);
-  background-color: #f3f4f6;
-  color: #111827;
-  padding-right: 40px;
-  width: calc(100%- 40px);
-}
-
-.input-container .input-name {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.input-container .icon:nth-child(3) {
-  position: absolute;
-  right: 0px;
-  top: 32px;
 }
 
 .auth-errors {

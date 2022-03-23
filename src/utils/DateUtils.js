@@ -19,7 +19,7 @@ const timeElapsed = (date) => {
 
   if (diffMonths < 12) return dateFormat(date, "mmm d");
 
-  return dateFormat(date, "mmm d, yyyy");
+  return dateFormat(date, "mmm dd, yyyy");
 };
 
 export default timeElapsed;

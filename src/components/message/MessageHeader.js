@@ -1,8 +1,12 @@
 import React from "react";
 import timeElapsed from "../../utils/DateUtils";
 import ProfileContainer from "../containers/ProfileContainer";
+import moment from "moment";
 
 const MessageHeader = (props) => {
+  const date = moment(props.message.publishDate, "DD/MM/YYYY").toDate();
+  const time = timeElapsed(date);
+
   return (
     <div className="message-header">
       <span
@@ -19,7 +23,7 @@ const MessageHeader = (props) => {
       </span>
       <span>{props.message.user.username}</span>
       <i className="fa-solid fa-minus"></i>
-      <span>{timeElapsed(props.message.publishDate)}</span>
+      <span>{time}</span>
     </div>
   );
 };

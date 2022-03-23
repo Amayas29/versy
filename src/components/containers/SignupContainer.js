@@ -1,29 +1,31 @@
 import React from "react";
 import MainLayout from "../../layouts/MainLayout";
+
 import {
+  validateUsername,
+  validateDate,
   validateEmail,
   validatePassword,
   validatePasswordConfirmation,
-  validateName,
-  validateUsername,
 } from "../../utils/Validations";
+
 import Form from "../authentification/Form";
-import Input from "../authentification/Input";
+import Input from "../Input";
 import LoginContainer from "./LoginContainer";
 
 class SignupContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
       username: "",
+      birthday: "",
       email: "",
       password: "",
       passwordconfirmation: "",
 
       errors: {
-        name: "",
         username: "",
+        birthday: "",
         email: "",
         password: "",
         passwordconfirmation: "",
@@ -42,15 +44,15 @@ class SignupContainer extends React.Component {
 
   handleFormSubmit(e) {
     const {
-      name,
       username,
+      birthday,
       email,
       password,
       passwordconfirmation,
     } = this.state;
 
-    const nameValidation = validateName(name);
     const usernameValidation = validateUsername(username);
+    const birthdayValidation = validateDate(birthday);
     const emailValidation = validateEmail(email);
     const passwordValidation = validatePassword(password);
     const passwordConfirmationValidation = validatePasswordConfirmation(
@@ -60,8 +62,8 @@ class SignupContainer extends React.Component {
 
     this.setState({
       errors: {
-        name: nameValidation.message,
         username: usernameValidation.message,
+        birthday: birthdayValidation.message,
         email: emailValidation.message,
         password: passwordValidation.message,
         passwordconfirmation: passwordConfirmationValidation.message,
@@ -72,8 +74,8 @@ class SignupContainer extends React.Component {
       emailValidation.status &&
       passwordValidation.status &&
       passwordConfirmationValidation.status &&
-      nameValidation.status &&
-      usernameValidation.status
+      usernameValidation.status &&
+      passwordValidation.status
     )
       this.props.setPage(<MainLayout setPage={this.props.setPage} />);
   }
@@ -108,21 +110,21 @@ class SignupContainer extends React.Component {
         handleAction={this.handleFormSubmit}
       >
         <Input
-          label="Name"
-          type="text"
-          name="name"
-          icon="fa-signature"
-          handleChange={(e) => this.setValue("name", e.target.value)}
-          error={this.state.errors.name}
-        />
-
-        <Input
           label="Username"
           type="text"
           name="username"
           icon="fa-user"
           handleChange={(e) => this.setValue("username", e.target.value)}
           error={this.state.errors.username}
+        />
+
+        <Input
+          label="Birthday"
+          type="date"
+          name="birthday"
+          icon="fa-cake-candles"
+          handleChange={(e) => this.setValue("birthday", e.target.value)}
+          error={this.state.errors.birthday}
         />
 
         <Input

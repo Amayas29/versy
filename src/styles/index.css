@@ -9,8 +9,9 @@
 @import "./components/containers/_MessageViewContainer.css";
 @import "./components/containers/_AboutUsContainer.css";
 @import "./components/_Messages.css";
-@import "./_MessagesList.css";
-@import "./_UsersList.css";
+@import "./components/_MessagesList.css";
+@import "./components/_Input.css";
+@import "./components/_UsersList.css";
 @import "./components/_Buttons.css";
 @import "./components/_Icon.css";
 @import "./components/_Footer.css";
@@ -22,6 +23,7 @@
   outline: none;
   user-select: none;
   border: none;
+  word-break: break-all;
   letter-spacing: 0.05rem;
 }
 

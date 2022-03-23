@@ -1,5 +1,5 @@
 import React from "react";
-import Icon from "../Icon";
+import Icon from "./Icon";
 
 class Input extends React.Component {
   constructor(props) {
@@ -30,7 +30,9 @@ class Input extends React.Component {
           }`}
           type={this.state.type}
           name={this.props.name}
+          value={this.props.value}
           onChange={this.props.handleChange}
+          pattern={this.props.pattern}
         />
         {this.props.hasShowPassword && (
           <ShownPassword
@@ -38,7 +40,7 @@ class Input extends React.Component {
             hide={this.state.type === "password"}
           />
         )}
-        {this.props.error && <p className="auth-errors">{this.props.error}</p>}
+        <span className="auth-errors">{this.props.error}</span>
       </div>
     );
   }

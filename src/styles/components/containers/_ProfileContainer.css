@@ -88,8 +88,57 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 30px;
+  gap: 13px;
   position: relative;
+}
+
+.edit-profile .input-container {
+  width: 100%;
+  color: #f3f4f6;
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+}
+
+.edit-profile .input {
+  padding: 7px 10px;
+  width: calc(100% - 20px) !important;
+  height: auto !important;
+  border: 1px solid transparent;
+  background: #f3f4f6;
+  color: #111827;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  border-radius: 9px;
+  font-size: 1.1rem;
+  transition: 0.3s;
+  letter-spacing: 1px;
+}
+
+.edit-profile .input:focus {
+  border: 1px solid #5a00ee;
+}
+
+.edit-profile .input-password {
+  padding: 10px !important;
+  width: calc(100% - 20px) !important;
+  height: auto !important;
+  border: 1px solid transparent;
+  background: #f3f4f6;
+  color: #111827;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  border-radius: 9px;
+  font-size: 1.1rem;
+  transition: 0.3s;
+  letter-spacing: 1px;
+}
+
+.edit-profile .input-container .icon:nth-child(3) {
+  color: #111827;
+  position: absolute;
+  right: 0px;
+  top: 45px;
 }
 
 .edit-save {
@@ -107,76 +156,4 @@
   width: 150px;
   height: 150px;
   border-radius: 50%;
-}
-
-.edit-input-container {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.edit-input {
-  padding: 10px;
-  width: calc(100% - 20px);
-  border: 1px solid transparent;
-  background: #f3f4f6;
-  color: #111827;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  border-radius: 9px;
-  font-size: 1.1rem;
-  transition: 0.3s;
-  letter-spacing: 1px;
-}
-
-.edit-input:active,
-.edit-input:focus {
-  border: 1px solid #5a00ee;
-}
-
-.edit-birthday {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px;
-  width: calc(100% - 20px);
-  border: 1px solid transparent;
-  background: #f3f4f6;
-  color: #111827;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  border-radius: 9px;
-  font-size: 1.1rem;
-  letter-spacing: 1px;
-}
-
-.edit-birthday em:hover {
-  transition: 0.2s;
-  filter: drop-shadow(0 0 0.4rem #111827);
-}
-
-.date-editor {
-  display: flex;
-  width: 100%;
-  align-items: flex-end;
-}
-
-.date-field {
-  width: 100%;
-  display: flex;
-  gap: 15px;
-  flex-direction: column;
-  align-items: center;
-}
-
-.date-editor .edit-input {
-  width: 50%;
-}
-
-.date-editor .icon {
-  padding: 20px;
-}
-
-.date-editor .icon:hover {
-  transition: 0.2s;
-  filter: drop-shadow(0 0 0.4rem #f3f4f6);
 }

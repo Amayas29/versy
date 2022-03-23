@@ -80,6 +80,40 @@
 }
 
 .suggestion-panel-header {
+  width: 100%;
+  text-align: center;
   font-size: 1.5rem;
   font-style: italic;
+}
+
+.suggestion-panel .user-list-item {
+  padding-bottom: 0px;
+  border: none;
+}
+
+.suggestion-panel .user-list {
+  border: 1px solid #f3f4f6;
+  border-radius: 30px;
+  padding: 20px;
+}
+
+.suggestion-panel-more {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.suggestion-panel-more span {
+  font-style: italic;
+}
+
+.suggestion-panel-more:hover span {
+  text-decoration: underline;
+}
+
+.suggestion-panel-more:hover em {
+  transition: 0.2s;
+  filter: drop-shadow(0 0 0.4rem #f3f4f6);
 }

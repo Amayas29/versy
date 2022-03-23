@@ -16,8 +16,9 @@ class ProfileContainer extends React.Component {
     this.setProfileVue = this.setProfileVue.bind(this);
   }
 
-  componentDidMount() {
-    const messages = getUserMessages(this.state.token);
+  refreshProfileVue() {
+    const user = this.props.user || getUser(this.state.token);
+    const messages = getUserMessages(user.id);
 
     this.setState({
       profileVue: (
@@ -29,6 +30,10 @@ class ProfileContainer extends React.Component {
     });
   }
 
+  componentDidMount() {
+    this.refreshProfileVue();
+  }
+
   setProfileVue(vue, mainProfileVue) {
     this.setState({
       profileVue: vue,
@@ -36,8 +41,12 @@ class ProfileContainer extends React.Component {
     });
   }
 
+  UNSAFE_componentWillReceiveProps(props) {
+    this.refreshProfileVue();
+  }
+
   render() {
-    const user = this.props.user ? this.props.user : getUser(this.state.token);
+    const user = this.props.user || getUser(this.state.token);
 
     return (
       <section className="central-container">

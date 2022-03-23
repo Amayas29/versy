@@ -1,11 +1,12 @@
 import React from "react";
 import Icon from "../Icon";
-import dateFormat from "dateformat";
 import MessagesList from "../MessagesList";
 import UsersList from "../UsersList";
 import Popup from "reactjs-popup";
 import EditProfile from "../profile/EditProfile";
 import { getUser, getUserMessages } from "../../data/data";
+import moment from "moment";
+import dateFormat from "dateformat";
 
 class UserBanner extends React.Component {
   constructor(props) {
@@ -18,7 +19,7 @@ class UserBanner extends React.Component {
   render() {
     const style = {
       width: "600px",
-      height: "700px",
+      // height: "800px",
     };
 
     const messages = getUserMessages(this.props.user.id);
@@ -28,6 +29,12 @@ class UserBanner extends React.Component {
 
     let following = [];
     for (let id of this.props.user.following) following.push(getUser(id));
+
+    let joinedDate = moment(this.props.user.joinedDate, "DD/MM/YYYY").toDate();
+    joinedDate = dateFormat(joinedDate, "mmm dd,yyyy");
+
+    let birthday = moment(this.props.user.birthday, "DD/MM/YYYY").toDate();
+    birthday = dateFormat(birthday, "mmm dd,yyyy");
 
     return (
       <div className="user-banner-container">
@@ -54,20 +61,8 @@ class UserBanner extends React.Component {
         <span className="user-bio">{this.props.user.bio}</span>
 
         <div className="user-metadatas">
-          <UserMetadata
-            name="fa-location-dot"
-            data={this.props.user.location}
-          />
-          <UserMetadata
-            name="fa-cake-candles"
-            data={"Born " + dateFormat(this.props.user.birthday, "mmm d, yyyy")}
-          />
-          <UserMetadata
-            name="fa-calendar-days"
-            data={
-              "Joined " + dateFormat(this.props.user.joinedDate, "mmm d, yyyy")
-            }
-          />
+          <UserMetadata name="fa-cake-candles" data={`Born ${birthday}`} />
+          <UserMetadata name="fa-calendar-days" data={`Joined ${joinedDate}`} />
         </div>
 
         <div className="user-stats">

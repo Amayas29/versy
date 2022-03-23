@@ -5,6 +5,7 @@ import Icon from "../Icon";
 import ImagePickerContainer from "../ImagePickerContainer";
 import ImageHolder from "./ImageHolder";
 import Picker from "emoji-picker-react";
+import Popup from "reactjs-popup";
 
 class PublishMessage extends React.Component {
   constructor(props) {
@@ -13,15 +14,11 @@ class PublishMessage extends React.Component {
     this.state = {
       image: "",
       content: "",
-      showEmojiPicker: false,
-      emojiPickerTop: 0,
-      emojiPickerLeft: 0,
     };
 
     this.setState = this.setState.bind(this);
     this.onEmojiClick = this.onEmojiClick.bind(this);
 
-    this.emojiRectRef = React.createRef();
     this.inputRef = React.createRef();
 
     this.publish = this.publish.bind(this);
@@ -81,36 +78,12 @@ class PublishMessage extends React.Component {
         </div>
 
         <MessageActions hasButton={true} publish={this.publish}>
-          <Icon
-            name="fa-face-smile"
-            size="fa-xl"
-            ref={this.emojiRectRef}
-            onClick={() => {
-              this.setState({
-                emojiPickerTop:
-                  this.emojiRectRef.current.getBoundingClientRect().top + 5,
-                emojiPickerLeft:
-                  this.emojiRectRef.current.getBoundingClientRect().left + 15,
-                showEmojiPicker: !this.state.showEmojiPicker,
-              });
-            }}
-          />
-
-          {this.state.showEmojiPicker && (
-            <div
-              style={{
-                position: "fixed",
-                top: this.state.emojiPickerTop,
-                left: this.state.emojiPickerLeft,
-                zIndex: "99",
-              }}
-              onMouseLeave={() => {
-                this.setState({ showEmojiPicker: false });
-              }}
-            >
-              <Picker onEmojiClick={this.onEmojiClick} />
-            </div>
-          )}
+          <Popup
+            trigger={<Icon name="fa-face-smile" size="fa-xl" />}
+            position="bottom left"
+          >
+            <Picker onEmojiClick={this.onEmojiClick} />
+          </Popup>
 
           <ImagePickerContainer getImage={this.getImage} icon="fa-image" />
           {this.state.image && (
@@ -125,14 +98,6 @@ class PublishMessage extends React.Component {
         </MessageActions>
       </article>
     );
-  }
-
-  componentDidMount() {
-    this.setState({
-      emojiPickerTop: this.emojiRectRef.current.getBoundingClientRect().top + 5,
-      emojiPickerLeft:
-        this.emojiRectRef.current.getBoundingClientRect().left + 15,
-    });
   }
 
   publish() {
