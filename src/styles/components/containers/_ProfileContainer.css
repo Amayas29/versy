@@ -28,11 +28,12 @@
 
 .user-banner-container .user-header .user-pseudos > span:nth-child(1) {
   font-weight: bold;
+  font-size: 15px;
 }
 
 .user-banner-container .user-header .user-pseudos > span:nth-child(2) {
   font-style: italic;
-  font-size: 0.8em;
+  font-size: 13px;
 }
 
 .user-banner-edit-profile {
@@ -70,11 +71,12 @@
 
 .user-banner-container .user-stats .user-stat > span:nth-child(1) {
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size: 15px;
 }
 
 .user-banner-container .user-stats .user-stat > span:nth-child(2) {
   font-style: italic;
+  font-size: 13px;
 }
 
 .edit-profile {
@@ -95,7 +97,6 @@
 .edit-profile .input-container {
   width: 100%;
   color: #f3f4f6;
-  font-size: 16px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -105,13 +106,13 @@
 .edit-profile .input {
   padding: 7px 10px;
   width: calc(100% - 20px) !important;
+  font-size: 20px;
   height: auto !important;
   border: 1px solid transparent;
   background: #f3f4f6;
   color: #111827;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   border-radius: 9px;
-  font-size: 1.1rem;
   transition: 0.3s;
   letter-spacing: 1px;
 }
@@ -123,13 +124,13 @@
 .edit-profile .input-password {
   padding: 10px !important;
   width: calc(100% - 20px) !important;
+  font-size: 20px;
   height: auto !important;
   border: 1px solid transparent;
   background: #f3f4f6;
   color: #111827;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   border-radius: 9px;
-  font-size: 1.1rem;
   transition: 0.3s;
   letter-spacing: 1px;
 }

@@ -58,7 +58,7 @@ class UserBanner extends React.Component {
           )}
         </Popup>
 
-        <span className="user-bio">{this.props.user.bio}</span>
+        <span className="user-bio break">{this.props.user.bio}</span>
 
         <div className="user-metadatas">
           <UserMetadata name="fa-cake-candles" data={`Born ${birthday}`} />
@@ -120,7 +120,7 @@ const UserHeader = (props) => {
     <div className="user-header">
       <img src={props.user.avatar} alt="avatar" className="user-avatar" />
 
-      <div className="user-pseudos">
+      <div className="user-pseudos break">
         <span>{props.user.name}</span>
         <span>{props.user.username}</span>
       </div>

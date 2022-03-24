@@ -16,22 +16,23 @@ class ProfileContainer extends React.Component {
     this.setProfileVue = this.setProfileVue.bind(this);
   }
 
-  refreshProfileVue() {
-    const user = this.props.user || getUser(this.state.token);
+  refreshProfileVue(props) {
+    const user = props.user || getUser(this.state.token);
     const messages = getUserMessages(user.id);
 
     this.setState({
       profileVue: (
         <MessagesList
           messages={messages}
-          setMainContainer={this.props.setMainContainer}
+          setMainContainer={props.setMainContainer}
         />
       ),
+      mainProfileVue: true,
     });
   }
 
   componentDidMount() {
-    this.refreshProfileVue();
+    this.refreshProfileVue(this.props);
   }
 
   setProfileVue(vue, mainProfileVue) {
@@ -42,7 +43,7 @@ class ProfileContainer extends React.Component {
   }
 
   UNSAFE_componentWillReceiveProps(props) {
-    this.refreshProfileVue();
+    this.refreshProfileVue(props);
   }
 
   render() {

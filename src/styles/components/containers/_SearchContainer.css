@@ -9,7 +9,7 @@
 }
 
 .not-found-container .no-results {
-  font-size: 1.3rem;
+  font-size: 20px;
   color: #f3f4f6;
   font-weight: bold;
   font-style: italic;
@@ -18,7 +18,7 @@
 }
 
 .not-found-container .result-info {
-  font-size: 1rem;
+  font-size: 15px;
   color: #f3f4f6;
   font-style: italic;
   text-align: justify;

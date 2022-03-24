@@ -34,6 +34,7 @@ class MessageViewContainer extends React.Component {
         />
         <PublishMessage
           user={user}
+          isComment={true}
           publish={this.publish}
           setMainContainer={this.props.setMainContainer}
         />

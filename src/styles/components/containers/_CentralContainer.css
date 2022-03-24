@@ -1,16 +1,15 @@
 .central-container {
-  width: 100%;
-  padding-top: 30px;
   display: flex;
+  padding-right: 30px;
+  padding-top: 30px;
   flex-direction: column;
   gap: 50px;
-  padding-right: 30px;
   border-right: 1px solid #f3f4f6;
 }
 
 @media only screen and (max-width: 1200px) {
   .central-container {
-    width: 100%;
+    width: 80%;
     border-right: none;
     padding-right: 0;
   }

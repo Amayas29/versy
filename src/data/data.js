@@ -59,7 +59,7 @@ const generateUser = () => {
   return {
     id: id,
     avatar: avatars[Math.floor(Math.random() * avatars.length)],
-    name: name,
+    name: `${name}`,
     username: `@${name.toLowerCase()}${id}`,
     email: `${name.toLowerCase()}@gmail.com`,
     password: "123456",
@@ -124,7 +124,7 @@ const generateMessages = (user) => {
       user: user,
       publishDate: date,
       likes: likes,
-      // Todo
+      isComment: false,
       comments: [],
     });
   }
@@ -169,4 +169,8 @@ const getUserMessages = (id) => {
   return messages[id];
 };
 
-export { getUser, getUserStats, getUserMessages };
+const getRandomMessages = () => {
+  return messages[Math.floor(Math.random() * users.length)];
+};
+
+export { getUser, getUserStats, getUserMessages, getRandomMessages };

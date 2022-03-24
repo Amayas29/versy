@@ -25,11 +25,16 @@
   gap: 25px;
 }
 
+.auth-title {
+  font-size: 30px;
+}
+
 .auth-title,
 .move-to span {
   text-align: center;
   background: -webkit-linear-gradient(#5a00ee, #111827);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   font-weight: bold;
 }

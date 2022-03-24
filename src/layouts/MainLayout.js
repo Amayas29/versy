@@ -1,9 +1,7 @@
 import React from "react";
 import MenuContainer from "../components/containers/MenuContainer";
-import MainContainer from "../components/containers/MainContainer";
 import FeedContainer from "../components/containers/FeedContainer";
-import ProfileContainer from "../components/containers/ProfileContainer";
-import { getUser } from "../data/data";
+import SuggestContainer from "../components/containers/SuggestContainer";
 class MainLayout extends React.Component {
   constructor(props) {
     super(props);
@@ -17,13 +15,6 @@ class MainLayout extends React.Component {
   componentDidMount() {
     this.setMainContainer(
       <FeedContainer setMainContainer={this.setMainContainer} />
-    );
-
-    this.setMainContainer(
-      <ProfileContainer
-        setMainContainer={this.setMainContainer}
-        user={getUser("0")}
-      />
     );
   }
 
@@ -41,9 +32,9 @@ class MainLayout extends React.Component {
           setMainContainer={this.setMainContainer}
         />
 
-        <MainContainer setMainContainer={this.setMainContainer}>
-          {this.state.mainContainer}
-        </MainContainer>
+        {this.state.mainContainer}
+
+        <SuggestContainer setMainContainer={this.setMainContainer} />
       </div>
     );
   }

@@ -1,9 +1,8 @@
 .menu {
   position: sticky;
+  padding: 0 10px;
   height: 100vh;
   top: 0;
-  width: 20%;
-  min-width: 180px;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -30,7 +29,7 @@
 }
 
 .menu-item {
-  width: 60%;
+  width: calc(100% - 15px);
   display: inline-flex;
   align-items: center;
   gap: 10px;

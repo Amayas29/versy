@@ -1,6 +1,6 @@
 .message {
-  padding-bottom: 20px;
-  width: calc(100% - 20px);
+  padding-bottom: 30px;
+  width: 100%;
   border-radius: 10px;
   border-bottom: 1px solid #f3f4f6;
   display: grid;
@@ -19,7 +19,7 @@
 
 .message .message-options {
   position: absolute;
-  right: 0;
+  right: 20px;
 }
 
 .message .message-options .icon:hover {
@@ -61,6 +61,7 @@
 
 .message-header {
   grid-area: header;
+  width: calc(100% - 80px - 25px);
   display: flex;
   align-items: center;
   gap: 5px;
@@ -68,6 +69,7 @@
 
 .message-header span:nth-child(1) {
   font-weight: bold;
+  font-size: 15px;
   cursor: pointer;
 }
 
@@ -77,7 +79,7 @@
 
 .message-header span:nth-child(2) {
   font-style: italic;
-  font-size: 0.8em;
+  font-size: 13px;
 }
 
 .message-avatar {
@@ -99,6 +101,8 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
 
 .message-content > .message-input {
@@ -111,7 +115,7 @@
   max-height: 400px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   border-radius: 9px;
-  font-size: 1.1rem;
+  font-weight: 500;
   transition: 0.3s;
   letter-spacing: 1px;
   word-wrap: break-word;

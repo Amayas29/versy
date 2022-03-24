@@ -47,6 +47,7 @@
 
 .minimal-user-info span:nth-child(1) {
   font-weight: bold;
+  font-size: 15px;
   cursor: pointer;
 }
 
@@ -56,7 +57,7 @@
 
 .minimal-user-info span:nth-child(2) {
   font-style: italic;
-  font-size: 0.8em;
+  font-size: 13px;
 }
 
 .minimal-user-avatar {

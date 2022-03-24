@@ -40,6 +40,8 @@ class SearchContainer extends React.Component {
         );
     }
 
+    resultComponent = <NotFound query={this.props.query} />;
+
     return resultComponent;
   }
 }
@@ -66,7 +68,7 @@ const UsersResult = (props) => {
 const NotFound = (props) => {
   return (
     <div className="not-found-container">
-      <span className="no-results">No results for "{props.query}"</span>
+      <span className="no-results break">No results for "{props.query}"</span>
       <span className="result-info">
         The term you entered did not bring up any results. You may have made a
         typing error or used the incorrect filter (@ for user search)

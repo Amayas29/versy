@@ -16,9 +16,15 @@
   gap: 15px;
 }
 
+.notification-container .notification-content {
+  display: flex;
+  align-items: end;
+  gap: 5px;
+}
+
 .notification-container .notification-body .notification-user {
   font-weight: bold;
-  font-size: 1.1rem;
+  font-size: 15px;
 }
 
 .notification-container .notification-body .notification-avatar {
