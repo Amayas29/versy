@@ -7,6 +7,7 @@
 @import "./components/containers/_SearchContainer.css";
 @import "./components/containers/_MessageViewContainer.css";
 @import "./components/containers/_AboutUsContainer.css";
+@import "./components/containers/_AnalyticsContainer.css";
 @import "./components/_Messages.css";
 @import "./components/_MessagesList.css";
 @import "./components/_Input.css";
@@ -28,8 +29,7 @@
 
 .break {
   white-space: pre-wrap;
-  /* word-break: break-all; */
-  color: green;
+  word-break: break-all;
 }
 
 @font-face {
@@ -46,6 +46,7 @@ body {
   width: calc(100% - 10%);
   padding: 0 5%;
   display: flex;
+  align-items: stretch;
   gap: 30px;
 }
 

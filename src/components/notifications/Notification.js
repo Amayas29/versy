@@ -63,7 +63,7 @@ const Notification = (props) => {
           className="notification-avatar"
         />
 
-        <div className="notification-content break">
+        <div className="notification-content">
           <span className="notification-user">{props.user.name}</span> {text}
         </div>
       </div>

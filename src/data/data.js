@@ -73,29 +73,10 @@ const generateUser = () => {
 
 const generateStats = () => {
   return {
-    profileVisitsPerMonth: {
-      "2022-03": Math.floor(Math.random() * 100) + 90,
-      "2022-02": Math.floor(Math.random() * 50) + 20,
-      "2022-01": Math.floor(Math.random() * 20) + 5,
-    },
-
-    postsPerMonth: {
-      "2022-03": Math.floor(Math.random() * 100) + 90,
-      "2022-02": Math.floor(Math.random() * 50) + 20,
-      "2022-01": Math.floor(Math.random() * 20) + 5,
-    },
-
-    newFollowersPerMonth: {
-      "2022-03": Math.floor(Math.random() * 100) + 90,
-      "2022-02": Math.floor(Math.random() * 50) + 20,
-      "2022-01": Math.floor(Math.random() * 20) + 5,
-    },
-
-    likesPerMonth: {
-      "2022-03": Math.floor(Math.random() * 100) + 90,
-      "2022-02": Math.floor(Math.random() * 50) + 20,
-      "2022-01": Math.floor(Math.random() * 20) + 5,
-    },
+    "profile visits": Math.floor(Math.random() * 100),
+    posts: Math.floor(Math.random() * 100),
+    "new followers": Math.floor(Math.random() * 100),
+    likes: Math.floor(Math.random() * 100),
   };
 };
 

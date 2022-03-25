@@ -10,7 +10,6 @@
     "avatar header"
     "avatar content"
     "avatar actions";
-  position: relative;
 }
 
 .message:hover {
@@ -18,8 +17,9 @@
 }
 
 .message .message-options {
-  position: absolute;
-  right: 20px;
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .message .message-options .icon:hover {
@@ -61,7 +61,6 @@
 
 .message-header {
   grid-area: header;
-  width: calc(100% - 80px - 25px);
   display: flex;
   align-items: center;
   gap: 5px;
@@ -103,12 +102,14 @@
   gap: 20px;
   white-space: pre-wrap;
   word-wrap: break-word;
+  word-break: break-all;
 }
 
 .message-content > .message-input {
   content: attr(data);
   padding: 10px;
   width: calc(100% - 20px);
+  max-width: calc(100% - 20px);
   border: 1px solid transparent;
   background: #f3f4f6;
   min-height: 100px;
@@ -120,8 +121,6 @@
   letter-spacing: 1px;
   word-wrap: break-word;
   word-break: break-all;
-  outline: none;
-  overflow-y: auto;
 }
 
 .message-content > .message-input:active,

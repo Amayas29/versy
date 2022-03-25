@@ -2,6 +2,7 @@ import React from "react";
 import MenuContainer from "../components/containers/MenuContainer";
 import FeedContainer from "../components/containers/FeedContainer";
 import SuggestContainer from "../components/containers/SuggestContainer";
+import AnalyticsContainer from "../components/containers/AnalyticsContainer";
 class MainLayout extends React.Component {
   constructor(props) {
     super(props);
@@ -16,6 +17,8 @@ class MainLayout extends React.Component {
     this.setMainContainer(
       <FeedContainer setMainContainer={this.setMainContainer} />
     );
+
+    this.setMainContainer(<AnalyticsContainer />);
   }
 
   setMainContainer(container) {

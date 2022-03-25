@@ -7,8 +7,6 @@ class FeedContainer extends React.Component {
   constructor(props) {
     super(props);
 
-    console.log("FeedContainer.constructor");
-
     const token = "0";
     this.state = {
       token: token,

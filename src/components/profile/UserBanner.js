@@ -120,7 +120,7 @@ const UserHeader = (props) => {
     <div className="user-header">
       <img src={props.user.avatar} alt="avatar" className="user-avatar" />
 
-      <div className="user-pseudos break">
+      <div className="user-pseudos">
         <span>{props.user.name}</span>
         <span>{props.user.username}</span>
       </div>

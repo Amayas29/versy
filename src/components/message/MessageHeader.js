@@ -13,7 +13,6 @@ const MessageHeader = (props) => {
   return (
     <div className="message-header">
       <span
-        className="break"
         onClick={() =>
           props.setMainContainer(
             <ProfileContainer
@@ -25,21 +24,19 @@ const MessageHeader = (props) => {
       >
         {props.message.user.name}
       </span>
-      <span className="break">{props.message.user.username}</span>
+      <span>{props.message.user.username}</span>
       <Icon name="fa-minus" size="fa-xs" />
       <span>{time}</span>
-      <Popup
-        trigger={
-          <div className="message-options">
-            <Icon name="fa-ellipsis-h" size="fa-xl" />
-          </div>
-        }
-        closeOnDocumentClick
-        closeOnEscape
-        position="bottom right"
-      >
-        <MessageOptions />
-      </Popup>
+      <div className="message-options">
+        <Popup
+          trigger={<Icon name="fa-ellipsis-h" size="fa-xl" />}
+          closeOnDocumentClick
+          closeOnEscape
+          position="bottom center"
+        >
+          <MessageOptions />
+        </Popup>
+      </div>
     </div>
   );
 };

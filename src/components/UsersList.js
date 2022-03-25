@@ -41,11 +41,10 @@ const UserVue = (props) => {
               onClick={() =>
                 redirectUserProfile(props.data, props.setMainContainer)
               }
-              className="break"
             >
               {props.data.name}
             </span>
-            <span className="break">{props.data.username}</span>
+            <span>{props.data.username}</span>
           </div>
         </div>
         <div className="btn">Follow</div>

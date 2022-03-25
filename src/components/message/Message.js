@@ -6,11 +6,12 @@ import MessageHeader from "./MessageHeader";
 import MessageAction from "./MessageAction";
 import MessageViewContainer from "../containers/MessageViewContainer";
 import Popup from "reactjs-popup";
-import Icon from "../Icon";
-import MessageOptions from "./MessageOptions";
-
+import MessageLikes from "./MessageLikes";
+import { getUser } from "../../data/data";
 class Message extends React.Component {
   render() {
+    const likes = [getUser("1"), getUser("2"), getUser("3"), getUser("4")];
+
     return (
       <article className="message">
         <MessageAvatar
@@ -37,8 +38,19 @@ class Message extends React.Component {
               }}
             />
           )}
-          <MessageAction name="fa-heart" list={this.props.data.likes} />
-          {/* <MessageAction name="fa-share" list={this.props.data.shares} /> */}
+          <Popup
+            trigger={
+              <MessageAction name="fa-heart" list={this.props.data.likes} />
+            }
+            modal
+            closeOnDocumentClick
+            closeOnEscape
+          >
+            <MessageLikes
+              likes={likes}
+              setMainContainer={this.props.setMainContainer}
+            />
+          </Popup>
         </MessageActions>
       </article>
     );
