@@ -1,16 +1,14 @@
 import React from "react";
+import Members from "../AboutUsComponents/Members";
 
 const AboutUsContainer = () => {
   return (
     <section className="central-container">
-      <Member name="Amayas" />
-      <Member name="Dayane" />
+      <span className="aboutus-title">About us</span>
+      <div className="summary">versy est un site ... </div>
+      <Members />
     </section>
   );
-};
-
-const Member = (props) => {
-  return <div className="member-container">{props.name}</div>;
 };
 
 export default AboutUsContainer;
