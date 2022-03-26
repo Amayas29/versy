@@ -10,7 +10,26 @@ import MessageLikes from "./MessageLikes";
 import { getUser } from "../../data/data";
 class Message extends React.Component {
   render() {
-    const likes = [getUser("1"), getUser("2"), getUser("3"), getUser("4")];
+    const likes = [
+      getUser("1"),
+      getUser("2"),
+      getUser("3"),
+      getUser("4"),
+      getUser("1"),
+      getUser("2"),
+      getUser("3"),
+      getUser("4"),
+      getUser("1"),
+      getUser("2"),
+      getUser("3"),
+      getUser("4"),
+    ];
+
+    const style = {
+      width: "700px",
+      height: "700px",
+      overflowY: "scroll",
+    };
 
     return (
       <article className="message">
@@ -42,14 +61,19 @@ class Message extends React.Component {
             trigger={
               <MessageAction name="fa-heart" list={this.props.data.likes} />
             }
+            contentStyle={style}
             modal
             closeOnDocumentClick
             closeOnEscape
+            lockScroll={true}
           >
-            <MessageLikes
-              likes={likes}
-              setMainContainer={this.props.setMainContainer}
-            />
+            {(close) => (
+              <MessageLikes
+                likes={likes}
+                setMainContainer={this.props.setMainContainer}
+                close={close}
+              />
+            )}
           </Popup>
         </MessageActions>
       </article>

@@ -73,10 +73,13 @@ const generateUser = () => {
 
 const generateStats = () => {
   return {
-    "profile visits": Math.floor(Math.random() * 100),
-    posts: Math.floor(Math.random() * 100),
-    "new followers": Math.floor(Math.random() * 100),
-    likes: Math.floor(Math.random() * 100),
+    "number of profile visits": Math.floor(Math.random() * 100),
+    "number of messages you have published": Math.floor(Math.random() * 100),
+    "number of messages you have commented on": Math.floor(Math.random() * 100),
+    "number of messages you have liked": Math.floor(Math.random() * 100),
+    "number of likes that your messages have accumulated": Math.floor(
+      Math.random() * 100
+    ),
   };
 };
 

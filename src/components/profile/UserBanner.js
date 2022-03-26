@@ -48,6 +48,7 @@ class UserBanner extends React.Component {
           modal
           closeOnDocumentClick
           closeOnEscape
+          lockScroll={true}
         >
           {(close) => (
             <EditProfile

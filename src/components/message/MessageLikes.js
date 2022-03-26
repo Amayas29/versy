@@ -5,8 +5,11 @@ const MessageLikes = (props) => {
   return (
     <div className="message-likes-container">
       <UsersList
-        users={props.users}
-        setMainContainer={props.setMainContainer}
+        users={props.likes}
+        setMainContainer={(container) => {
+          props.close();
+          props.setMainContainer(container);
+        }}
         hasBio={true}
       />
     </div>

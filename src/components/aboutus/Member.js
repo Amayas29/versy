@@ -1,5 +1,5 @@
 import React from "react";
-import Dayane from "../../assets/images/Dayane.jpeg";
+
 const Member = (props) => {
   const { member } = props;
 

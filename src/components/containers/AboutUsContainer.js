@@ -1,5 +1,5 @@
 import React from "react";
-import Members from "../AboutUsComponents/Members";
+import Members from "../aboutus/Members";
 
 const AboutUsContainer = () => {
   return (
