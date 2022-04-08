@@ -1,0 +1,67 @@
+@import "./components/containers/_MenuContainer.css";
+@import "./components/containers/_FeedContainer.css";
+@import "./components/containers/_SuggestContainer.css";
+@import "./components/containers/_ProfileContainer.css";
+@import "./components/containers/_NotificationsContainer.css";
+@import "./components/containers/_CentralContainer.css";
+@import "./components/containers/_SearchContainer.css";
+@import "./components/containers/_MessageViewContainer.css";
+@import "./components/containers/_AboutUsContainer.css";
+@import "./components/containers/_AnalyticsContainer.css";
+@import "./components/_Messages.css";
+@import "./components/_MessagesList.css";
+@import "./components/_Input.css";
+@import "./components/_UsersList.css";
+@import "./components/_Buttons.css";
+@import "./components/_Icon.css";
+@import "./components/_Footer.css";
+@import "./components/_Authentification.css";
+
+* {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  user-select: none;
+  border: none;
+  letter-spacing: 0.05rem;
+  font-size: 16px;
+}
+
+.break {
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+img {
+  object-fit: cover;
+}
+
+@font-face {
+  font-family: Montserrat;
+  src: url(../assets/fonts/Montserrat-Light.ttf);
+}
+
+body {
+  background-color: #111827;
+  font-family: Montserrat, Helvetica, sans-serif;
+}
+
+.app {
+  width: calc(100% - 10%);
+  padding: 0 5%;
+  display: flex;
+  align-items: stretch;
+  gap: 30px;
+}
+
+.app.login {
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.app.register {
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}

@@ -1,0 +1,24 @@
+import React from "react";
+import ProfileContainer from "../containers/ProfileContainer";
+
+const MessageAvatar = (props) => {
+  return (
+    <div className="message-avatar">
+      <img
+        src={props.user.avatar}
+        alt="avatar"
+        onClick={() =>
+          props.setMainContainer(
+            <ProfileContainer
+              user={props.user}
+              setMainContainer={props.setMainContainer}
+              setPage={props.setPage}
+            />
+          )
+        }
+      />
+    </div>
+  );
+};
+
+export default MessageAvatar;
