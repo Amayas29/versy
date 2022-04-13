@@ -1,5 +1,5 @@
 {
-  "name": "Versy",
+  "name": "versy",
   "version": "0.1.0",
   "description": "A social network",
   "main": "index.js",
@@ -16,6 +16,7 @@
     "express-session": "^1.17.1",
     "glob": "^7.2.0",
     "mocha": "^8.3.0",
+    "nedb": "^1.8.0",
     "path": "^0.12.7"
   }
 }

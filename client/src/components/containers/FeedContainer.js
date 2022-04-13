@@ -13,24 +13,29 @@ class FeedContainer extends React.Component {
   constructor(props) {
     super(props);
 
-    const token = getCookie("token");
+    this.token = getCookie("token");
 
     this.state = {
-      messages: token ? getUserMessages(token) : getRandomMessages(),
+      user: null,
+      messages: null,
     };
 
     this.publish = this.publish.bind(this);
   }
 
-  render() {
-    const token = getCookie("token");
-    const user = getUser(token);
+  componentWillMount() {
+    const user = getUser(this.token);
+    const messages = getUserMessages(user.id);
 
+    this.setState({ user, messages });
+  }
+
+  render() {
     return (
       <section className="central-container">
-        {token && (
+        {this.token && (
           <PublishMessage
-            user={user}
+            user={this.state.user}
             setMainContainer={this.props.setMainContainer}
             setPage={this.props.setPage}
             publish={this.publish}
