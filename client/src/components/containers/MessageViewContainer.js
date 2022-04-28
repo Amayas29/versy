@@ -2,18 +2,30 @@ import React from "react";
 import Message from "../message/Message";
 import MessagesList from "../MessagesList";
 import PublishMessage from "../message/PublishMessage";
-import { getUser } from "../../data/data";
-import getCookie from "../../utils/Cookies";
+import axios from "axios";
 
 class MessageViewContainer extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      user: null,
       comments: [],
     };
 
     this.publish = this.publish.bind(this);
+  }
+
+  UNSAFE_componentWillMount() {
+    const token = localStorage.getItem("token");
+    axios.get(`http://localhost:4000/api/token/${token}`).then((res) => {
+      const user_id = res.user_id;
+      axios
+        .get(`http://localhost:4000/api/users/${user_id}`)
+        .then((user_res) => {
+          this.setState({ user: user_res.user });
+        });
+    });
   }
 
   publish(message) {
@@ -26,8 +38,7 @@ class MessageViewContainer extends React.Component {
   }
 
   render() {
-    const token = getCookie("token");
-    const user = getUser(token);
+    const user = this.state.user;
 
     return (
       <div className="central-container message-view-container">

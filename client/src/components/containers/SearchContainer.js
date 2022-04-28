@@ -1,13 +1,6 @@
 import React from "react";
 import UsersList from "../UsersList";
 import MessagesList from "../MessagesList";
-import { getUser, getUserMessages } from "../../data/data";
-
-let users = [];
-for (let i = 0; i < 3; i++) users.push(getUser(`${i}`));
-
-let messages = [];
-for (let i = 0; i < 3; i++) messages.push(...getUserMessages(`${i}`));
 
 class SearchContainer extends React.Component {
   render() {
@@ -21,7 +14,8 @@ class SearchContainer extends React.Component {
     const regex = /@(.*)/g;
 
     if (query.match(regex)) {
-      // get from server
+      // TODO: get from server
+      const users = [];
       if (users.length > 0)
         resultComponent = (
           <UsersResult
@@ -31,7 +25,9 @@ class SearchContainer extends React.Component {
           />
         );
     } else {
-      // get from server
+      // TODO: get from server
+
+      const messages = [];
       if (messages.length > 0)
         resultComponent = (
           <MessagesResult

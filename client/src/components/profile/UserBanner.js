@@ -4,41 +4,59 @@ import MessagesList from "../MessagesList";
 import UsersList from "../UsersList";
 import Popup from "reactjs-popup";
 import EditProfile from "../profile/EditProfile";
-import { getUser, getUserMessages } from "../../data/data";
 import moment from "moment";
 import dateFormat from "dateformat";
-import getCookie from "../../utils/Cookies";
 import AuthentificationLayout from "../../layouts/AuthentificationLayout";
+import axios from "axios";
 
 class UserBanner extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      user: null,
       mainProfileVue: false,
     };
   }
 
+  UNSAFE_componentWillMount() {
+    const token = localStorage.getItem("token");
+    axios.get(`http://localhost:4000/api/token/${token}`).then((res) => {
+      const user_id = res.user_id;
+      axios
+        .get(`http://localhost:4000/api/users/${user_id}`)
+        .then((user_res) => {
+          this.setState({ user: user_res.user });
+        });
+    });
+  }
+
   render() {
+    const token = localStorage.getItem("token");
+
     const style = {
       width: "600px",
     };
 
-    const messages = getUserMessages(this.props.user.id);
+    // TODO: get messages
+    const messages = [];
 
     let followers = [];
-    for (let id of this.props.user.followers) followers.push(getUser(id));
-
     let following = [];
-    for (let id of this.props.user.following) following.push(getUser(id));
+    let joinedDate = "";
+    let birthday = "";
 
-    let joinedDate = moment(this.props.user.joinedDate, "DD/MM/YYYY").toDate();
-    joinedDate = dateFormat(joinedDate, "mmm dd,yyyy");
+    if (this.props.user) {
+      followers = this.props.user.followers;
+      following = this.props.user.following;
 
-    let birthday = moment(this.props.user.birthday, "DD/MM/YYYY").toDate();
-    birthday = dateFormat(birthday, "mmm dd,yyyy");
+      joinedDate = moment(this.props.user.joinedDate, "DD/MM/YYYY").toDate();
+      joinedDate = dateFormat(joinedDate, "mmm dd,yyyy");
 
-    const token = getCookie("token");
-    const user = getUser(token);
+      birthday = moment(this.props.user.birthday, "DD/MM/YYYY").toDate();
+      birthday = dateFormat(birthday, "mmm dd,yyyy");
+    }
+
+    const user = this.state.user;
 
     return (
       <div className="user-banner-container">
@@ -79,7 +97,9 @@ class UserBanner extends React.Component {
           </div>
         )}
 
-        <span className="user-bio break">{this.props.user.bio}</span>
+        <span className="user-bio break">
+          {this.props.user && this.props.user.bio}
+        </span>
 
         <div className="user-metadatas">
           <UserMetadata name="fa-cake-candles" data={`Born ${birthday}`} />

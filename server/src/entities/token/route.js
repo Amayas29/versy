@@ -1,12 +1,15 @@
 const express = require("express");
 const router = express.Router();
 
-let mapping_tokens = { h467vdgchcv356: "2465376FTFdqs3" };
+let mapping_tokens = {};
 
-router.get("/token", async (req, res) => {
-  const { token } = req.body;
-  if (mapping_tokens[token])
+router.get("/token/:token", async (req, res) => {
+  const { token } = req.params;
+
+  if (mapping_tokens[token]) {
     res.status(200).send({ user_id: mapping_tokens[token] });
+    return;
+  }
 
   res.status(401).json({
     status: 401,

@@ -7,47 +7,41 @@ import MessageAction from "./MessageAction";
 import MessageViewContainer from "../containers/MessageViewContainer";
 import Popup from "reactjs-popup";
 import MessageLikes from "./MessageLikes";
-import {
-  getUser,
-  likeMessage,
-  getLikesMessage,
-  unlikeMessage,
-} from "../../data/data";
 import Icon from "../Icon";
-import getCookie from "../../utils/Cookies";
 import AuthentificationLayout from "../../layouts/AuthentificationLayout";
+import axios from "axios";
 class Message extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      user: null,
       refresh: false,
     };
 
     this.toggleLike = this.toggleLike.bind(this);
   }
 
-  componentDidMount() {
-    console.log("did mount");
+  UNSAFE_componentWillMount() {
+    const token = localStorage.getItem("token");
+    axios.get(`http://localhost:4000/api/token/${token}`).then((res) => {
+      const user_id = res.user_id;
+      axios.get(`http://localhost:4000/api/users/${user_id}`).then((user) => {
+        this.setState({ user: user.user });
+      });
+    });
   }
 
   toggleLike(user, message) {
-    const likes = getLikesMessage(user.id, message.id);
-
-    if (likes.find((u) => u === user.id)) unlikeMessage(user.id, message.id);
-    else likeMessage(user.id, message.id);
-
+    // Todo
     this.setState({ refresh: !this.state.refresh });
   }
 
   render() {
-    console.log("render");
-    let likes = [];
-    for (const i of this.props.data.likes) likes.push(getUser(i));
-
-    const token = getCookie("token");
-    const user = getUser(token);
-    const isLiked = user ? likes.find((u) => u.id === user.id) : false;
+    let likes = this.props.data.likes;
+    const user = this.state.user;
+    const isLiked = user ? likes.find((u) => u === user.id) : false;
+    const token = localStorage.getItem("token");
 
     const style = {
       width: "700px",

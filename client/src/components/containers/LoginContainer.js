@@ -4,6 +4,7 @@ import { validateEmail, validatePassword } from "../../utils/Validations";
 import Form from "../authentification/Form";
 import Input from "../Input";
 import SignupContainer from "./SignupContainer";
+import axios from "axios";
 
 class LoginContainer extends React.Component {
   constructor(props) {
@@ -46,8 +47,19 @@ class LoginContainer extends React.Component {
     });
 
     if (emailValidation.status && passwordValidation.status) {
-      console.log("Login");
-      this.props.setPage(<MainLayout setPage={this.props.setPage} />);
+      axios
+        .post("http://localhost:4000/api/users/login", {
+          email: email,
+          password: password,
+        })
+        .then((res) => {
+          // Todo creation token
+          localStorage.setItem("token", "1");
+          this.props.setPage(<MainLayout setPage={this.props.setPage} />);
+        })
+        .catch((err) => {
+          console.log("No " + err);
+        });
     }
   }
 

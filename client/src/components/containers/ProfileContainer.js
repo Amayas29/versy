@@ -1,15 +1,15 @@
 import React from "react";
 import UserBanner from "../profile/UserBanner";
 import MessagesList from "../MessagesList";
-
-import { getUser, getUserMessages } from "../../data/data";
-import getCookie from "../../utils/Cookies";
+import axios from "axios";
 
 class ProfileContainer extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      user: null,
+      messages: null,
       profileVue: null,
       mainProfileVue: true,
     };
@@ -17,10 +17,28 @@ class ProfileContainer extends React.Component {
     this.setProfileVue = this.setProfileVue.bind(this);
   }
 
+  UNSAFE_componentWillMount() {
+    const token = localStorage.getItem("token");
+    axios.get(`http://localhost:4000/api/token/${token}`).then((res) => {
+      const user_id = res.user_id;
+
+      axios
+        .get(`http://localhost:4000/api/users/${user_id}`)
+        .then((user_res) => {
+          this.setState({ user: user_res.user });
+
+          axios
+            .get(`http://localhost:4000/api/messages/${user_id}`)
+            .then((messages_res) => {
+              this.setState({ messages: messages_res.messages });
+            });
+        });
+    });
+  }
+
   refreshProfileVue(props) {
-    const token = getCookie("token");
-    const user = props.user || getUser(token);
-    const messages = getUserMessages(user.id);
+    // TODO: get messages
+    const messages = [];
 
     this.setState({
       profileVue: (
@@ -50,8 +68,7 @@ class ProfileContainer extends React.Component {
   }
 
   render() {
-    const token = getCookie("token");
-    const user = this.props.user || getUser(token);
+    const user = this.props.user || this.state.user;
 
     return (
       <section className="central-container">

@@ -11,6 +11,15 @@ class UserModel {
       });
     });
   }
+
+  checkAccount(email, password) {
+    return new Promise((resolve, reject) => {
+      this.database.find({ email: email, password: password }, (err, doc) => {
+        if (err) reject(err);
+        else resolve(doc);
+      });
+    });
+  }
 }
 
 exports.default = UserModel;

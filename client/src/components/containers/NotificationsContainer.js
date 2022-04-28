@@ -1,36 +1,44 @@
 import React from "react";
+import axios from "axios";
 import Notification from "../notifications/Notification";
-import { getUser, getUserMessages } from "../../data/data";
+class NotificationsContainer extends React.Component {
+  constructor(props) {
+    super(props);
 
-const NotificationsContainer = (props) => {
-  const user = getUser("1");
+    this.state = {
+      notifications: [],
+    };
+  }
 
-  const message = getUserMessages("2")[0];
+  UNSAFE_componentWillMount() {
+    const token = localStorage.getItem("token");
+    axios.get(`http://localhost:4000/api/token/${token}`).then((res) => {
+      const user_id = res.user_id;
+      axios
+        .get(`http://localhost:4000/api/notifications/${user_id}`)
+        .then((notifications_res) => {
+          this.setState({ notifications: notifications_res.notifications });
+        });
+    });
+  }
 
-  return (
-    <div className="central-container">
-      <Notification
-        user={user}
-        message={message}
-        type="like"
-        setMainContainer={props.setMainContainer}
-        setPage={props.setPage}
-      />
-      <Notification
-        user={user}
-        type="follow"
-        setMainContainer={props.setMainContainer}
-        setPage={props.setPage}
-      />
-      <Notification
-        user={user}
-        message={message}
-        type="comment"
-        setMainContainer={props.setMainContainer}
-        setPage={props.setPage}
-      />
-    </div>
-  );
-};
+  render() {
+    const props = this.props;
+    return (
+      <div className="central-container">
+        {this.state.notifications.map((notification, index) => (
+          <Notification
+            key={index}
+            user={notification.user}
+            message={notification.message}
+            type={notification.type}
+            setMainContainer={props.setMainContainer}
+            setPage={props.setPage}
+          />
+        ))}
+      </div>
+    );
+  }
+}
 
 export default NotificationsContainer;

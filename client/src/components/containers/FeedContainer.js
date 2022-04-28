@@ -1,19 +1,11 @@
 import React from "react";
 import PublishMessage from "../message/PublishMessage";
 import MessagesList from "../MessagesList";
-import {
-  getUser,
-  getUserMessages,
-  getRandomMessages,
-  addMessage,
-} from "../../data/data";
-import getCookie from "../../utils/Cookies";
+import axios from "axios";
 
 class FeedContainer extends React.Component {
   constructor(props) {
     super(props);
-
-    this.token = getCookie("token");
 
     this.state = {
       user: null,
@@ -23,17 +15,37 @@ class FeedContainer extends React.Component {
     this.publish = this.publish.bind(this);
   }
 
-  componentWillMount() {
-    const user = getUser(this.token);
-    const messages = getUserMessages(user.id);
+  UNSAFE_componentWillMount() {
+    this.token = localStorage.getItem("token");
 
-    this.setState({ user, messages });
+    axios
+      .get(`http://localhost:4000/api/token/${this.token}`)
+      .then((token_res) => {
+        const user_id = token_res.user_id;
+
+        axios
+          .get(`http://localhost:4000/api/users/${user_id}`)
+          .then((user_res) => {
+            this.setState({ user: user_res.user });
+
+            axios
+              .get(`http://localhost:4000/api/messages/${user_id}`)
+              .then((messages_res) => {
+                this.setState({ messages: messages_res.messages });
+              });
+          });
+      })
+      .catch(() => {
+        axios.get(`http://localhost:4000/api/messages`).then((messages_res) => {
+          this.setState({ messages: messages_res.messages });
+        });
+      });
   }
 
   render() {
     return (
       <section className="central-container">
-        {this.token && (
+        {this.state.user && (
           <PublishMessage
             user={this.state.user}
             setMainContainer={this.props.setMainContainer}
@@ -52,8 +64,8 @@ class FeedContainer extends React.Component {
   }
 
   publish(message, id) {
+    // Todo push to serve
     this.setState({ messages: [message, ...this.state.messages] });
-    addMessage(message, id);
   }
 }
 

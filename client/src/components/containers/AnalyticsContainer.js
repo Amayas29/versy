@@ -1,8 +1,8 @@
 import React from "react";
-import { getUserStats } from "../../data/data";
 
 const AnalyticsContainer = () => {
-  const stats = getUserStats("1");
+  // Todo
+  const stats = {};
 
   const statsItems = [];
 

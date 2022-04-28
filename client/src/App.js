@@ -9,7 +9,7 @@ class App extends Component {
       page: null,
     };
 
-    document.cookie = "token=0";
+    localStorage.setItem("token", "1hjv356Dghyc");
   }
 
   componentDidMount() {
