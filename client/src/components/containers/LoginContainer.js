@@ -20,7 +20,7 @@ class LoginContainer extends React.Component {
     };
 
     this.setValue = this.setValue.bind(this);
-    this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    this.login = this.login.bind(this);
   }
 
   setValue(name, value) {
@@ -33,7 +33,7 @@ class LoginContainer extends React.Component {
     this.props.setHasLogo(true);
   }
 
-  handleFormSubmit(e) {
+  login(_e) {
     const { email, password } = this.state;
 
     const emailValidation = validateEmail(email);
@@ -86,7 +86,7 @@ class LoginContainer extends React.Component {
             </span>
           </div>
         }
-        handleAction={this.handleFormSubmit}
+        handleAction={this.login}
       >
         <Input
           label="Email"

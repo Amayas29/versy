@@ -2,10 +2,10 @@ import React from "react";
 import Message from "./message/Message";
 
 const MessagesList = (props) => {
-  return (
-    <ul className="message-list">
-      {props.messages &&
-        props.messages.map((message, index) => (
+  if (props.messages)
+    return (
+      <ul className="message-list">
+        {props.messages.map((message, index) => (
           <Message
             key={index}
             data={message}
@@ -13,8 +13,10 @@ const MessagesList = (props) => {
             setPage={props.setPage}
           />
         ))}
-    </ul>
-  );
+      </ul>
+    );
+
+  return <div className="no-messages">No messages found.</div>;
 };
 
 export default MessagesList;

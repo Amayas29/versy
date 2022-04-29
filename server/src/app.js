@@ -10,7 +10,12 @@ const app = express();
 const session = require("express-session");
 const cors = require("cors");
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:4000",
+    credentials: true,
+  })
+);
 app.use(
   session({
     secret: "technoweb rocks",

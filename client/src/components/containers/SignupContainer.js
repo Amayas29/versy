@@ -34,7 +34,7 @@ class SignupContainer extends React.Component {
     };
 
     this.setValue = this.setValue.bind(this);
-    this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    this.register = this.register.bind(this);
   }
 
   setValue(name, value) {
@@ -43,14 +43,9 @@ class SignupContainer extends React.Component {
     });
   }
 
-  handleFormSubmit(e) {
-    const {
-      username,
-      birthday,
-      email,
-      password,
-      passwordconfirmation,
-    } = this.state;
+  register(_e) {
+    const { username, birthday, email, password, passwordconfirmation } =
+      this.state;
 
     const usernameValidation = validateUsername(username);
     const birthdayValidation = validateDate(birthday);
@@ -77,21 +72,21 @@ class SignupContainer extends React.Component {
       passwordConfirmationValidation.status &&
       usernameValidation.status &&
       passwordValidation.status
-    ){
-      axios.post("http://localhost:4000/api/users/register", {
-        username: username,
-        birthday: birthday,
-        email: email,
-        password: password,
-        passwordconfirmation: passwordconfirmation,
-      })
-      .then(res => {
-        localStorage.setItem("token", res.data.token);
-        this.props.setPage(<MainLayout setPage={this.props.setPage} />);
-      })
-      .catch(err => {
-        console.log("No " + err);
-      });
+    ) {
+      axios
+        .post("http://localhost:4000/api/users/register", {
+          username: username,
+          birthday: birthday,
+          email: email,
+          password: password,
+        })
+        .then((res) => {
+          localStorage.setItem("token", res.data.token);
+          this.props.setPage(<MainLayout setPage={this.props.setPage} />);
+        })
+        .catch((err) => {
+          console.log("No " + err);
+        });
     }
   }
 
@@ -122,7 +117,7 @@ class SignupContainer extends React.Component {
             </span>
           </div>
         }
-        handleAction={this.handleFormSubmit}
+        handleAction={this.register}
       >
         <Input
           label="Username"

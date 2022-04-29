@@ -8,8 +8,6 @@ class App extends Component {
     this.state = {
       page: null,
     };
-
-    localStorage.setItem("token", "1hjv356Dghyc");
   }
 
   componentDidMount() {

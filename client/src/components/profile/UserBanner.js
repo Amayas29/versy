@@ -31,6 +31,9 @@ class UserBanner extends React.Component {
   }
 
   render() {
+    // Todo: temporary
+    if (!this.props.user) return <></>;
+
     const token = localStorage.getItem("token");
 
     const style = {
@@ -40,21 +43,14 @@ class UserBanner extends React.Component {
     // TODO: get messages
     const messages = [];
 
-    let followers = [];
-    let following = [];
-    let joinedDate = "";
-    let birthday = "";
+    let followers = this.props.user.followers;
+    let following = this.props.user.following;
 
-    if (this.props.user) {
-      followers = this.props.user.followers;
-      following = this.props.user.following;
+    let joinedDate = moment(this.props.user.joinedDate, "DD/MM/YYYY").toDate();
+    joinedDate = dateFormat(joinedDate, "mmm dd,yyyy");
 
-      joinedDate = moment(this.props.user.joinedDate, "DD/MM/YYYY").toDate();
-      joinedDate = dateFormat(joinedDate, "mmm dd,yyyy");
-
-      birthday = moment(this.props.user.birthday, "DD/MM/YYYY").toDate();
-      birthday = dateFormat(birthday, "mmm dd,yyyy");
-    }
+    let birthday = moment(this.props.user.birthday, "DD/MM/YYYY").toDate();
+    birthday = dateFormat(birthday, "mmm dd,yyyy");
 
     const user = this.state.user;
 
