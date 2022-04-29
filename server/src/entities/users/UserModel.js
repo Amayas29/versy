@@ -20,6 +20,18 @@ class UserModel {
       });
     });
   }
+  
+  
+  registerUser(user) {
+    return new Promise((resolve, reject) => {
+      this.database.insert(user, (err, doc) => {
+        if (err) reject(err);
+        else resolve(doc);
+      });
+    });
+    }
+
 }
+
 
 exports.default = UserModel;

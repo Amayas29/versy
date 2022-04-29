@@ -25,5 +25,15 @@ router.post("/login", async (req, res) => {
 
   const user = await userModel.checkAccount(email, password);
 });
+router.post("/register", async (req, res) => {
+  const { username, birthday, email, password, passwordconfirmation } = req.query;
+  const user = await userModel.registerUser({
+    username: username,
+    birthday: birthday,
+    email: email,
+    password: password,
+    passwordconfirmation: passwordconfirmation,
+  });
+});
 
 exports.default = router;

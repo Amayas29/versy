@@ -12,6 +12,7 @@ import {
 import Form from "../authentification/Form";
 import Input from "../Input";
 import LoginContainer from "./LoginContainer";
+import axios from "axios";
 
 class SignupContainer extends React.Component {
   constructor(props) {
@@ -76,8 +77,22 @@ class SignupContainer extends React.Component {
       passwordConfirmationValidation.status &&
       usernameValidation.status &&
       passwordValidation.status
-    )
-      this.props.setPage(<MainLayout setPage={this.props.setPage} />);
+    ){
+      axios.post("http://localhost:4000/api/users/register", {
+        username: username,
+        birthday: birthday,
+        email: email,
+        password: password,
+        passwordconfirmation: passwordconfirmation,
+      })
+      .then(res => {
+        localStorage.setItem("token", res.data.token);
+        this.props.setPage(<MainLayout setPage={this.props.setPage} />);
+      })
+      .catch(err => {
+        console.log("No " + err);
+      });
+    }
   }
 
   componentDidMount() {
