@@ -1,6 +1,12 @@
 class UserModel {
-  constructor(table) {
-    this.table = table;
+  constructor(user) {
+    this.username = user.username;
+    this.birthday = user.birthday;
+    this.email = user.email;
+    this.password = user.password;
+    this.passwordconfirmation = user.passwordconfirmation;
+    followers = [];
+    following = [];
   }
 }
 

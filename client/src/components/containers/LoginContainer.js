@@ -58,7 +58,7 @@ class LoginContainer extends React.Component {
           this.props.setPage(<MainLayout setPage={this.props.setPage} />);
         })
         .catch((err) => {
-          console.log("No " + err);
+          console.log("No " + err.message);
         });
     }
   }

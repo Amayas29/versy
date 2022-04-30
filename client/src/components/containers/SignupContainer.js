@@ -81,7 +81,7 @@ class SignupContainer extends React.Component {
           password: password,
         })
         .then((res) => {
-          localStorage.setItem("token", res.data.token);
+          // localStorage.setItem("token", res.data.token);
           this.props.setPage(<MainLayout setPage={this.props.setPage} />);
         })
         .catch((err) => {
@@ -129,7 +129,7 @@ class SignupContainer extends React.Component {
         />
 
         <Input
-          label="Birthday"
+          label="Birthdate"
           type="date"
           name="birthday"
           icon="fa-cake-candles"
