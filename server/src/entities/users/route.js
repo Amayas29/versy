@@ -68,21 +68,23 @@ router.post("/login", async (req, res) => {
     }
     console.log("user: "+user);
     if(!user){
-      return res.status(401).send({
+      res.status(401).send({
         error: "User not found",
         });
     }
     if(user && user.password !== password){
-      return res.status(401).send({
+      res.status(401).send({
         error: "Password incorrect",
         });
     }
-    const token = createToken(user._id);
+    if(user){
+      const token = createToken(user._id);
     res.status(200).send({
       user: user,
       token: token,
       });
-      });
+    }
+    });
   }catch(err){
     res.status(400).send({
       error: err.message,
