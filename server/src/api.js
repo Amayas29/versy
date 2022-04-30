@@ -1,5 +1,4 @@
 const express = require("express");
-
 function init() {
   const router = express.Router();
   router.use(express.json());

@@ -9,6 +9,10 @@ const express = require("express");
 const app = express();
 const session = require("express-session");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
+// const checkUser = require("./middleware/checkUser.js");
+
+
 
 app.use(
   cors({
@@ -25,8 +29,14 @@ app.use(
 app.use("/api", api.default());
 router(app);
 
+app.use(cookieParser());
+
 app.on("close", () => {
   console.log("Closing server...");
 });
+
+// jwt
+// app.get('*', checkUser);
+
 
 exports.default = app;

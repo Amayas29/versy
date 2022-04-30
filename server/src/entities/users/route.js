@@ -1,8 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const { default: UserModel } = require("./UserModel.js");
-const jws = require("jsonwebtoken");
 
+
+const jws = require("jsonwebtoken");
+const maxAge = 1000 * 60 * 60 * 2;
+const TOKEN_SECRET = "mucha gracia aspission esta para bosotroch siuuuuuuuuuuullllllllllll!"; 
 
 // Datatable creation
 
@@ -14,8 +17,17 @@ const db = new Datastore({
 
 
 
+// Token creation
 
-// auth
+const createToken = (id) => {
+  return jwt.sign({id}, TOKEN_SECRET, {
+    expiresIn: maxAge,
+  })
+}
+
+
+
+// registration
 
 router.post("/register", async (req, res) => {
   const { username,
@@ -49,10 +61,12 @@ router.post("/login", async (req, res) => {
     const user = await db.findOne({email: email});
     if(user){
       const token = createToken(user._id);
+      res.cookie('jwt', token, {httpOnly: true, maxAge: maxAge});
+      res.status(200).json({user: user._id});
     }
   }catch(err){
-    res.status(400).send({
-      error: err.message,
+    res.status(400).json({
+      message: err, 
     });
   }
 })
@@ -61,6 +75,8 @@ router.post("/login", async (req, res) => {
 // logout
 
 router.get("/logout", async (req, res) => {
+  res.clearCookie('jwt');
+  res.status(200).json({message: "logout"});
 })
 
 
