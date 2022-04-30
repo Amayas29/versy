@@ -5,8 +5,10 @@ class UserModel {
     this.email = user.email;
     this.password = user.password;
     this.passwordconfirmation = user.passwordconfirmation;
-    followers = [];
-    following = [];
+    this.bio = "";
+    this.followers = []; 
+    this.following = [];
+    this.likes = [];
   }
 }
 

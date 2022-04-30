@@ -48,7 +48,7 @@ class LoginContainer extends React.Component {
 
     if (emailValidation.status && passwordValidation.status) {
       axios
-        .post("http://localhost:4000l /api/users/login", {
+        .post("http://localhost:4000/api/users/login", {
           email: email,
           password: password,
         })

@@ -3,7 +3,7 @@ const router = express.Router();
 const { default: UserModel } = require("./UserModel.js");
 
 
-const jws = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 const maxAge = 1000 * 60 * 60 * 2;
 const TOKEN_SECRET = "mucha gracia aspission esta para bosotroch siuuuuuuuuuuullllllllllll!"; 
 
@@ -36,6 +36,7 @@ router.post("/register", async (req, res) => {
     password,
     passwordconfirmation } = req.body;
     try{
+      console.log("data received");
       const user = new UserModel({
         username: username,
         birthday: birthday,
@@ -43,7 +44,8 @@ router.post("/register", async (req, res) => {
         password: password,
         passwordconfirmation: passwordconfirmation,
       });
-      res.status(201).json({user: user._id});
+      db.insert(user);
+      res.status(201).  json({user: user._id});
     }catch(err){
       res.status(400).send({
         error: err.message,
@@ -58,18 +60,35 @@ router.post("/login", async (req, res) => {
   const { email, password } = req.body;
   
   try{
-    const user = await db.findOne({email: email});
-    if(user){
-      const token = createToken(user._id);
-      res.cookie('jwt', token, {httpOnly: true, maxAge: maxAge});
-      res.status(200).json({user: user._id});
+    db.findOne({ email: email}, (err, user) => {
+    if(err){
+      res.status(500).send({
+        error: err.message,
+        });
     }
+    console.log("user: "+user);
+    if(!user){
+      return res.status(401).send({
+        error: "User not found",
+        });
+    }
+    if(user && user.password !== password){
+      return res.status(401).send({
+        error: "Password incorrect",
+        });
+    }
+    const token = createToken(user._id);
+    res.status(200).send({
+      user: user,
+      token: token,
+      });
+      });
   }catch(err){
-    res.status(400).json({
-      message: err, 
+    res.status(400).send({
+      error: err.message,
     });
   }
-})
+});
 
 
 // logout
