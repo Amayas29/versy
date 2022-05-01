@@ -82,10 +82,14 @@ class SignupContainer extends React.Component {
         })
         .then((res) => {
           // localStorage.setItem("token", res.data.token);
+          console.log(res.data);
           this.props.setPage(<MainLayout setPage={this.props.setPage} />);
         })
         .catch((err) => {
-          console.log("No " + err);
+
+          console.log(err.response.data.errors);
+          this.state.errors = err.response.data.errors;
+          this.props.setContainer( <SignupContainer setContainer={this.props.setContainer} setPage={this.props.setPage} setHasLogo={this.props.setHasLogo} />);
         });
     }
   }

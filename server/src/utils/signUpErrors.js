@@ -6,7 +6,7 @@ signUpErrors = (err) => {
         errors.username = "Username already exists";
     }
 
-    if( err.code === 11000){
+    if( err.message.includes("email")){
         errors.email = "Email already exists";
     }
     

@@ -16,7 +16,7 @@ checkUser = (req, res, next, db) => {
                 next();
             }
         })
-    }else{
+    }else{          
         res.locals.user = null;
         next();
     }

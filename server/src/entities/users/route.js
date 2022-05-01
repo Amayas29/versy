@@ -39,14 +39,32 @@ router.post("/register", async (req, res) => {
     try{
 
       // Verify if the user already exists
-      if(db.findOne({username: username})){
-        throw new Error("username");
+
+      let res =  await db.findOne( {username: username });
+      let reason = "username";
+      if(! res)
+        res = await db.findOne( {email: email })
+        reason = "email";
+      try{
+        if(res && reason === "username"){
+          throw new Error("username");
+        }
+      }catch(err){
+        const errors = loginErrors(err);
+        console.log(errors);
+        return res.status(400).send({errors});
       }
 
-      if(db.findOne({email: email})){
-        throw new Error("email");
+      console.log(res);
+      try{
+        if(res && reason === "email"){
+          throw new Error("email");
+        }
+      }catch(err){
+        const errors = loginErrors(err);
+        console.log(errors);
+        return res.status(400).send({errors});
       }
-
 
       // Add the user to the database
 
@@ -59,10 +77,9 @@ router.post("/register", async (req, res) => {
         passwordconfirmation: passwordconfirmation,
       });
       db.insert(user);
-      res.status(201).  json({user: user._id});
+      res.status(200).json({user: user._id});
     }catch(err){
-      const errors = signUpErrors(err);
-      res.status(400).send({errors});
+      res.status(404).send(err);
     }
 })
 
@@ -75,7 +92,6 @@ router.post("/login", async (req, res) => {
   try{
 
     db.findOne({ email: email}, (err, user) => {
-    // console.log("user: "+user);
       
     // Verify if the user exists
     
@@ -86,10 +102,16 @@ router.post("/login", async (req, res) => {
     } catch(err){
       const errors = loginErrors(err);
       console.log(errors);
-      return res.status(200).send({errors});
+      return res.status(400).send({errors});
     }
-    if(user && user.password !== password){
-      throw new Error("password");
+    try{
+      if(user && user.password !== password){
+        throw new Error("password");
+      }
+    } catch(err){
+      const errors = loginErrors(err);
+      console.log(errors);
+      return res.status(400).send({errors});
     }
 
     // Connect the user
@@ -102,9 +124,7 @@ router.post("/login", async (req, res) => {
       });
     });
   }catch(err){
-
-    const errors = loginErrors(err);
-      res.status(400).send({errors});
+      res.status(404).send(400);
   }
 });
 
