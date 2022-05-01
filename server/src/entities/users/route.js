@@ -1,12 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const { default: UserModel } = require("./UserModel.js");
-// const signUpErrors = require("./utils/errors");
 const signUpErrors = require("../../utils/signUpErrors");
 const loginErrors = require("../../utils/loginErrors");
-const jwt = require("jsonwebtoken");
-const maxAge = 1000 * 60 * 60 * 2;
-const TOKEN_SECRET = "mucha gracia aspission esta para bosotroch siuuuuuuuuuuullllllllllll!"; 
+const createToken = require("../token/token");
 
 // Datatable creation
 
@@ -15,17 +12,6 @@ const db = new Datastore({
   filename: "./database/users.db",
   autoload: true,
 });
-
-
-
-// Token creation
-
-const createToken = (id) => {
-  return jwt.sign({id}, TOKEN_SECRET, {
-    expiresIn: maxAge,
-  })
-}
-
 
 
 // registration
@@ -50,7 +36,7 @@ router.post("/register", async (req, res) => {
           throw new Error("username");
         }
       }catch(err){
-        const errors = loginErrors(err);
+        const errors = signUpErrors(err);
         console.log(errors);
         return res.status(400).send({errors});
       }
@@ -61,7 +47,7 @@ router.post("/register", async (req, res) => {
           throw new Error("email");
         }
       }catch(err){
-        const errors = loginErrors(err);
+        const errors = signUpErrors(err);
         console.log(errors);
         return res.status(400).send({errors});
       }
@@ -118,6 +104,7 @@ router.post("/login", async (req, res) => {
 
     
     const token = createToken(user._id);
+    console.log(token);
     res.status(200).send({
       user: user,
       token: token,
