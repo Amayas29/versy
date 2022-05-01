@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const { default: UserModel } = require("./UserModel.js");
-
-
+// const signUpErrors = require("./utils/errors");
+const signUpErrors = require("../../utils/signUpErrors");
+const loginErrors = require("../../utils/loginErrors");
 const jwt = require("jsonwebtoken");
 const maxAge = 1000 * 60 * 60 * 2;
 const TOKEN_SECRET = "mucha gracia aspission esta para bosotroch siuuuuuuuuuuullllllllllll!"; 
@@ -36,6 +37,19 @@ router.post("/register", async (req, res) => {
     password,
     passwordconfirmation } = req.body;
     try{
+
+      // Verify if the user already exists
+      if(db.findOne({username: username})){
+        throw new Error("username");
+      }
+
+      if(db.findOne({email: email})){
+        throw new Error("email");
+      }
+
+
+      // Add the user to the database
+
       console.log("data received");
       const user = new UserModel({
         username: username,
@@ -47,9 +61,8 @@ router.post("/register", async (req, res) => {
       db.insert(user);
       res.status(201).  json({user: user._id});
     }catch(err){
-      res.status(400).send({
-        error: err.message,
-      });
+      const errors = signUpErrors(err);
+      res.status(400).send({errors});
     }
 })
 
@@ -60,35 +73,38 @@ router.post("/login", async (req, res) => {
   const { email, password } = req.body;
   
   try{
+
     db.findOne({ email: email}, (err, user) => {
-    if(err){
-      res.status(500).send({
-        error: err.message,
-        });
-    }
-    console.log("user: "+user);
-    if(!user){
-      res.status(401).send({
-        error: "User not found",
-        });
+    // console.log("user: "+user);
+      
+    // Verify if the user exists
+    
+    try{
+      if(!user){
+        throw new Error("email");
+      }
+    } catch(err){
+      const errors = loginErrors(err);
+      console.log(errors);
+      return res.status(200).send({errors});
     }
     if(user && user.password !== password){
-      res.status(401).send({
-        error: "Password incorrect",
-        });
+      throw new Error("password");
     }
-    if(user){
-      const token = createToken(user._id);
+
+    // Connect the user
+
+    
+    const token = createToken(user._id);
     res.status(200).send({
       user: user,
       token: token,
       });
-    }
     });
   }catch(err){
-    res.status(400).send({
-      error: err.message,
-    });
+
+    const errors = loginErrors(err);
+      res.status(400).send({errors});
   }
 });
 

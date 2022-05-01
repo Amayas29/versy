@@ -10,8 +10,8 @@ const app = express();
 const session = require("express-session");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
-// const checkUser = require("./middleware/checkUser.js");
-
+const checkUser = require("./middleware/checkUser");
+const requireAth = require("./middleware/requireAth");
 
 
 app.use(
@@ -33,7 +33,11 @@ app.on("close", () => {
 });
 
 // jwt
-// app.get('*', checkUser);
+app.get('*', checkUser);
+
+app.get('/jwtid', requireAth, (req, res) => {
+  res.status(200).send(res.locals.user._id)
+});
 
 
 exports.default = app;

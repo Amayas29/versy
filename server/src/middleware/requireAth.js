@@ -2,25 +2,19 @@ const jwt = require('jsonwebtoken');
 const { default: UserModel } = require("../entities/users/UserModel");
 const TOKEN_SECRET = "mucha gracia aspission esta para bosotroch siuuuuuuuuuuullllllllllll!"; 
 
-checkUser = (req, res, next, db) => {
+requireAth = (req, res, next, db) =>{
     const token = req.cookies.jwt;
     if (token) {
         jwt.verify(token, TOKEN_SECRET, async (err, decodedToken) => {
             if(err){
-                res.locals.user = null;
-                res.clearCookie('jwt');
-                next();
+                console.log(err);
             }else{
-                const user = await db.findById(decodedToken.id);
-                res.locals.user = user;
-                next();
+                console.log(decodedToken.id);
             }
         })
     }else{
-        res.locals.user = null;
-        next();
+        console.log("No token");
     }
 }
 
-
-module.exports = checkUser;
+module.exports = requireAth;
