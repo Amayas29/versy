@@ -7,6 +7,7 @@ const maxAge = 1000 * 60 * 60 * 24 * 7;
 const createToken = (id) => {
     return jwt.sign({id}, TOKEN_SECRET, {
       expiresIn: maxAge,
+      
     })
   }
 

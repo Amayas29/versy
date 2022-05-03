@@ -41,8 +41,7 @@ router.get("/logout", async (req, res) => {
 // Get all users
 
 router.get("/", async (req, res) => {
-  const users =   await dt.find().select('-password');
-  res.status(200).json(users);
+  userModel.getAllusers(req, res);
 })
 
 
