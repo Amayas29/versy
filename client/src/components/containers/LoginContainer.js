@@ -54,19 +54,27 @@ class LoginContainer extends React.Component {
           password: password,
         })
         .then((res) => {
-          
-          
-            // localStorage.setItem("token", "1");
-            console.log(res.data);
-            this.props.setPage(<MainLayout setPage={this.props.setPage} />);
-          
-          
-
+          // localStorage.setItem("token", "1");
+          console.log(res.data);
+          this.props.setPage(<MainLayout setPage={this.props.setPage} />);
         })
         .catch((err) => {
           console.log(err.response.data.errors);
-          this.state.errors = err.response.data.errors;
-          this.props.setContainer( <LoginContainer setContainer={this.props.setContainer} setPage={this.props.setPage} setHasLogo={this.props.setHasLogo} />);
+
+          this.setState({
+            errors: {
+              email: err.response.data.errors.email,
+              password: err.response.data.errors.password,
+            },
+          });
+
+          this.props.setContainer(
+            <LoginContainer
+              setContainer={this.props.setContainer}
+              setPage={this.props.setPage}
+              setHasLogo={this.props.setHasLogo}
+            />
+          );
         });
     }
   }

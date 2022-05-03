@@ -1,5 +1,4 @@
 import React from "react";
-import MainLayout from "../../layouts/MainLayout";
 
 import {
   validateUsername,
@@ -44,8 +43,13 @@ class SignupContainer extends React.Component {
   }
 
   register(_e) {
-    const { username, birthday, email, password, passwordconfirmation: passwordConfirmation } =
-      this.state;
+    const {
+      username,
+      birthday,
+      email,
+      password,
+      passwordconfirmation: passwordConfirmation,
+    } = this.state;
 
     const usernameValidation = validateUsername(username);
     const birthdayValidation = validateDate(birthday);
@@ -84,13 +88,30 @@ class SignupContainer extends React.Component {
         .then((res) => {
           // localStorage.setItem("token", res.data.token);
           // console.log(res.data);
-          this.props.setContainer( <LoginContainer setContainer={this.props.setContainer} setPage={this.props.setPage} setHasLogo={this.props.setHasLogo} />);
+          this.props.setContainer(
+            <LoginContainer
+              setContainer={this.props.setContainer}
+              setPage={this.props.setPage}
+              setHasLogo={this.props.setHasLogo}
+            />
+          );
         })
         .catch((err) => {
-
           console.log(err.response.data.errors);
-          this.state.errors = err.response.data.errors;
-          this.props.setContainer( <SignupContainer setContainer={this.props.setContainer} setPage={this.props.setPage} setHasLogo={this.props.setHasLogo} />);
+          this.setState({
+            errors: {
+              username: err.response.data.errors.username,
+              email: err.response.data.errors.email,
+            },
+          });
+
+          this.props.setContainer(
+            <SignupContainer
+              setContainer={this.props.setContainer}
+              setPage={this.props.setPage}
+              setHasLogo={this.props.setHasLogo}
+            />
+          );
         });
     }
   }

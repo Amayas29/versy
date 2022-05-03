@@ -13,13 +13,12 @@ const cookieParser = require("cookie-parser");
 const checkUser = require("./middleware/checkUser");
 const requireAth = require("./middleware/requireAth");
 
-
-app.use(
-  cors()
-);
+app.use(cors());
 app.use(
   session({
-    secret: "technoweb rocks",
+    secret: "versy to the moon",
+    resave: true,
+    saveUninitialized: true,
   })
 );
 
@@ -33,11 +32,10 @@ app.on("close", () => {
 });
 
 // jwt
-app.get('*', checkUser);
+app.get("*", checkUser);
 
-app.get('/jwtid', requireAth, (req, res) => {
-  res.status(200).send(res.locals.user._id)
+app.get("/jwtid", requireAth, (req, res) => {
+  res.status(200).send(res.locals.user._id);
 });
-
 
 exports.default = app;

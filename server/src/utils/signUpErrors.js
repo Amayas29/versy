@@ -1,16 +1,11 @@
+const signUpErrors = (err) => {
+  if (err.message.includes("username"))
+    return { username: "Username already exists", email: "" };
 
-signUpErrors = (err) => {
-    let errors = { username: "", email: ""}
-    
-    if( err.message.includes("username")){
-        errors.username = "Username already exists";
-    }
+  if (err.message.includes("email"))
+    return { username: "", email: "Email already exists" };
 
-    if( err.message.includes("email")){
-        errors.email = "Email already exists";
-    }
-    
-    return errors;
-}
+  return { username: "", email: "" };
+};
 
 module.exports = signUpErrors;
