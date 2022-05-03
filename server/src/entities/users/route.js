@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { default: UserModel } = require("./UserModel.js");
+const { default: UserModel } = require("./UserModel");
 const signUpErrors = require("../../utils/signUpErrors");
 const loginErrors = require("../../utils/loginErrors");
 const createToken = require("../token/token");
@@ -8,10 +8,13 @@ const createToken = require("../token/token");
 // Datatable creation
 
 const Datastore = require("nedb");
-const db = new Datastore({
+const dt = new Datastore({
   filename: "./database/users.db",
   autoload: true,
 });
+
+// Create a userModel
+const userModel = new UserModel(dt);
 
 
 // registration
@@ -26,10 +29,10 @@ router.post("/register", async (req, res) => {
 
       // Verify if the user already exists
 
-      let res =  await db.findOne( {username: username });
+      let res =  await dt.findOne( {username: username });
       let reason = "username";
       if(! res)
-        res = await db.findOne( {email: email })
+        res = await dt.findOne( {email: email })
         reason = "email";
       try{
         if(res && reason === "username"){
@@ -62,7 +65,7 @@ router.post("/register", async (req, res) => {
         password: password,
         passwordconfirmation: passwordconfirmation,
       });
-      db.insert(user);
+      dt.insert(user);
       res.status(200).json({user: user._id});
     }catch(err){
       res.status(404).send(err);
@@ -73,46 +76,7 @@ router.post("/register", async (req, res) => {
 // login
 
 router.post("/login", async (req, res) => {
-  const { email, password } = req.body;
-  
-  try{
-
-    db.findOne({ email: email}, (err, user) => {
-      
-    // Verify if the user exists
-    
-    try{
-      if(!user){
-        throw new Error("email");
-      }
-    } catch(err){
-      const errors = loginErrors(err);
-      console.log(errors);
-      return res.status(400).send({errors});
-    }
-    try{
-      if(user && user.password !== password){
-        throw new Error("password");
-      }
-    } catch(err){
-      const errors = loginErrors(err);
-      console.log(errors);
-      return res.status(400).send({errors});
-    }
-
-    // Connect the user
-
-    
-    const token = createToken(user._id);
-    console.log(token);
-    res.status(200).send({
-      user: user,
-      token: token,
-      });
-    });
-  }catch(err){
-      res.status(404).send(400);
-  }
+  userModel.login(req, res); 
 });
 
 
@@ -129,7 +93,7 @@ router.get("/logout", async (req, res) => {
 // Get all users
 
 router.get("/", async (req, res) => {
-  const users =   await db.find().select('-password');
+  const users =   await dt.find().select('-password');
   res.status(200).json(users);
 })
 
@@ -137,7 +101,7 @@ router.get("/", async (req, res) => {
 // Get user informations
 
 router.get("/:id", async (req, res) => {
-  db.findById(req.params.id, (err, docs) => {
+  dt.findById(req.params.id, (err, docs) => {
     if(!err) res.send(docs);
     else console.log("User not found: " + err);
   }).select('-password');
@@ -148,7 +112,7 @@ router.get("/:id", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
   try{
-    await db.findOneAndUpdate({ _id: req.params.id },
+    await dt.findOneAndUpdate({ _id: req.params.id },
        { $set: req.body },
         { new: true, upsert: true, setDefaultOnInsert: true },
         (err, doc) => {
@@ -168,7 +132,7 @@ router.put("/:id", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
   try{
-    await db.remove({ _id: req.params.id }).exec();
+    await dt.remove({ _id: req.params.id }).exec();
     res.status(200).json({
       message: "User deleted",
     });
@@ -186,7 +150,7 @@ router.patch('/follow/:id',   async (req, res) => {
 
     // add to the followers list
 
-    await db.findByIdAndUpdate(
+    await dt.findByIdAndUpdate(
       req.params.id,
        { $addToSet: { following: req.body.idToFollow } },
         { new: true, upsert: true},
@@ -196,7 +160,7 @@ router.patch('/follow/:id',   async (req, res) => {
         }
        )
     // add to the following list
-    await db.findByIdAndUpdate(
+    await dt.findByIdAndUpdate(
       req.body.idToFollow,
        { $addToSet: { followers: req.params.id } },
         { new: true, upsert: true},
@@ -220,7 +184,7 @@ router.patch('/unfollow/:id',   async (req, res) => {
 
     // remove from the followers list
 
-    await db.findByIdAndUpdate(
+    await dt.findByIdAndUpdate(
       req.params.id,
        { $pull: { following: req.body.idToUnfollow } },
         { new: true, upsert: true},
@@ -230,7 +194,7 @@ router.patch('/unfollow/:id',   async (req, res) => {
         }
        )
     // remove from the following list
-    await db.findByIdAndUpdate(
+    await dt.findByIdAndUpdate(
       req.body.idToUnfollow,
        { $pull: { followers: req.params.id } },
         { new: true, upsert: true},
