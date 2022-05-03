@@ -1,9 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const { default: UserModel } = require("./UserModel");
-const signUpErrors = require("../../utils/signUpErrors");
-const loginErrors = require("../../utils/loginErrors");
-const createToken = require("../token/token");
 
 // Datatable creation
 
@@ -20,56 +17,7 @@ const userModel = new UserModel(dt);
 // registration
 
 router.post("/register", async (req, res) => {
-  const { username,
-    birthday,
-    email,
-    password,
-    passwordconfirmation } = req.body;
-    try{
-
-      // Verify if the user already exists
-
-      let res =  await dt.findOne( {username: username });
-      let reason = "username";
-      if(! res)
-        res = await dt.findOne( {email: email })
-        reason = "email";
-      try{
-        if(res && reason === "username"){
-          throw new Error("username");
-        }
-      }catch(err){
-        const errors = signUpErrors(err);
-        console.log(errors);
-        return res.status(400).send({errors});
-      }
-
-      console.log(res);
-      try{
-        if(res && reason === "email"){
-          throw new Error("email");
-        }
-      }catch(err){
-        const errors = signUpErrors(err);
-        console.log(errors);
-        return res.status(400).send({errors});
-      }
-
-      // Add the user to the database
-
-      console.log("data received");
-      const user = new UserModel({
-        username: username,
-        birthday: birthday,
-        email: email,
-        password: password,
-        passwordconfirmation: passwordconfirmation,
-      });
-      dt.insert(user);
-      res.status(200).json({user: user._id});
-    }catch(err){
-      res.status(404).send(err);
-    }
+  userModel.signUp(req, res);
 })
 
 

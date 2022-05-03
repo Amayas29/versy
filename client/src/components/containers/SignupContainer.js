@@ -44,7 +44,7 @@ class SignupContainer extends React.Component {
   }
 
   register(_e) {
-    const { username, birthday, email, password, passwordconfirmation } =
+    const { username, birthday, email, password, passwordconfirmation: passwordConfirmation } =
       this.state;
 
     const usernameValidation = validateUsername(username);
@@ -52,7 +52,7 @@ class SignupContainer extends React.Component {
     const emailValidation = validateEmail(email);
     const passwordValidation = validatePassword(password);
     const passwordConfirmationValidation = validatePasswordConfirmation(
-      passwordconfirmation,
+      passwordConfirmation,
       password
     );
 
@@ -79,11 +79,12 @@ class SignupContainer extends React.Component {
           birthday: birthday,
           email: email,
           password: password,
+          passwordConfirmation: passwordConfirmation,
         })
         .then((res) => {
           // localStorage.setItem("token", res.data.token);
-          console.log(res.data);
-          this.props.setPage(<MainLayout setPage={this.props.setPage} />);
+          // console.log(res.data);
+          this.props.setContainer( <LoginContainer setContainer={this.props.setContainer} setPage={this.props.setPage} setHasLogo={this.props.setHasLogo} />);
         })
         .catch((err) => {
 
