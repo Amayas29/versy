@@ -45,7 +45,6 @@ class LoginContainer extends React.Component {
         password: passwordValidation.message,
       },
     });
-
     if (emailValidation.status && passwordValidation.status) {
       // console.log("sending request");
       axios
@@ -54,8 +53,9 @@ class LoginContainer extends React.Component {
           password: password,
         })
         .then((res) => {
-          // localStorage.setItem("token", "1");
-          console.log(res.data);
+          // Store the token in local storage
+          localStorage.setItem("token", res.data.user.token);
+
           this.props.setPage(<MainLayout setPage={this.props.setPage} />);
         })
         .catch((err) => {

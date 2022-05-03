@@ -39,10 +39,10 @@ class UserModel {
       // Connect the user
 
       const token = createToken(user._id);
+      user.token = token;
       console.log(token);
       res.status(200).send({
-        user: user,
-        token: token,
+        user: user
         });
       });
     }catch(err){
@@ -103,10 +103,16 @@ class UserModel {
         console.log(err);
         res.status(400).send(err);
       }
-    })   
-
+    })  
   }
 
+  // Get all users
+  async getAllusers(req, res){
+    await this.dt.find({},{password: 0},(err, users) => {
+      console.log(users);
+      res.status(200).send(users);
+    });
+  }
 }
 
 exports.default = UserModel;
