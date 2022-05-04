@@ -1,7 +1,9 @@
 const signUpErrors = require("../../utils/signUpErrors");
 const loginErrors = require("../../utils/loginErrors");
-const createToken = require("../token/token");
-
+const createToken = require("../token/token").createToken;
+const maxAge = require("../token/token").maxAge;
+const cookies = require("cookie-parser");
+const { Cookie } = require("express-session");
 class UserModel {
   constructor(dt) {
     this.dt = dt;
@@ -37,11 +39,13 @@ class UserModel {
         }
 
         // Connect the user
-
         const token = createToken(user._id);
-        user.token = token;
-        res.status(200).send({
-          user: user,
+        res.cookie("jwt", token, {
+          httpOnly: true,
+          maxAge: maxAge,
+        });
+        res.status(200).json({
+          user: user._id,
         });
       });
     } catch (err) {

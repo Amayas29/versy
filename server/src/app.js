@@ -13,7 +13,12 @@ const cookieParser = require("cookie-parser");
 const checkUser = require("./middleware/checkUser");
 const requireAth = require("./middleware/requireAth");
 
-app.use(cors());
+app.use(
+  cors({
+    credentials: true,
+    origin: "http://localhost:3000",
+  })
+);
 app.use(
   session({
     secret: "versy to the moon",

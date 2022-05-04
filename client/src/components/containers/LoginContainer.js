@@ -53,13 +53,14 @@ class LoginContainer extends React.Component {
           password: password,
         })
         .then((res) => {
-          // Store the token in local storage
-          localStorage.setItem("token", res.data.user.token);
-
+          // Store token in local storage
+          console.log(res.headers);
+          let token = res.cookieS.token;
+          localStorage.setItem("token", token);
           this.props.setPage(<MainLayout setPage={this.props.setPage} />);
         })
         .catch((err) => {
-          console.log(err.response.data.errors);
+          console.log(err);
 
           this.setState({
             errors: {
