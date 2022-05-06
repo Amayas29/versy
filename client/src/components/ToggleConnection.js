@@ -9,9 +9,11 @@ const ToggleConnexion = (props) => {
   return (
     <div
       className="toggle-connection"
-      onClick={() =>
-        props.setPage(<AuthentificationLayout setPage={props.setPage} />)
-      }
+      onClick={() => {
+        if (token) Cookies.remove("access_token");
+
+        props.setPage(<AuthentificationLayout setPage={props.setPage} />);
+      }}
     >
       <span className="menu-separator"></span>
       {token ? (
