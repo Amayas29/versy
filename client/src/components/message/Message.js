@@ -10,38 +10,91 @@ import MessageLikes from "./MessageLikes";
 import Icon from "../Icon";
 import AuthentificationLayout from "../../layouts/AuthentificationLayout";
 import axios from "axios";
+import Cookies from "js-cookie";
+
 class Message extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      message: this.props.message,
       user: null,
-      refresh: false,
+      sender: null,
     };
 
     this.toggleLike = this.toggleLike.bind(this);
+    this.refresh = this.refresh.bind(this);
   }
 
   UNSAFE_componentWillMount() {
-    const token = localStorage.getItem("token");
-    axios.get(`http://localhost:4000/api/token/${token}`).then((res) => {
-      const user_id = res.user_id;
-      axios.get(`http://localhost:4000/api/users/${user_id}`).then((user) => {
-        this.setState({ user: user.user });
+    const token = Cookies.get("access_token");
+    axios
+      .get(`http://localhost:4000/api/token/${token}`)
+      .then((res) => {
+        this.setState({ user: res.data.user });
+      })
+      .catch((err) => {
+        console.log(err.response.data);
       });
-    });
+
+    if (!this.props.message) return;
+
+    axios
+      .get(`http://localhost:4000/api/users/${this.props.message.user}`)
+      .then((res) => {
+        this.setState({ sender: res.data.user });
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+      });
+
+    this.refresh();
   }
 
-  toggleLike(user, message) {
-    // Todo
-    this.setState({ refresh: !this.state.refresh });
+  refresh() {
+    axios
+      .get(`http://localhost:4000/api/messages/${this.state.message._id}`)
+      .then((res) => {
+        this.setState({ message: res.data.msg });
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+      });
+  }
+
+  toggleLike(isLiked, messageId) {
+    if (isLiked) {
+      axios
+        .put(`http://localhost:4000/api/messages/unlike/${messageId}`)
+        .then((_res) => {
+          this.refresh();
+        })
+        .catch((err) => {
+          console.log(err.response.data);
+        });
+
+      return;
+    }
+
+    axios
+      .put(`http://localhost:4000/api/messages/like/${messageId}`)
+      .then((_res) => {
+        this.refresh();
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+      });
   }
 
   render() {
-    let likes = this.props.data.likes;
+    if (!this.state.message) return <></>;
+
+    let message = this.state.message;
+    let likes = message.likes;
     const user = this.state.user;
-    const isLiked = user ? likes.find((u) => u === user.id) : false;
-    const token = localStorage.getItem("token");
+
+    const isLiked = user ? likes.find((u) => u === user._id) : false;
+    const token = Cookies.get("access_token");
 
     const style = {
       width: "700px",
@@ -52,28 +105,32 @@ class Message extends React.Component {
       backgroundColor: "#111827",
     };
 
+    if (!this.state.sender) return <></>;
+
     return (
       <article className="message">
         <MessageAvatar
-          user={this.props.data.user}
+          user={this.state.sender}
           setMainContainer={this.props.setMainContainer}
           setPage={this.props.setPage}
         />
         <MessageHeader
-          message={this.props.data}
+          message={message}
           setMainContainer={this.props.setMainContainer}
           setPage={this.props.setPage}
+          refresh={this.props.refresh}
+          options={this.props.options}
         />
-        <MessageContent message={this.props.data} />
+        <MessageContent message={message} />
         <MessageActions>
-          {this.props.data.isComment || (
+          {message.isComment || (
             <MessageAction
               name="fa-comment"
-              list={this.props.data.comments}
+              list={message.comments}
               onClick={() => {
                 this.props.setMainContainer(
                   <MessageViewContainer
-                    message={this.props.data}
+                    message={message}
                     setMainContainer={this.props.setMainContainer}
                     setPage={this.props.setPage}
                   />
@@ -89,7 +146,7 @@ class Message extends React.Component {
               effect={isLiked && "liked"}
               onClick={() => {
                 if (token) {
-                  this.toggleLike(user, this.props.data);
+                  this.toggleLike(isLiked, message._id);
                   return;
                 }
 
@@ -111,7 +168,7 @@ class Message extends React.Component {
             >
               {(close) => (
                 <MessageLikes
-                  likes={likes}
+                  id={message._id}
                   setMainContainer={this.props.setMainContainer}
                   setPage={this.props.setPage}
                   close={close}

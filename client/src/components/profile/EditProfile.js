@@ -3,7 +3,6 @@ import ImagePickerContainer from "../ImagePickerContainer";
 import ProfileContainer from "../containers/ProfileContainer";
 import Input from "../Input";
 import dateFormat from "dateformat";
-import moment from "moment";
 
 import {
   validateEmail,
@@ -11,6 +10,8 @@ import {
   validateName,
   validateDate,
 } from "../../utils/Validations";
+import moment from "moment";
+import axios from "axios";
 
 class EditProfile extends React.Component {
   constructor(props) {
@@ -53,7 +54,7 @@ class EditProfile extends React.Component {
 
     let birthday = "";
     if (this.state.user.birthday) {
-      birthday = moment(this.state.user.birthday, "DD/MM/YYYY").toDate();
+      birthday = this.state.user.birthday;
       birthday = dateFormat(birthday, "yyyy-mm-dd");
     }
 
@@ -74,12 +75,10 @@ class EditProfile extends React.Component {
               ? newPasswordValidator.message
               : "";
 
-            let passwordMessage =
-              this.state.password === this.state.user.password
-                ? ""
-                : "Password is incorrect";
-
-            passwordMessage = this.state.newPassword ? passwordMessage : "";
+            const passwordMessage =
+              this.state.newPassword && !this.state.password
+                ? "Password is required"
+                : "";
 
             const errors = {
               name: nameValidator.message,
@@ -100,19 +99,37 @@ class EditProfile extends React.Component {
               passwordMessage === "" &&
               birthdayValidator.status
             ) {
-              const editedUser = this.state.user;
-              editedUser.password = this.state.newPassword;
+              const newPassword = this.state.newPassword;
+              let password = this.state.password;
 
-              // save the user
-              this.props.setMainContainer(
-                <ProfileContainer
-                  user={editedUser}
-                  setMainContainer={this.props.setMainContainer}
-                  setPage={this.props.setPage}
-                />
-              );
+              if (!newPassword) password = "";
 
-              this.props.close();
+              axios
+                .put("http://localhost:4000/api/users", {
+                  user: this.state.user,
+                  newPassword: newPassword,
+                  password: password,
+                })
+                .then((res) => {
+                  this.props.setMainContainer(
+                    <ProfileContainer
+                      user={res.data.user}
+                      setMainContainer={this.props.setMainContainer}
+                      setPage={this.props.setPage}
+                    />
+                  );
+
+                  this.props.close();
+                })
+                .catch((err) => {
+                  console.log(err.response.data);
+                  this.setState({
+                    errors: {
+                      ...this.state.errors,
+                      [err.response.data.field]: err.response.data.message,
+                    },
+                  });
+                });
             }
           }}
         >
@@ -176,7 +193,6 @@ class EditProfile extends React.Component {
             }
 
             let birth = moment(event.target.value, "YYYY-MM-DD").toDate();
-            birth = dateFormat(birth, "dd/mm/yyyy");
             this.editUserInformations("birthday", birth);
           }}
         />

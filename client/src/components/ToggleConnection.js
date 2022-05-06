@@ -1,9 +1,10 @@
 import React from "react";
 import Icon from "./Icon";
 import AuthentificationLayout from "../layouts/AuthentificationLayout";
+import Cookies from "js-cookie";
 
 const ToggleConnexion = (props) => {
-  const token = localStorage.getItem("token");
+  const token = Cookies.get("access_token");
 
   return (
     <div

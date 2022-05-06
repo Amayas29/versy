@@ -2,10 +2,11 @@ import React from "react";
 import Search from "../search/Search";
 import SuggestionPanel from "../suggestion/SuggestionPanel";
 import Footer from "../footer/Footer";
+import Cookies from "js-cookie";
 
 class SuggestContainer extends React.Component {
   render() {
-    const token = localStorage.getItem("token");
+    const token = Cookies.get("access_token");
 
     return (
       <section className="suggest">

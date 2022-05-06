@@ -11,7 +11,9 @@ import {
 import Form from "../authentification/Form";
 import Input from "../Input";
 import LoginContainer from "./LoginContainer";
+import moment from "moment";
 import axios from "axios";
+import MainLayout from "../../layouts/MainLayout";
 
 class SignupContainer extends React.Component {
   constructor(props) {
@@ -43,20 +45,15 @@ class SignupContainer extends React.Component {
   }
 
   register(_e) {
-    const {
-      username,
-      birthday,
-      email,
-      password,
-      passwordconfirmation: passwordConfirmation,
-    } = this.state;
+    const { username, birthday, email, password, passwordconfirmation } =
+      this.state;
 
     const usernameValidation = validateUsername(username);
     const birthdayValidation = validateDate(birthday);
     const emailValidation = validateEmail(email);
     const passwordValidation = validatePassword(password);
     const passwordConfirmationValidation = validatePasswordConfirmation(
-      passwordConfirmation,
+      passwordconfirmation,
       password
     );
 
@@ -75,43 +72,29 @@ class SignupContainer extends React.Component {
       passwordValidation.status &&
       passwordConfirmationValidation.status &&
       usernameValidation.status &&
-      passwordValidation.status
+      birthdayValidation.status
     ) {
+      const date = moment(birthday, "YYYY-MM-DD").toDate();
+
       axios
         .post("http://localhost:4000/api/users/register", {
-          username: username,
-          birthday: birthday,
-          email: email,
-          password: password,
-          passwordConfirmation: passwordConfirmation,
+          user: {
+            username: username,
+            email: email,
+            password: password,
+            birthday: date,
+          },
         })
-        .then((res) => {
-          // localStorage.setItem("token", res.data.token);
-          // console.log(res.data);
-          this.props.setContainer(
-            <LoginContainer
-              setContainer={this.props.setContainer}
-              setPage={this.props.setPage}
-              setHasLogo={this.props.setHasLogo}
-            />
-          );
+        .then((_res) => {
+          this.props.setPage(<MainLayout setPage={this.props.setPage} />);
         })
         .catch((err) => {
-          console.log(err.response.data.errors);
+          console.dir(err.response);
           this.setState({
             errors: {
-              username: err.response.data.errors.username,
-              email: err.response.data.errors.email,
+              [err.response.data.field]: err.response.data.message,
             },
           });
-
-          this.props.setContainer(
-            <SignupContainer
-              setContainer={this.props.setContainer}
-              setPage={this.props.setPage}
-              setHasLogo={this.props.setHasLogo}
-            />
-          );
         });
     }
   }

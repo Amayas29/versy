@@ -8,8 +8,8 @@ const Members = () => {
 
   return (
     <ul className="contributors">
-      {members.map((contributor) => (
-        <Member member={contributor} />
+      {members.map((contributor, i) => (
+        <Member member={contributor} key={i} />
       ))}
     </ul>
   );

@@ -46,36 +46,20 @@ class LoginContainer extends React.Component {
       },
     });
     if (emailValidation.status && passwordValidation.status) {
-      // console.log("sending request");
       axios
-        .post("http://localhost:4000/api/users/login", {
+        .post(`http://localhost:4000/api/users/login`, {
           email: email,
           password: password,
         })
-        .then((res) => {
-          // Store token in local storage
-          console.log(res.headers);
-          let token = res.cookieS.token;
-          localStorage.setItem("token", token);
+        .then((_res) => {
           this.props.setPage(<MainLayout setPage={this.props.setPage} />);
         })
         .catch((err) => {
-          console.log(err);
-
           this.setState({
             errors: {
-              email: err.response.data.errors.email,
-              password: err.response.data.errors.password,
+              [err.response.data.field]: err.response.data.message,
             },
           });
-
-          this.props.setContainer(
-            <LoginContainer
-              setContainer={this.props.setContainer}
-              setPage={this.props.setPage}
-              setHasLogo={this.props.setHasLogo}
-            />
-          );
         });
     }
   }

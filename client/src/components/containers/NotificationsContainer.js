@@ -1,6 +1,8 @@
 import React from "react";
 import axios from "axios";
 import Notification from "../notifications/Notification";
+import Cookies from "js-cookie";
+
 class NotificationsContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -11,15 +13,16 @@ class NotificationsContainer extends React.Component {
   }
 
   UNSAFE_componentWillMount() {
-    const token = localStorage.getItem("token");
-    axios.get(`http://localhost:4000/api/token/${token}`).then((res) => {
-      const user_id = res.user_id;
-      axios
-        .get(`http://localhost:4000/api/notifications/${user_id}`)
-        .then((notifications_res) => {
-          this.setState({ notifications: notifications_res.notifications });
-        });
-    });
+    const token = Cookies.get("access_token");
+    axios
+      .get(`http://localhost:4000/api/token/${token}`)
+      .then((res) => {
+        const user = res.data.user;
+        // TODO ?
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+      });
   }
 
   render() {

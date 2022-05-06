@@ -1,8 +1,53 @@
 import React from "react";
 import UsersList from "../UsersList";
 import MessagesList from "../MessagesList";
+import axios from "axios";
 
 class SearchContainer extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      results: [],
+      users: false,
+    };
+  }
+
+  UNSAFE_componentWillMount() {
+    this.refresh(this.props);
+  }
+
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    this.refresh(nextProps);
+  }
+
+  refresh(props) {
+    let query = props.query;
+    const regex = /@(.*)/g;
+
+    if (query.match(regex)) {
+      query = query.replace("@", "");
+
+      axios
+        .get(`http://localhost:4000/api/users/search/${query}`)
+        .then((res) => {
+          this.setState({ results: res.data.users, users: true });
+        })
+        .catch((err) => {
+          console.log(err.response.data);
+        });
+    } else {
+      axios
+        .get(`http://localhost:4000/api/messages/search/${query}`)
+        .then((res) => {
+          this.setState({ results: res.data.messages, users: false });
+        })
+        .catch((err) => {
+          console.log(err.response.data);
+        });
+    }
+  }
+
   render() {
     return <div className="central-container">{this.getResults()}</div>;
   }
@@ -10,27 +55,22 @@ class SearchContainer extends React.Component {
   getResults() {
     let resultComponent = <NotFound query={this.props.query} />;
 
-    let query = this.props.query;
-    const regex = /@(.*)/g;
-
-    if (query.match(regex)) {
-      // TODO: get from server
-      const users = [];
+    if (this.state.users) {
+      const users = this.state.results;
       if (users.length > 0)
         resultComponent = (
-          <UsersResult
+          <UsersList
             users={users}
             setMainContainer={this.props.setMainContainer}
             setPage={this.props.setPage}
+            hasBio={true}
           />
         );
     } else {
-      // TODO: get from server
-
-      const messages = [];
+      const messages = this.state.results;
       if (messages.length > 0)
         resultComponent = (
-          <MessagesResult
+          <MessagesList
             messages={messages}
             setMainContainer={this.props.setMainContainer}
             setPage={this.props.setPage}
@@ -41,27 +81,6 @@ class SearchContainer extends React.Component {
     return resultComponent;
   }
 }
-
-const MessagesResult = (props) => {
-  return (
-    <MessagesList
-      messages={props.messages}
-      setMainContainer={props.setMainContainer}
-      setPage={props.setPage}
-    />
-  );
-};
-
-const UsersResult = (props) => {
-  return (
-    <UsersList
-      users={props.users}
-      setMainContainer={props.setMainContainer}
-      setPage={props.setPage}
-      hasBio={true}
-    />
-  );
-};
 
 const NotFound = (props) => {
   return (

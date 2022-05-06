@@ -2,7 +2,7 @@ import axios from "axios";
 import React from "react";
 import UsersList from "../UsersList";
 
-class AllSuggestionContainer extends React.Component {
+class FollowList extends React.Component {
   constructor(props) {
     super(props);
 
@@ -13,9 +13,9 @@ class AllSuggestionContainer extends React.Component {
 
   UNSAFE_componentWillMount() {
     axios
-      .get("http://localhost:4000/api/users/suggest")
+      .get(`http://localhost:4000/api/users/follows/${this.props.id}`)
       .then((res) => {
-        this.setState({ users: res.data.users });
+        this.setState({ users: res.data[this.props.name] });
       })
       .catch((err) => {
         console.log(err);
@@ -24,15 +24,16 @@ class AllSuggestionContainer extends React.Component {
 
   render() {
     return (
-      <div className="central-container">
+      <div className="follow-list">
         <UsersList
           users={this.state.users}
           setMainContainer={this.props.setMainContainer}
           setPage={this.props.setPage}
+          hasBio={true}
         />
       </div>
     );
   }
 }
 
-export default AllSuggestionContainer;
+export default FollowList;

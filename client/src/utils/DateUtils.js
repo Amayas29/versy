@@ -10,15 +10,10 @@ const timeElapsed = (date) => {
   const diffMonths = Math.floor(diff / (1000 * 60 * 60 * 24 * 30));
 
   if (diffSeconds === 0) return "now";
-
   if (diffSeconds < 60) return `${diffSeconds}s`;
-
   if (diffMinutes < 60) return `${diffMinutes}m`;
-
   if (diffHours < 24) return `${diffHours}h`;
-
   if (diffMonths < 12) return dateFormat(date, "mmm d");
-
   return dateFormat(date, "mmm dd, yyyy");
 };
 

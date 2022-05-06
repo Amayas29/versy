@@ -1,229 +1,245 @@
-const signUpErrors = require("../../utils/signUpErrors");
-const loginErrors = require("../../utils/loginErrors");
-const createToken = require("../token/token").createToken;
-const maxAge = require("../token/token").maxAge;
-const cookies = require("cookie-parser");
-const { Cookie } = require("express-session");
+const { hash, compare } = require("../../utils/hash");
+const Datastore = require("nedb");
+
 class UserModel {
-  constructor(dt) {
-    this.dt = dt;
+  constructor() {
+    this.dt = new Datastore({
+      filename: "./database/users.db",
+      autoload: true,
+    });
   }
 
-  // Login function
+  checkPassword(password, hash) {
+    return compare(password, hash);
+  }
 
-  async login(req, res) {
-    const { email, password } = req.body;
-    // Verify if the user exists
-    try {
-      await this.dt.findOne({ email: email }, (err, user) => {
-        // Verify if the user exists
-        try {
-          if (!user) {
-            throw new Error("email");
-          }
-        } catch (err) {
-          const errors = loginErrors(err);
-          console.log(errors);
-          return res.status(400).send({ errors });
+  userTemplate(user, withId = false) {
+    const userTemplate = {
+      avatar: user.avatar || "",
+      name: user.name || "",
+      username: user.username || "",
+      email: user.email || "",
+      password: user.password || "",
+      bio: user.bio || "",
+      birthday: user.birthday || null,
+      joinedDate: user.joinedDate || null,
+      followers: user.followers || [],
+      following: user.following || [],
+    };
+
+    if (withId) userTemplate._id = user._id || "";
+
+    return userTemplate;
+  }
+
+  getByEmail(email) {
+    return new Promise((resolve, reject) => {
+      this.dt.findOne({ email: email }, (err, user) => {
+        if (err) {
+          reject(err);
+          return;
         }
 
-        // Verify if the password is correct
-        try {
-          if (user && user.password !== req.body.password) {
-            throw new Error("password");
-          }
-        } catch (err) {
-          const errors = loginErrors(err);
-          console.log(errors);
-          return res.status(400).send({ errors });
-        }
-
-        // Connect the user
-        const token = createToken(user._id);
-        res.cookie("jwt", token, {
-          httpOnly: true,
-          maxAge: maxAge,
-        });
-        res.status(200).json({
-          user: user._id,
-        });
+        resolve(user);
       });
-    } catch (err) {
-      const errors = loginErrors(err);
-      console.log(errors);
-      return res.status(400).send({ errors });
-    }
+    });
   }
 
-  // Sign up function
+  getByUsername(username) {
+    return new Promise((resolve, reject) => {
+      this.dt.findOne({ username: username }, (err, user) => {
+        if (err) {
+          reject(err);
+          return;
+        }
 
-  async signUp(req, res) {
-    const { username, birthdate, email, password, passwordConfirmation } =
-      req.body;
-
-    // Verify if the email exists
-    let result1 = null;
-    let result2 = null;
-    let cpt = 0;
-    await this.dt.find({ email: email }, (err, user) => {
-      result1 = user;
-      cpt++;
+        resolve(user);
+      });
     });
+  }
 
-    // Verify if the username exists
+  getById(id) {
+    return new Promise((resolve, reject) => {
+      this.dt.findOne({ _id: id }, (err, user) => {
+        if (err) {
+          reject(err);
+          return;
+        }
 
-    await this.dt.find({ username: username }, (err, user) => {
-      result2 = user;
-      cpt++;
-    });
-
-    while (cpt < 2) {
-      await new Promise((resolve) => setTimeout(resolve, 100));
-    }
-
-    console.log(result2);
-    console.log(result1);
-    try {
-      if (result1.length > 0 && result2.length > 0) {
-        throw new Error("email and username");
-      } else if (result1.length > 0) {
-        throw new Error("email");
-      } else if (result2.length > 0) {
-        throw new Error("username");
-      }
-    } catch (err) {
-      const errors = signUpErrors(err);
-      console.log(errors);
-      return res.status(400).send({ errors });
-    }
-
-    // Create the user
-    console.log(" data received");
-    this.dt.insert(req.body, (err, user) => {
-      if (!err) {
-        console.log("user created");
-        res.status(200).send(user);
-      } else {
-        console.log(err);
-        res.status(400).send(err);
-      }
+        resolve(user);
+      });
     });
   }
 
   // Get all users
-  async getAllusers(req, res) {
-    await this.dt.find({}, { password: 0 }, (err, users) => {
-      console.log(users);
-      res.status(200).send(users);
+  getAll() {
+    return new Promise((resolve, reject) => {
+      this.dt.find({}, (err, users) => {
+        if (err) {
+          reject(err);
+          return;
+        }
+
+        resolve(users);
+      });
     });
   }
 
-  // Get user informations
-  async getUser(req, res) {
-    //checkUser
+  insert(user) {
+    return new Promise((resolve, reject) => {
+      this.dt.insert(user, (err, newUser) => {
+        if (err) {
+          reject(err);
+          return;
+        }
 
-    //checkUser
-    await this.dt.find({ _id: req.params.id }, { password: 0 }, (err, user) => {
-      if (!err) {
-        res.send(user);
-      } else console.log("User not found: " + err);
+        resolve(newUser);
+      });
     });
   }
 
-  // update user informations
-  async updateUser(req, res) {
-    try {
-      await dt.findOneAndUpdate(
-        { _id: req.params.id },
-        { $set: req.body },
-        { new: true, upsert: true, setDefaultOnInsert: true },
-        (err, doc) => {
-          if (!err) return res.send(doc);
-          else return res.status(500).send({ message: err });
+  update(user) {
+    return new Promise((resolve, reject) => {
+      this.dt.update(
+        { _id: user._id },
+        user,
+
+        (err) => {
+          if (err) {
+            reject(err);
+            return;
+          }
+
+          resolve(true);
         }
       );
-    } catch (err) {
-      return res.status(500).json({
-        message: err,
-      });
-    }
+    });
   }
 
-  // Delete user
-  async deleteUser(req, res) {
-    try {
-      await dt.remove({ _id: req.params.id }).exec();
-      res.status(200).json({
-        message: "User deleted",
+  remove(id) {
+    return new Promise((resolve, reject) => {
+      this.dt.remove({ _id: id }, (err) => {
+        if (err) {
+          reject(err);
+          return;
+        }
+
+        resolve(true);
       });
-    } catch (err) {
-      return res.status(500).json({
-        message: err,
-      });
-    }
+    });
   }
 
-  // follow user
-  async followUser(req, res) {
-    try {
-      // add to the followers list
+  follow(sender, target) {
+    return new Promise((resolve, reject) => {
+      this.dt.findOne({ _id: target }, (err, user) => {
+        if (err) {
+          reject(err);
+          return;
+        }
 
-      await dt.findByIdAndUpdate(
-        req.params.id,
-        { $addToSet: { following: req.body.idToFollow } },
-        { new: true, upsert: true },
-        (err, doc) => {
-          if (!err) resizeTo.status(201).json(doc);
-          else res.status(500).json({ err });
-        }
-      );
-      // add to the following list
-      await dt.findByIdAndUpdate(
-        req.body.idToFollow,
-        { $addToSet: { followers: req.params.id } },
-        { new: true, upsert: true },
-        (err, doc) => {
-          if (!err) resizeTo.status(201).json(doc);
-          else res.status(500).json({ err });
-        }
-      );
-    } catch (err) {
-      return res.status(500).json({
-        message: err,
+        if (!user) resolve(false);
       });
-    }
+
+      this.dt.update(
+        { _id: sender },
+        { $addToSet: { following: target } },
+        (err) => {
+          if (err) {
+            reject(err);
+            return;
+          }
+        }
+      );
+
+      this.dt.update(
+        { _id: target },
+        { $addToSet: { followers: sender } },
+        (err) => {
+          if (err) {
+            reject(err);
+            return;
+          }
+
+          resolve(true);
+        }
+      );
+    });
   }
 
-  // unfollow user
-  async unfollowUser(req, res) {
-    try {
-      // remove from the followers list
+  unfollow(sender, target) {
+    return new Promise((resolve, reject) => {
+      this.dt.findOne({ _id: target }, (err, user) => {
+        if (err) {
+          reject(err);
+          return;
+        }
 
-      await dt.findByIdAndUpdate(
-        req.params.id,
-        { $pull: { following: req.body.idToUnfollow } },
-        { new: true, upsert: true },
-        (err, doc) => {
-          if (!err) resizeTo.status(201).json(doc);
-          else res.status(500).json({ err });
-        }
-      );
-      // remove from the following list
-      await dt.findByIdAndUpdate(
-        req.body.idToUnfollow,
-        { $pull: { followers: req.params.id } },
-        { new: true, upsert: true },
-        (err, doc) => {
-          if (!err) resizeTo.status(201).json(doc);
-          else res.status(500).json({ err });
-        }
-      );
-    } catch (err) {
-      return res.status(500).json({
-        message: err,
+        if (!user) resolve(false);
       });
-    }
+
+      this.dt.update(
+        { _id: sender },
+        { $pull: { following: target } },
+        (err) => {
+          if (err) {
+            reject(err);
+            return;
+          }
+        }
+      );
+
+      this.dt.update(
+        { _id: target },
+        { $pull: { followers: sender } },
+        (err) => {
+          if (err) {
+            reject(err);
+            return;
+          }
+
+          resolve(true);
+        }
+      );
+    });
+  }
+
+  search(query) {
+    return new Promise((resolve, reject) => {
+      this.dt.find(
+        {
+          username: new RegExp(query, "i"),
+        },
+        (err, users) => {
+          if (err) {
+            reject(err);
+            return;
+          }
+
+          resolve(users);
+        }
+      );
+    });
+  }
+
+  suggest(userId) {
+    return new Promise((resolve, reject) => {
+      this.getById(userId).then((user) => {
+        this.dt.find(
+          {
+            _id: { $nin: [userId, ...user.following] },
+          },
+          (err, users) => {
+            if (err) {
+              reject(err);
+              return;
+            }
+
+            resolve(users);
+          }
+        );
+      });
+    });
   }
 }
 
-exports.default = UserModel;
+module.exports = new UserModel();

@@ -6,7 +6,6 @@ import ImagePickerContainer from "../ImagePickerContainer";
 import ImageHolder from "./ImageHolder";
 import Picker from "emoji-picker-react";
 import Popup from "reactjs-popup";
-import dateFormat from "dateformat";
 
 class PublishMessage extends React.Component {
   constructor(props) {
@@ -25,7 +24,7 @@ class PublishMessage extends React.Component {
     this.getImage = this.getImage.bind(this);
   }
 
-  onEmojiClick(event, emojiObject) {
+  onEmojiClick(_event, emojiObject) {
     this.setState((prevState) => {
       this.inputRef.current.textContent =
         this.inputRef.current.textContent + emojiObject.emoji;
@@ -39,7 +38,6 @@ class PublishMessage extends React.Component {
     const range = document.createRange();
     const sel = window.getSelection();
 
-    console.log(this.inputRef.current.childNodes);
     range.setStart(
       this.inputRef.current.childNodes[0],
       this.inputRef.current.textContent.length
@@ -102,19 +100,15 @@ class PublishMessage extends React.Component {
     const content = this.inputRef.current.textContent;
     if (!content && !this.state.image) return;
 
-    this.props.publish(
-      {
-        id: Math.floor(Math.random() * 1000000) + 10000,
-        content: content,
-        image: this.state.image,
-        user: this.props.user,
-        publishDate: dateFormat(new Date(), "dd/mm/yyyy"),
-        likes: [],
-        isComment: this.props.isComment,
-        comments: [],
-      },
-      this.props.user.id
-    );
+    this.props.publish({
+      content: content,
+      image: this.state.image,
+      user: this.props.user._id,
+      publishDate: new Date(),
+      likes: [],
+      isComment: this.props.isComment || false,
+      comments: [],
+    });
 
     this.inputRef.current.textContent = "";
 

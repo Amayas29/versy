@@ -19,7 +19,7 @@ const Member = (props) => {
         <span>{member.description}</span>
 
         <span className="contributor-github">
-          <em class="fa-brands fa-github"></em>
+          <em className="fa-brands fa-github"></em>
           <a className="contributor-github-link" href={member.github}>
             {member.github}
           </a>

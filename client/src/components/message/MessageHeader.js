@@ -1,11 +1,11 @@
 import React from "react";
 import timeElapsed from "../../utils/DateUtils";
 import ProfileContainer from "../containers/ProfileContainer";
-import moment from "moment";
 import Icon from "../Icon";
 import MessageOptions from "./MessageOptions";
 import Popup from "reactjs-popup";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 class MessageHeader extends React.Component {
   constructor(props) {
@@ -13,28 +13,39 @@ class MessageHeader extends React.Component {
 
     this.state = {
       user: null,
+      sender: null,
     };
   }
 
   UNSAFE_componentWillMount() {
-    const token = localStorage.getItem("token");
-    axios.get(`http://localhost:4000/api/token/${token}`).then((res) => {
-      const user_id = res.user_id;
+    const token = Cookies.get("access_token");
+    axios
+      .get(`http://localhost:4000/api/token/${token}`)
+      .then((res) => {
+        this.setState({ user: res.data.user });
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+      });
 
-      axios
-        .get(`http://localhost:4000/api/users/${user_id}`)
-        .then((user_res) => {
-          this.setState({ user: user_res.user });
-        });
-    });
+    axios
+      .get(`http://localhost:4000/api/users/${this.props.message.user}`)
+      .then((res) => {
+        this.setState({ sender: res.data.user });
+      });
   }
 
   render() {
     const props = this.props;
-    const date = moment(props.message.publishDate, "DD/MM/YYYY").toDate();
+    const date = new Date(props.message.publishDate);
     const time = timeElapsed(date);
 
     const user = this.state.user;
+    const sender = this.state.sender;
+
+    const options = props.options === undefined ? true : props.options;
+
+    if (!sender) return <></>;
 
     return (
       <div className="message-header">
@@ -42,20 +53,20 @@ class MessageHeader extends React.Component {
           onClick={() =>
             props.setMainContainer(
               <ProfileContainer
-                user={props.message.user}
+                user={sender}
                 setMainContainer={props.setMainContainer}
                 setPage={props.setPage}
               />
             )
           }
         >
-          {props.message.user.name}
+          {sender.name}
         </span>
-        <span>{props.message.user.username}</span>
+        <span>{sender.username}</span>
         <Icon name="fa-minus" size="fa-xs" />
         <span>{time}</span>
 
-        {user && props.message.user.id === user.id && (
+        {user && sender._id === user._id && options === true && (
           <div className="message-options">
             <Popup
               trigger={<Icon name="fa-ellipsis-h" size="fa-xl" />}
@@ -63,7 +74,13 @@ class MessageHeader extends React.Component {
               closeOnEscape
               position="bottom right"
             >
-              {(close) => <MessageOptions close={close} />}
+              {(close) => (
+                <MessageOptions
+                  refresh={this.props.refresh}
+                  close={close}
+                  id={props.message._id}
+                />
+              )}
             </Popup>
           </div>
         )}

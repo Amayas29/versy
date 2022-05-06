@@ -2,22 +2,45 @@ import React from "react";
 import UsersList from "../UsersList";
 import Icon from "../Icon";
 import AllSuggestionContainer from "../containers/AllSuggestionContainer";
+import axios from "axios";
 
-const SuggestionPanel = (props) => {
-  const users = [];
+class SuggestionPanel extends React.Component {
+  constructor(props) {
+    super(props);
 
-  return (
-    <div className="suggestion-panel">
-      <div className="suggestion-panel-header">You may know</div>
-      <UsersList
-        users={users}
-        setMainContainer={props.setMainContainer}
-        setPage={props.setPage}
-        more={<More setMainContainer={props.setMainContainer} />}
-      />
-    </div>
-  );
-};
+    this.state = {
+      users: [],
+    };
+  }
+
+  UNSAFE_componentWillMount() {
+    axios
+      .get("http://localhost:4000/api/users/suggest")
+      .then((res) => {
+        this.setState({ users: res.data.users.slice(0, 4) });
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+      });
+  }
+
+  render() {
+    const users = this.state.users;
+    const props = this.props;
+    return (
+      <div className="suggestion-panel">
+        <div className="suggestion-panel-header">You may know</div>
+        <UsersList
+          users={users}
+          setMainContainer={props.setMainContainer}
+          setPage={props.setPage}
+          more={<More setMainContainer={props.setMainContainer} />}
+          hasButton={false}
+        />
+      </div>
+    );
+  }
+}
 
 const More = (props) => {
   return (

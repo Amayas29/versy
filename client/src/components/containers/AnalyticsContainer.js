@@ -1,17 +1,37 @@
+import axios from "axios";
 import React from "react";
 
-const AnalyticsContainer = () => {
-  // Todo
-  const stats = {};
+class AnalyticsContainer extends React.Component {
+  constructor(props) {
+    super(props);
 
-  const statsItems = [];
-
-  for (let stat in stats) {
-    statsItems.push(<StatItem key={stat} name={stat} value={stats[stat]} />);
+    this.state = {
+      stats: {},
+    };
   }
 
-  return <section className="central-container">{statsItems}</section>;
-};
+  UNSAFE_componentWillMount() {
+    axios
+      .get("http://localhost:4000/api/users/stats")
+      .then((res) => {
+        this.setState({ stats: res.data.stats });
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+      });
+  }
+
+  render() {
+    const stats = this.state.stats;
+
+    const statsItems = [];
+
+    for (let stat in stats)
+      statsItems.push(<StatItem key={stat} name={stat} value={stats[stat]} />);
+
+    return <section className="central-container">{statsItems}</section>;
+  }
+}
 
 const StatItem = (props) => {
   return (

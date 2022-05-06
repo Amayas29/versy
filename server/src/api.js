@@ -1,4 +1,5 @@
 const express = require("express");
+
 function init() {
   const router = express.Router();
   router.use(express.json());
@@ -6,6 +7,7 @@ function init() {
   router.use((req, _, next) => {
     console.log(`API: method ${req.method}, path ${req.url}`);
     console.log(`API: body ${JSON.stringify(req.body)}`);
+    console.log("\n");
     next();
   });
 

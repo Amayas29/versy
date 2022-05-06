@@ -2,6 +2,9 @@ import React from "react";
 import PublishMessage from "../message/PublishMessage";
 import MessagesList from "../MessagesList";
 import axios from "axios";
+import Cookies from "js-cookie";
+
+axios.defaults.withCredentials = true;
 
 class FeedContainer extends React.Component {
   constructor(props) {
@@ -13,33 +16,44 @@ class FeedContainer extends React.Component {
     };
 
     this.publish = this.publish.bind(this);
+    this.refresh = this.refresh.bind(this);
   }
 
   UNSAFE_componentWillMount() {
-    this.token = localStorage.getItem("token");
+    const token = Cookies.get("access_token");
 
     axios
-      .get(`http://localhost:4000/api/token/${this.token}`)
-      .then((token_res) => {
-        const user_id = token_res.user_id;
-
-        axios
-          .get(`http://localhost:4000/api/users/${user_id}`)
-          .then((user_res) => {
-            this.setState({ user: user_res.user });
-
-            axios
-              .get(`http://localhost:4000/api/messages/${user_id}`)
-              .then((messages_res) => {
-                this.setState({ messages: messages_res.messages });
-              });
-          });
+      .get(`http://localhost:4000/api/token/${token}`)
+      .then((res) => {
+        this.setState({ user: res.data.user });
       })
-      .catch(() => {
-        axios.get(`http://localhost:4000/api/messages`).then((messages_res) => {
-          this.setState({ messages: messages_res.messages });
-        });
+      .catch((err) => {
+        console.log(err.response.data);
       });
+
+    this.refresh();
+  }
+
+  refresh() {
+    this.setState({ messages: [] });
+    const token = Cookies.get("access_token");
+
+    if (token) {
+      axios
+        .get("http://localhost:4000/api/messages/feed")
+        .then((res) => {
+          this.setState({ messages: res.data.messages });
+        })
+        .catch((err) => {
+          console.log(err.response.data);
+        });
+
+      return;
+    }
+
+    axios.get(`http://localhost:4000/api/messages`).then((res) => {
+      this.setState({ messages: res.data.messages });
+    });
   }
 
   render() {
@@ -58,14 +72,23 @@ class FeedContainer extends React.Component {
           messages={this.state.messages}
           setMainContainer={this.props.setMainContainer}
           setPage={this.props.setPage}
+          refresh={this.refresh}
         />
       </section>
     );
   }
 
-  publish(message, id) {
-    // Todo push to serve
-    this.setState({ messages: [message, ...this.state.messages] });
+  publish(message) {
+    axios
+      .post("http://localhost:4000/api/messages", {
+        message: message,
+      })
+      .then((_res) => {
+        this.refresh();
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+      });
   }
 }
 

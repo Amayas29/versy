@@ -3,49 +3,87 @@ import Message from "../message/Message";
 import MessagesList from "../MessagesList";
 import PublishMessage from "../message/PublishMessage";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 class MessageViewContainer extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      message: this.props.message,
       user: null,
       comments: [],
     };
 
     this.publish = this.publish.bind(this);
+    this.refresh = this.refresh.bind(this);
   }
 
   UNSAFE_componentWillMount() {
-    const token = localStorage.getItem("token");
-    axios.get(`http://localhost:4000/api/token/${token}`).then((res) => {
-      const user_id = res.user_id;
-      axios
-        .get(`http://localhost:4000/api/users/${user_id}`)
-        .then((user_res) => {
-          this.setState({ user: user_res.user });
-        });
-    });
+    const token = Cookies.get("access_token");
+
+    axios
+      .get(`http://localhost:4000/api/token/${token}`)
+      .then((res) => {
+        this.setState({ user: res.data.user });
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+      });
+
+    this.refresh();
+  }
+
+  refresh() {
+    this.setState({ comments: [], message: null });
+
+    axios
+      .get(
+        `http://localhost:4000/api/messages/comments/${this.props.message._id}`
+      )
+      .then((res) => {
+        axios
+          .get(`http://localhost:4000/api/messages/${this.props.message._id}`)
+          .then((msg_res) => {
+            this.setState({
+              comments: res.data.comments,
+              message: msg_res.data.msg,
+            });
+          })
+          .catch((err) => {
+            console.log(err.response.data);
+          });
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+      });
   }
 
   publish(message) {
-    this.setState({
-      comments: [message, ...this.state.comments],
-    });
-
-    this.props.message.comments.push(message);
-    // Todo push to server
+    axios
+      .put(
+        `http://localhost:4000/api/messages/comment/${this.props.message._id}`,
+        {
+          comment: message,
+        }
+      )
+      .then((_res) => {
+        this.refresh();
+      });
   }
 
   render() {
+    if (!this.state.message) return <></>;
+
     const user = this.state.user;
 
     return (
       <div className="central-container message-view-container">
         <Message
-          data={this.props.message}
+          message={this.state.message}
           setMainContainer={this.props.setMainContainer}
           setPage={this.props.setPage}
+          options={false}
         />
         {user && (
           <PublishMessage
@@ -59,8 +97,10 @@ class MessageViewContainer extends React.Component {
 
         <MessagesList
           messages={this.state.comments}
+          comments={true}
           setMainContainer={this.props.setMainContainer}
           setPage={this.props.setPage}
+          refresh={this.refresh}
         />
       </div>
     );

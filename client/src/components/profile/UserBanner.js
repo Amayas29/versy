@@ -1,64 +1,60 @@
 import React from "react";
 import Icon from "../Icon";
-import MessagesList from "../MessagesList";
-import UsersList from "../UsersList";
 import Popup from "reactjs-popup";
 import EditProfile from "../profile/EditProfile";
-import moment from "moment";
 import dateFormat from "dateformat";
 import AuthentificationLayout from "../../layouts/AuthentificationLayout";
 import axios from "axios";
+import Cookies from "js-cookie";
+import FollowList from "./FollowList";
 
 class UserBanner extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      user: null,
-      mainProfileVue: false,
+      user: this.props.user,
+      sender: null,
     };
   }
 
   UNSAFE_componentWillMount() {
-    const token = localStorage.getItem("token");
-    axios.get(`http://localhost:4000/api/token/${token}`).then((res) => {
-      const user_id = res.user_id;
-      axios
-        .get(`http://localhost:4000/api/users/${user_id}`)
-        .then((user_res) => {
-          this.setState({ user: user_res.user });
-        });
-    });
+    const token = Cookies.get("access_token");
+    axios
+      .get(`http://localhost:4000/api/token/${token}`)
+      .then((res) => {
+        this.setState({ sender: res.data.user });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   render() {
-    // Todo: temporary
-    if (!this.props.user) return <></>;
+    if (!this.state.user) return <></>;
 
-    const token = localStorage.getItem("token");
+    const token = Cookies.get("access_token");
 
     const style = {
       width: "600px",
     };
 
-    // TODO: get messages
-    const messages = [];
+    let joinedDate = this.state.user.joinedDate;
+    joinedDate = dateFormat(joinedDate, "mmm dd, yyyy");
 
-    let followers = this.props.user.followers;
-    let following = this.props.user.following;
+    let birthday = this.state.user.birthday;
+    birthday = dateFormat(birthday, "mmm dd, yyyy");
 
-    let joinedDate = moment(this.props.user.joinedDate, "DD/MM/YYYY").toDate();
-    joinedDate = dateFormat(joinedDate, "mmm dd,yyyy");
-
-    let birthday = moment(this.props.user.birthday, "DD/MM/YYYY").toDate();
-    birthday = dateFormat(birthday, "mmm dd,yyyy");
-
-    const user = this.state.user;
+    const sender = this.state.sender;
+    const isFollowing = sender
+      ? sender.following.includes(this.state.user._id)
+      : false;
 
     return (
       <div className="user-banner-container">
-        <UserHeader user={this.props.user} />
+        <UserHeader user={this.state.user} />
 
-        {user && user.id === this.props.user.id ? (
+        {sender && sender._id === this.state.user._id ? (
           <Popup
             trigger={<div className="btn user-banner-btn">Edit profile</div>}
             contentStyle={style}
@@ -69,7 +65,7 @@ class UserBanner extends React.Component {
           >
             {(close) => (
               <EditProfile
-                user={this.props.user}
+                user={this.state.user}
                 setMainContainer={this.props.setMainContainer}
                 setPage={this.props.setPage}
                 close={close}
@@ -81,6 +77,39 @@ class UserBanner extends React.Component {
             className="btn user-banner-btn"
             onClick={() => {
               if (token) {
+                if (isFollowing) {
+                  axios
+                    .patch(
+                      `http://localhost:4000/api/users/unfollow/${this.state.user._id}`
+                    )
+                    .then((res) => {
+                      this.setState({ user: null, sender: null });
+                      this.setState({
+                        sender: res.data.sender,
+                        user: res.data.user,
+                      });
+                    })
+                    .catch((err) => {
+                      console.log(err);
+                    });
+                  return;
+                }
+
+                axios
+                  .patch(
+                    `http://localhost:4000/api/users/follow/${this.state.user._id}`
+                  )
+                  .then((res) => {
+                    this.setState({ user: null, sender: null });
+
+                    this.setState({
+                      sender: res.data.sender,
+                      user: res.data.user,
+                    });
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                  });
                 return;
               }
 
@@ -89,12 +118,12 @@ class UserBanner extends React.Component {
               );
             }}
           >
-            Follow
+            {isFollowing ? "Unfollow" : "Follow"}
           </div>
         )}
 
         <span className="user-bio break">
-          {this.props.user && this.props.user.bio}
+          {this.state.user && this.state.user.bio}
         </span>
 
         <div className="user-metadatas">
@@ -103,52 +132,55 @@ class UserBanner extends React.Component {
         </div>
 
         <div className="user-stats">
-          <UserStat
-            list={followers}
-            name="Following"
-            onClick={() =>
-              this.props.setProfileVue(
-                <UsersList
-                  users={followers}
-                  setMainContainer={this.props.setMainContainer}
-                  setPage={this.props.setPage}
-                />,
-                false
-              )
+          <Popup
+            trigger={
+              <div className="user-stat">
+                <span>{this.state.user.following.length}</span>
+                <span>Following</span>
+              </div>
             }
-          />
+            contentStyle={style}
+            modal
+            closeOnDocumentClick
+            closeOnEscape
+            lockScroll={true}
+          >
+            {(close) => (
+              <FollowList
+                list={this.state.user.following}
+                name="following"
+                id={this.state.user._id}
+                setMainContainer={this.props.setMainContainer}
+                setPage={this.props.setPage}
+                close={close}
+              />
+            )}
+          </Popup>
 
-          <UserStat
-            list={following}
-            name="Followers"
-            onClick={() =>
-              this.props.setProfileVue(
-                <UsersList
-                  users={following}
-                  setMainContainer={this.props.setMainContainer}
-                  setPage={this.props.setPage}
-                />,
-                false
-              )
+          <Popup
+            trigger={
+              <div className="user-stat">
+                <span>{this.state.user.followers.length}</span>
+                <span>Followers</span>
+              </div>
             }
-          />
-
-          {this.props.mainProfileVue || (
-            <Icon
-              name="fa-left-long"
-              size="fa-lg"
-              onClick={() =>
-                this.props.setProfileVue(
-                  <MessagesList
-                    messages={messages}
-                    setMainContainer={this.props.setMainContainer}
-                    setPage={this.props.setPage}
-                  />,
-                  true
-                )
-              }
-            />
-          )}
+            contentStyle={style}
+            modal
+            closeOnDocumentClick
+            closeOnEscape
+            lockScroll={true}
+          >
+            {(close) => (
+              <FollowList
+                list={this.state.user.followers}
+                name="followers"
+                id={this.state.user._id}
+                setMainContainer={this.props.setMainContainer}
+                setPage={this.props.setPage}
+                close={close}
+              />
+            )}
+          </Popup>
         </div>
       </div>
     );
@@ -173,15 +205,6 @@ const UserMetadata = (props) => {
     <div className="user-metadata">
       <Icon name={props.name} size="fa-lg" />
       <span>{props.data}</span>
-    </div>
-  );
-};
-
-const UserStat = (props) => {
-  return (
-    <div className="user-stat" onClick={props.onClick}>
-      <span>{props.list.length}</span>
-      <span>{props.name}</span>
     </div>
   );
 };

@@ -8,6 +8,7 @@ import NotificationsContainer from "./NotificationsContainer";
 import AboutUsContainer from "./AboutUsContainer";
 import AnalyticsContainer from "./AnalyticsContainer";
 import AuthentificationLayout from "../../layouts/AuthentificationLayout";
+import Cookies from "js-cookie";
 
 class MenuContainer extends React.Component {
   constructor(props) {
@@ -149,7 +150,7 @@ class MenuContainer extends React.Component {
   }
 
   render() {
-    const token = localStorage.getItem("token");
+    const token = Cookies.get("access_token");
 
     return (
       <aside className="menu">
