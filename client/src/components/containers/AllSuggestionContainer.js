@@ -18,7 +18,7 @@ class AllSuggestionContainer extends React.Component {
         this.setState({ users: res.data.users });
       })
       .catch((err) => {
-        console.log(err);
+        console.dir(err);
       });
   }
 

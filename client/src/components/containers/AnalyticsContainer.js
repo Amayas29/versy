@@ -17,7 +17,7 @@ class AnalyticsContainer extends React.Component {
         this.setState({ stats: res.data.stats });
       })
       .catch((err) => {
-        console.log(err.response.data);
+        console.dir(err);
       });
   }
 

@@ -1,7 +1,6 @@
 import React from "react";
 import axios from "axios";
 import Notification from "../notifications/Notification";
-import Cookies from "js-cookie";
 
 class NotificationsContainer extends React.Component {
   constructor(props) {
@@ -13,15 +12,13 @@ class NotificationsContainer extends React.Component {
   }
 
   UNSAFE_componentWillMount() {
-    const token = Cookies.get("access_token");
     axios
-      .get(`http://localhost:4000/api/token/${token}`)
+      .get("http://localhost:4000/api/notifications")
       .then((res) => {
-        const user = res.data.user;
-        // TODO ?
+        this.setState({ notifications: res.data.notifications });
       })
       .catch((err) => {
-        console.log(err.response.data);
+        console.dir(err);
       });
   }
 
@@ -32,13 +29,15 @@ class NotificationsContainer extends React.Component {
         {this.state.notifications.map((notification, index) => (
           <Notification
             key={index}
-            user={notification.user}
-            message={notification.message}
-            type={notification.type}
+            notification={notification}
             setMainContainer={props.setMainContainer}
             setPage={props.setPage}
           />
         ))}
+
+        {this.state.notifications.length === 0 && (
+          <div className="no-notifications">No notifications found</div>
+        )}
       </div>
     );
   }

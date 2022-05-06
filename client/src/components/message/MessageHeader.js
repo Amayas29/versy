@@ -25,7 +25,7 @@ class MessageHeader extends React.Component {
         this.setState({ user: res.data.user });
       })
       .catch((err) => {
-        console.log(err.response.data);
+        console.dir(err);
       });
 
     axios

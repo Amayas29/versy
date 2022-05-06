@@ -18,7 +18,7 @@ class FollowList extends React.Component {
         this.setState({ users: res.data[this.props.name] });
       })
       .catch((err) => {
-        console.log(err);
+        console.dir(err);
       });
   }
 

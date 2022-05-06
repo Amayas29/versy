@@ -1,6 +1,5 @@
 import axios from "axios";
 import React from "react";
-import AuthentificationLayout from "../layouts/AuthentificationLayout";
 import ProfileContainer from "./containers/ProfileContainer";
 import Cookies from "js-cookie";
 
@@ -59,8 +58,6 @@ class UserVue extends React.Component {
 
   render() {
     const props = this.props;
-    const user = this.state.user;
-    const token = Cookies.get("access_token");
 
     return (
       <li className="user-list-item">
@@ -93,22 +90,6 @@ class UserVue extends React.Component {
               <span>{props.data.username}</span>
             </div>
           </div>
-          {this.props.hasButton && user && user._id !== props.data._id && (
-            <div
-              className="btn"
-              onClick={() => {
-                if (token) {
-                  return;
-                }
-
-                props.setPage(
-                  <AuthentificationLayout setPage={props.setPage} />
-                );
-              }}
-            >
-              Follow
-            </div>
-          )}
         </div>
         {props.hasBio && (
           <span className="user-list-item-bio">{props.data.bio}</span>

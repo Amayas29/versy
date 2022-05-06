@@ -34,7 +34,7 @@ class Message extends React.Component {
         this.setState({ user: res.data.user });
       })
       .catch((err) => {
-        console.log(err.response.data);
+        console.dir(err);
       });
 
     if (!this.props.message) return;
@@ -45,7 +45,7 @@ class Message extends React.Component {
         this.setState({ sender: res.data.user });
       })
       .catch((err) => {
-        console.log(err.response.data);
+        console.dir(err);
       });
 
     this.refresh();
@@ -58,7 +58,7 @@ class Message extends React.Component {
         this.setState({ message: res.data.msg });
       })
       .catch((err) => {
-        console.log(err.response.data);
+        console.dir(err);
       });
   }
 
@@ -70,7 +70,31 @@ class Message extends React.Component {
           this.refresh();
         })
         .catch((err) => {
-          console.log(err.response.data);
+          console.dir(err);
+        });
+
+      if (this.state.user._id === this.state.sender._id) return;
+
+      axios
+        .post("http://localhost:4000/api/notifications/search", {
+          notification: {
+            type: "like",
+            message: this.state.message._id,
+            user_id: this.state.sender._id,
+            sender_id: this.state.user._id,
+          },
+        })
+        .then((res) => {
+          if (!res.data.id) return;
+
+          axios
+            .delete(`http://localhost:4000/api/notifications/${res.data.id}`)
+            .catch((err) => {
+              console.dir(err);
+            });
+        })
+        .catch((err) => {
+          console.dir(err);
         });
 
       return;
@@ -82,8 +106,20 @@ class Message extends React.Component {
         this.refresh();
       })
       .catch((err) => {
-        console.log(err.response.data);
+        console.dir(err);
       });
+
+    if (this.state.user._id === this.state.sender._id) return;
+
+    axios.post(
+      `http://localhost:4000/api/notifications/${this.state.sender._id}`,
+      {
+        notification: {
+          type: "like",
+          message: this.state.message._id,
+        },
+      }
+    );
   }
 
   render() {

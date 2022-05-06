@@ -26,7 +26,7 @@ class UserBanner extends React.Component {
         this.setState({ sender: res.data.user });
       })
       .catch((err) => {
-        console.log(err);
+        console.dir(err);
       });
   }
 
@@ -90,8 +90,33 @@ class UserBanner extends React.Component {
                       });
                     })
                     .catch((err) => {
-                      console.log(err);
+                      console.dir(err);
                     });
+
+                  axios
+                    .post("http://localhost:4000/api/notifications/search", {
+                      notification: {
+                        type: "follow",
+                        message: "",
+                        user_id: this.state.user._id,
+                        sender_id: this.state.sender._id,
+                      },
+                    })
+                    .then((res) => {
+                      if (!res.data.id) return;
+                      axios
+                        .delete(
+                          `http://localhost:4000/api/notifications/${res.data.id}`
+                        )
+
+                        .catch((err) => {
+                          console.dir(err);
+                        });
+                    })
+                    .catch((err) => {
+                      console.dir(err);
+                    });
+
                   return;
                 }
 
@@ -108,8 +133,25 @@ class UserBanner extends React.Component {
                     });
                   })
                   .catch((err) => {
-                    console.log(err);
+                    console.dir(err);
                   });
+
+                axios
+                  .post(
+                    `http://localhost:4000/api/notifications/${this.state.user._id}`,
+                    {
+                      notification: {
+                        message: "",
+                        type: "follow",
+                        user_id: this.state.user._id,
+                        sender_id: this.state.sender._id,
+                      },
+                    }
+                  )
+                  .catch((err) => {
+                    console.dir(err);
+                  });
+
                 return;
               }
 

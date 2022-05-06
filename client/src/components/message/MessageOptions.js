@@ -15,7 +15,7 @@ const MessageOptions = (props) => {
               props.close();
             })
             .catch((err) => {
-              console.log(err);
+              console.dir(err);
             });
         }}
       >

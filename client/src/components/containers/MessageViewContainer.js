@@ -28,7 +28,7 @@ class MessageViewContainer extends React.Component {
         this.setState({ user: res.data.user });
       })
       .catch((err) => {
-        console.log(err.response.data);
+        console.dir(err);
       });
 
     this.refresh();
@@ -51,11 +51,11 @@ class MessageViewContainer extends React.Component {
             });
           })
           .catch((err) => {
-            console.log(err.response.data);
+            console.dir(err);
           });
       })
       .catch((err) => {
-        console.log(err.response.data);
+        console.dir(err);
       });
   }
 
@@ -69,6 +69,25 @@ class MessageViewContainer extends React.Component {
       )
       .then((_res) => {
         this.refresh();
+      })
+      .catch((err) => {
+        console.dir(err);
+      });
+
+    if (this.state.user.id === this.state.message.user) return;
+
+    axios
+      .post(
+        `http://localhost:4000/api/notifications/${this.state.message.user}`,
+        {
+          notification: {
+            message: this.state.message._id,
+            type: "comment",
+          },
+        }
+      )
+      .catch((err) => {
+        console.dir(err);
       });
   }
 

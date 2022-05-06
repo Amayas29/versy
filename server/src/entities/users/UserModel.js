@@ -1,4 +1,4 @@
-const { hash, compare } = require("../../utils/hash");
+const { compare } = require("../../utils/hash");
 const Datastore = require("nedb");
 
 class UserModel {

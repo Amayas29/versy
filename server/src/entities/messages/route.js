@@ -3,6 +3,7 @@ const router = express.Router();
 const auth = require("../../middleware/auth");
 const messageModal = require("./MessageModal");
 const userModel = require("../users/UserModel");
+const notificationsModel = require("../notifications/NotificationModel");
 
 router.post("/", auth, async (req, res) => {
   const message = messageModal.messageTemplate(req.body.message);
@@ -22,6 +23,9 @@ router.delete("/:id", auth, async (req, res) => {
       message: "Message not found",
     });
   }
+
+  // Remove all notifications related to this message
+  await notificationsModel.removeNotificationsMessage(req.params.id);
 
   res.status(200).send({
     message: "Message deleted",

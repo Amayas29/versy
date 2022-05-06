@@ -32,3 +32,11 @@
   height: 40px;
   border-radius: 50%;
 }
+
+.no-notifications {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #f3f4f6;
+}

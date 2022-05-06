@@ -13,14 +13,14 @@ class SuggestionPanel extends React.Component {
     };
   }
 
-  UNSAFE_componentWillMount() {
+  UNSAFE_componentWillReceiveProps(_nextProps) {
     axios
       .get("http://localhost:4000/api/users/suggest")
       .then((res) => {
         this.setState({ users: res.data.users.slice(0, 4) });
       })
       .catch((err) => {
-        console.log(err.response.data);
+        console.dir(err);
       });
   }
 
@@ -35,7 +35,6 @@ class SuggestionPanel extends React.Component {
           setMainContainer={props.setMainContainer}
           setPage={props.setPage}
           more={<More setMainContainer={props.setMainContainer} />}
-          hasButton={false}
         />
       </div>
     );

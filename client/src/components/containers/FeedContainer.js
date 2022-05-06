@@ -28,7 +28,7 @@ class FeedContainer extends React.Component {
         this.setState({ user: res.data.user });
       })
       .catch((err) => {
-        console.log(err.response.data);
+        console.dir(err);
       });
 
     this.refresh();
@@ -45,7 +45,7 @@ class FeedContainer extends React.Component {
           this.setState({ messages: res.data.messages });
         })
         .catch((err) => {
-          console.log(err.response.data);
+          console.dir(err);
         });
 
       return;
@@ -87,7 +87,7 @@ class FeedContainer extends React.Component {
         this.refresh();
       })
       .catch((err) => {
-        console.log(err.response.data);
+        console.dir(err);
       });
   }
 }

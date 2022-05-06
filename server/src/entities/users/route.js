@@ -294,7 +294,6 @@ router.patch("/unfollow/:id", auth, async (req, res) => {
 });
 
 router.get("/stats", auth, async (req, res) => {
-  console.log(req.id);
   const messagesCount = await messageModel.countMessages(req.id);
   const commentsCount = await messageModel.countComments(req.id);
 
