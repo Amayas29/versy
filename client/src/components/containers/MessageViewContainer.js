@@ -74,7 +74,7 @@ class MessageViewContainer extends React.Component {
         console.dir(err);
       });
 
-    if (this.state.user.id === this.state.message.user) return;
+    if (this.state.user._id === this.state.message.user) return;
 
     axios
       .post(
