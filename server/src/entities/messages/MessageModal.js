@@ -172,34 +172,34 @@ class MessageModel {
             reject(err);
             return;
           }
+
+          // remove all comments
+          this.dt.remove(
+            { _id: { $in: [...msg.comments] } },
+            { multi: true },
+            (err) => {
+              if (err) {
+                reject(err);
+                return;
+              }
+
+              // remove the messages from all comments
+              this.dt.update(
+                {},
+                { $pull: { comments: id } },
+                { multi: true },
+                (err) => {
+                  if (err) {
+                    reject(err);
+                    return;
+                  }
+
+                  resolve(true);
+                }
+              );
+            }
+          );
         });
-
-        // remove all comments
-        this.dt.remove(
-          { _id: { $in: [...msg.comments] } },
-          { multi: true },
-          (err) => {
-            if (err) {
-              reject(err);
-              return;
-            }
-          }
-        );
-
-        // remove the messages from all comments
-        this.dt.update(
-          {},
-          { $pull: { comments: id } },
-          { multi: true },
-          (err) => {
-            if (err) {
-              reject(err);
-              return;
-            }
-
-            resolve(true);
-          }
-        );
       });
     });
   }

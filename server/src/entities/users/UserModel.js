@@ -138,32 +138,35 @@ class UserModel {
           return;
         }
 
-        if (!user) resolve(false);
+        if (!user) {
+          resolve(false);
+          return;
+        }
+
+        this.dt.update(
+          { _id: sender },
+          { $addToSet: { following: target } },
+          (err) => {
+            if (err) {
+              reject(err);
+              return;
+            }
+
+            this.dt.update(
+              { _id: target },
+              { $addToSet: { followers: sender } },
+              (err) => {
+                if (err) {
+                  reject(err);
+                  return;
+                }
+
+                resolve(true);
+              }
+            );
+          }
+        );
       });
-
-      this.dt.update(
-        { _id: sender },
-        { $addToSet: { following: target } },
-        (err) => {
-          if (err) {
-            reject(err);
-            return;
-          }
-        }
-      );
-
-      this.dt.update(
-        { _id: target },
-        { $addToSet: { followers: sender } },
-        (err) => {
-          if (err) {
-            reject(err);
-            return;
-          }
-
-          resolve(true);
-        }
-      );
     });
   }
 
@@ -175,32 +178,35 @@ class UserModel {
           return;
         }
 
-        if (!user) resolve(false);
+        if (!user) {
+          resolve(false);
+          return;
+        }
+
+        this.dt.update(
+          { _id: sender },
+          { $pull: { following: target } },
+          (err) => {
+            if (err) {
+              reject(err);
+              return;
+            }
+          }
+        );
+
+        this.dt.update(
+          { _id: target },
+          { $pull: { followers: sender } },
+          (err) => {
+            if (err) {
+              reject(err);
+              return;
+            }
+
+            resolve(true);
+          }
+        );
       });
-
-      this.dt.update(
-        { _id: sender },
-        { $pull: { following: target } },
-        (err) => {
-          if (err) {
-            reject(err);
-            return;
-          }
-        }
-      );
-
-      this.dt.update(
-        { _id: target },
-        { $pull: { followers: sender } },
-        (err) => {
-          if (err) {
-            reject(err);
-            return;
-          }
-
-          resolve(true);
-        }
-      );
     });
   }
 

@@ -13,8 +13,8 @@ import Input from "../Input";
 import LoginContainer from "./LoginContainer";
 import moment from "moment";
 import axios from "axios";
-import MainLayout from "../../layouts/MainLayout";
 import dateFormat from "dateformat";
+import AuthentificationLayout from "../../layouts/AuthentificationLayout";
 
 class SignupContainer extends React.Component {
   constructor(props) {
@@ -88,7 +88,13 @@ class SignupContainer extends React.Component {
           },
         })
         .then((_res) => {
-          this.props.setPage(<MainLayout setPage={this.props.setPage} />);
+          this.props.setContainer(
+            <LoginContainer
+              setContainer={this.props.setContainer}
+              setPage={this.props.setPage}
+              setHasLogo={this.props.setHasLogo}
+            />
+          );
         })
         .catch((err) => {
           console.dir(err.response);

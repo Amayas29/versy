@@ -62,7 +62,9 @@ router.get("/feed", auth, async (req, res) => {
 });
 
 router.put("/comment/:id", auth, async (req, res) => {
-  const commented = await messageModal.comment(req.params.id, req.body.comment);
+  req.body.comment.publishDate = getNow(true);
+  const comment = messageModal.messageTemplate(req.body.comment);
+  const commented = await messageModal.comment(req.params.id, comment);
 
   if (!commented) {
     res.status(404).send({

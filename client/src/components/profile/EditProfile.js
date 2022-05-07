@@ -54,6 +54,7 @@ class EditProfile extends React.Component {
     let birthday = "";
     if (this.state.user.birthday) {
       birthday = this.state.user.birthday;
+      birthday = moment(birthday, "DD/MM/YYYY").toDate();
       birthday = dateFormat(birthday, "yyyy-mm-dd");
     }
 

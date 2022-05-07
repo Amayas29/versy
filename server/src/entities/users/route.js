@@ -90,18 +90,9 @@ router.post("/register", async (req, res) => {
 
   // Create the user
   user = await userModel.insert(user);
-
-  // Connect the user
-  const token = await tokenModel.create(user._id);
-  res
-    .cookie("access_token", token, {
-      maxAge: tokenModel.maxAge,
-    })
-    .status(200)
-    .send({
-      message: "Successful registration",
-      token: token,
-    });
+  res.status(200).send({
+    message: "Successfully registered",
+  });
 });
 
 // logout
@@ -249,6 +240,14 @@ router.patch("/follow/:id", auth, async (req, res) => {
   const userToFollow = req.params.id;
   let sender = req.id;
 
+  if (sender === userToFollow) {
+    res.status(400).send({
+      message: "You can't follow yourself",
+    });
+
+    return;
+  }
+
   const follow = await userModel.follow(sender, userToFollow);
 
   if (!follow) {
@@ -273,6 +272,14 @@ router.patch("/follow/:id", auth, async (req, res) => {
 router.patch("/unfollow/:id", auth, async (req, res) => {
   const userToUnfollow = req.params.id;
   let sender = req.id;
+
+  if (sender === userToUnfollow) {
+    res.status(400).send({
+      message: "You can't unfollow yourself",
+    });
+
+    return;
+  }
 
   const unfollow = await userModel.unfollow(sender, userToUnfollow);
 

@@ -1,0 +1,443 @@
+{
+	"info": {
+		"_postman_id": "ebfe4a75-5c7a-46fd-a6a1-c7074bdd9db0",
+		"name": "Versy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Signup request",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user\": {\n    \"avatar\": \"\",\n    \"name\": \"Amayas\",\n    \"username\": \"amayas-29\",\n    \"email\": \"sadi.amayas29@gmail.com\",\n    \"password\": \"Amayas29@\",\n    \"bio\": \"NFTs hunter\" ,\n    \"birthday\": \"29/05/2001\",\n    \"joinedDate\": \"07/05/2022\",\n    \"followers\": [],\n    \"followings\": []\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/api/users/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"users",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login request",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"makhlouf.rayane2001@gmail.com\",\n    \"password\": \"47Dayane2001@\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/api/users/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout request",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/api/users/logout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"users",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update informations request",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user\": {\n        \"_id\": \"PDkj3XmvrI4u2QYs\",\n        \"password\": \"47Dayane2001@\"\n    },\n    \"password\": \"47Dayane2001@\",\n    \"newPassword\": \"47dayanE2001@\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/api/users/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get user informations request",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"params\": {\n        \"id\": \"PDkj3XmvrI4u2QYs\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/api/users/PDkj3XmvrI4u2QYs",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"users",
+						"PDkj3XmvrI4u2QYs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get user statistics request",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"PDkj3XmvrI4u2QYs\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/api/users/stats",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"users",
+						"stats"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fllowing request ",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n \"params\":\n {\n     \"id\": \"DjyYrHx5p4pFpCP0\"\n },\n \"id\": \"JynsIbqlYjJWWOvE\"    \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/api/users/follow/DjyYrHx5p4pFpCP0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"users",
+						"follow",
+						"DjyYrHx5p4pFpCP0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Verify token validty request",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/api/token/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ikp5bnNJYnFsWWpKV1dPdkUiLCJpYXQiOjE2NTE5MDU1OTUsImV4cCI6MjI1NjcwNTU5NX0.UEOx7I2jtgxPp_5ciIQ8L3obBdqJyJAFb8K3a-0wBx0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"token",
+						"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ikp5bnNJYnFsWWpKV1dPdkUiLCJpYXQiOjE2NTE5MDU1OTUsImV4cCI6MjI1NjcwNTU5NX0.UEOx7I2jtgxPp_5ciIQ8L3obBdqJyJAFb8K3a-0wBx0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Creating a message request",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"message\": \"LFGGG!\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/api/messages/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"messages",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete message request",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/api/messages/bhOVJWzOdJbMOqij",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"messages",
+						"bhOVJWzOdJbMOqij"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "retrieving message by user id request",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"params\": {\n        \"id\": \"JynsIbqlYjJWWOvE\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/api/messages/user/bhOVJWzOdJbMOqij",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"messages",
+						"user",
+						"bhOVJWzOdJbMOqij"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Unfollow request",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n \"params\":\n {\n     \"id\": \"DjyYrHx5p4pFpCP0\"\n },\n \"id\": \"JynsIbqlYjJWWOvE\"    \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/api/users/unfollow/DjyYrHx5p4pFpCP0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"users",
+						"unfollow",
+						"DjyYrHx5p4pFpCP0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get followers request",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n \"params\":\n {\n     \"id\": \"JynsIbqlYjJWWOvE\"\n } \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/api/users/follows/DjyYrHx5p4pFpCP0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"users",
+						"follows",
+						"DjyYrHx5p4pFpCP0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Comment a message request",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"comment\": {\n        \"content\": \"LFG my bro\",\n        \"image\": \"\",\n        \"user\": \"vncUCV251pLAUslu\",\n        \"likes\": [],\n        \"isComment\": true,\n        \"comments\": []\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/api/messages/comment/BH517DZ2b05t1bNn",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"messages",
+						"comment",
+						"BH517DZ2b05t1bNn"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
