@@ -13,3 +13,5 @@
 {"message":"VUeqiOHLu2ghiuPp","type":"like","sender_id":"A6fXTzAGczB7ra3h","user_id":"zJ1RwmVxCs9YUftL","created_at":"07/05/2022 18:11:56","_id":"JnpvIC0vl55Gwqzo"}
 {"message":"tDy7OvLca4XgUsDS","type":"like","sender_id":"KL8FKxDpg7T56zNK","user_id":"A6fXTzAGczB7ra3h","created_at":"07/05/2022 18:12:18","_id":"bwxZgC3OVpTZeiZG"}
 {"message":"VUeqiOHLu2ghiuPp","type":"like","sender_id":"KL8FKxDpg7T56zNK","user_id":"zJ1RwmVxCs9YUftL","created_at":"07/05/2022 18:12:19","_id":"FAmvGOnnuqPWcHPB"}
+{"message":"","type":"follow","sender_id":"KL8FKxDpg7T56zNK","user_id":"A6fXTzAGczB7ra3h","created_at":"07/05/2022 18:46:56","_id":"EFULsaTPwUNse6h4"}
+{"$$deleted":true,"_id":"EFULsaTPwUNse6h4"}
