@@ -42,8 +42,6 @@ class MessageHeader extends React.Component {
       props.message.publishDate,
       "DD/MM/YYYY HH:mm:ss"
     ).toDate();
-    console.log(date);
-    console.log(props.message.publishDate);
     const time = timeElapsed(date);
 
     const user = this.state.user;

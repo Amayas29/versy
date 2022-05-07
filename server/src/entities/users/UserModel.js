@@ -14,7 +14,6 @@ class UserModel {
   }
 
   userTemplate(user, withId = false) {
-    console.log(user);
     const userTemplate = {
       avatar: user.avatar || "",
       name: user.name || "",

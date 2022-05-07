@@ -18,7 +18,7 @@ router.post("/login", async (req, res) => {
 
   // Verify if the user exists
   const user = await userModel.getByEmail(email);
-  console.log(user);
+
   if (!user) {
     res.status(401).send({
       field: "email",
