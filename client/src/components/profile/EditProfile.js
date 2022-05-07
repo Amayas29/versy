@@ -19,7 +19,6 @@ class EditProfile extends React.Component {
 
     this.state = {
       user: props.user,
-
       newPassword: "",
       password: "",
 
@@ -193,6 +192,7 @@ class EditProfile extends React.Component {
             }
 
             let birth = moment(event.target.value, "YYYY-MM-DD").toDate();
+            birth = dateFormat(birth, "dd/mm/yyyy");
             this.editUserInformations("birthday", birth);
           }}
         />

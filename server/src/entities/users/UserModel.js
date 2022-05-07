@@ -14,6 +14,7 @@ class UserModel {
   }
 
   userTemplate(user, withId = false) {
+    console.log(user);
     const userTemplate = {
       avatar: user.avatar || "",
       name: user.name || "",
@@ -21,8 +22,8 @@ class UserModel {
       email: user.email || "",
       password: user.password || "",
       bio: user.bio || "",
-      birthday: user.birthday || null,
-      joinedDate: user.joinedDate || null,
+      birthday: user.birthday || "",
+      joinedDate: user.joinedDate || "",
       followers: user.followers || [],
       following: user.following || [],
     };

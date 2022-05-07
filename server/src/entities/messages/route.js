@@ -4,8 +4,10 @@ const auth = require("../../middleware/auth");
 const messageModal = require("./MessageModal");
 const userModel = require("../users/UserModel");
 const notificationsModel = require("../notifications/NotificationModel");
+const getNow = require("../../utils/date");
 
 router.post("/", auth, async (req, res) => {
+  req.body.message.publishDate = getNow(true);
   const message = messageModal.messageTemplate(req.body.message);
 
   await messageModal.insert(message);

@@ -6,6 +6,7 @@ const messageModel = require("../messages/MessageModal");
 const auth = require("../../middleware/auth");
 const { hash } = require("../../utils/hash");
 const fs = require("fs");
+const getNow = require("../../utils/date");
 
 const nothing =
   "data:image/png;base64," +
@@ -17,7 +18,7 @@ router.post("/login", async (req, res) => {
 
   // Verify if the user exists
   const user = await userModel.getByEmail(email);
-
+  console.log(user);
   if (!user) {
     res.status(401).send({
       field: "email",
@@ -59,7 +60,7 @@ router.post("/login", async (req, res) => {
 router.post("/register", async (req, res) => {
   let user = userModel.userTemplate(req.body.user);
   user.password = await hash(user.password);
-  user.joinedDate = new Date();
+  user.joinedDate = getNow();
   user.name = user.username;
   user.avatar = nothing;
 

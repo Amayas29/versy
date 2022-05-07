@@ -14,6 +14,7 @@ import LoginContainer from "./LoginContainer";
 import moment from "moment";
 import axios from "axios";
 import MainLayout from "../../layouts/MainLayout";
+import dateFormat from "dateformat";
 
 class SignupContainer extends React.Component {
   constructor(props) {
@@ -74,7 +75,8 @@ class SignupContainer extends React.Component {
       usernameValidation.status &&
       birthdayValidation.status
     ) {
-      const date = moment(birthday, "YYYY-MM-DD").toDate();
+      let date = moment(birthday, "YYYY-MM-DD").toDate();
+      date = dateFormat(date, "dd/mm/yyyy");
 
       axios
         .post("http://localhost:4000/api/users/register", {

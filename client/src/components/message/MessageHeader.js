@@ -6,6 +6,7 @@ import MessageOptions from "./MessageOptions";
 import Popup from "reactjs-popup";
 import axios from "axios";
 import Cookies from "js-cookie";
+import moment from "moment";
 
 class MessageHeader extends React.Component {
   constructor(props) {
@@ -37,7 +38,10 @@ class MessageHeader extends React.Component {
 
   render() {
     const props = this.props;
-    const date = new Date(props.message.publishDate);
+    const date = moment(
+      props.message.publishDate,
+      "DD/MM/YYYY HH:mm:ss"
+    ).toDate();
     const time = timeElapsed(date);
 
     const user = this.state.user;

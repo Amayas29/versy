@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const notificationModel = require("../notifications/NotificationModel");
 const auth = require("../../middleware/auth");
+const getNow = require("../../utils/date");
 
 router.post("/search", auth, async (req, res) => {
   let result = await notificationModel.search(req.body.notification);
@@ -25,7 +26,7 @@ router.post("/:id", auth, async (req, res) => {
 
   req.body.notification.user_id = id;
   req.body.notification.sender_id = req.id;
-  req.body.notification.created_at = new Date();
+  req.body.notification.created_at = getNow(true);
 
   let notif = await notificationModel.notificationTemplate(
     req.body.notification

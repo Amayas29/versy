@@ -7,6 +7,7 @@ import AuthentificationLayout from "../../layouts/AuthentificationLayout";
 import axios from "axios";
 import Cookies from "js-cookie";
 import FollowList from "./FollowList";
+import moment from "moment";
 
 class UserBanner extends React.Component {
   constructor(props) {
@@ -40,9 +41,11 @@ class UserBanner extends React.Component {
     };
 
     let joinedDate = this.state.user.joinedDate;
+    joinedDate = moment(joinedDate, "DD/MM/YYYY").toDate();
     joinedDate = dateFormat(joinedDate, "mmm dd, yyyy");
 
     let birthday = this.state.user.birthday;
+    birthday = moment(birthday, "DD/MM/YYYY").toDate();
     birthday = dateFormat(birthday, "mmm dd, yyyy");
 
     const sender = this.state.sender;

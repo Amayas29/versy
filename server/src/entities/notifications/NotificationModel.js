@@ -14,7 +14,7 @@ class NotificationModel {
       type: notif.type || "",
       sender_id: notif.sender_id || "",
       user_id: notif.user_id || "",
-      created_at: notif.created_at || null,
+      created_at: notif.created_at || "",
     };
 
     if (withId) notification._id = notif._id;

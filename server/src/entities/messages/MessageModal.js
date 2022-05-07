@@ -14,7 +14,7 @@ class MessageModel {
       content: msg.content || "",
       image: msg.image || "",
       user: msg.user || "",
-      publishDate: msg.publishDate || null,
+      publishDate: msg.publishDate || "",
       likes: msg.likes || [],
       isComment: msg.isComment || false,
       comments: msg.comments || [],

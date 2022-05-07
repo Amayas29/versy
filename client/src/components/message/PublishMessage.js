@@ -104,7 +104,6 @@ class PublishMessage extends React.Component {
       content: content,
       image: this.state.image,
       user: this.props.user._id,
-      publishDate: new Date(),
       likes: [],
       isComment: this.props.isComment || false,
       comments: [],
