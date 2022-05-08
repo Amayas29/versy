@@ -14,6 +14,7 @@ class ProfileContainer extends React.Component {
     };
 
     this.refresh = this.refresh.bind(this);
+    this.fetchMessages = this.fetchMessages.bind(this);
   }
 
   UNSAFE_componentWillMount() {
@@ -35,23 +36,40 @@ class ProfileContainer extends React.Component {
   }
 
   refresh() {
-    let id = "";
-    if (this.props.user) id = this.props.user._id;
-    else id = this.state.user._id;
-
     this.setState({
-      messages: [],
       user: null,
     });
 
+    if (this.props.user) {
+      axios
+        .get(`http://localhost:4000/api/users/${this.props.user._id}`)
+        .then((res) => {
+          this.setState({ user: res.data.user });
+          this.fetchMessages(this.props.user._id);
+        })
+        .catch((err) => {
+          console.dir(err);
+        });
+
+      return;
+    }
+
+    const token = Cookies.get("access_token");
     axios
-      .get(`http://localhost:4000/api/users/${id}`)
+      .get(`http://localhost:4000/api/token/${token}`)
       .then((res) => {
         this.setState({ user: res.data.user });
+        this.fetchMessages(res.data.user._id);
       })
       .catch((err) => {
         console.dir(err);
       });
+  }
+
+  fetchMessages(id) {
+    this.setState({
+      messages: [],
+    });
 
     axios
       .get(`http://localhost:4000/api/messages/user/${id}`)
