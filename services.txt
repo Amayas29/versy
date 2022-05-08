@@ -1,0 +1,37 @@
+Les services liées au User sont : /api/users
+    - post login : connexion
+    - post register : Inscription
+    - get logout : déconnexion de l'utilisateur
+    - get / : retourner la liste des utilisateurs
+    - put / : modifier les informations de l'utilisateur
+    - delete / : supprimer l'utilisateur
+    - patch follow/:id : Follow un utilisateur
+    - patch unfollow/:id : Unfollow un utilisateur
+    - get stats : retourner les statistiques de l'utilisateur
+    - get search/:query : rechercher un utilisateur
+    - get suggest : retourner les utilisateurs suggérés
+    - get follows/:id : retourner les listes des followers et des followings
+    - get /:id : retourner les informations d'un utilisateur
+
+Les services liées aux messages sont : /api/messages
+    - post / : envoyer un message
+    - delete /:id : supprimer un message
+    - get / : retourner tous les messages de versy
+    - get user/:id : retourner les messages d'un utilisateur
+    - get feed : retourner les messages du fil d'actualité d'un utilisateur
+    - put comment/:id : commenter un message
+    - put like/:id : liker un message
+    - put unlike/:id : unliker un message
+    - get comments/:id : retourner les commentaires d'un message
+    - get likes/:id : retourner les likes d'un message
+    - get search/:query : rechercher un message
+    - get /:id : retourner les informations d'un message
+
+Les services liées aux notifications sont : /api/notifications
+    - post search : rechercher une notification
+    - post /:id : envoyer une notification
+    - delete /:id : supprimer une notification
+    - get / : retourner toutes les notifications
+
+Les services liées aux token sont : /api/token
+    - get /:token : retourner l'utilisateur associé à un token

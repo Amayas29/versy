@@ -2,7 +2,6 @@ const chaiHttp = require("chai-http");
 const chai = require("chai");
 const app = require("../src/app.js");
 const mocha = require("mocha");
-const getNow = require("../src/utils/date");
 
 // Configurer chai
 chai.use(chaiHttp);
@@ -26,7 +25,7 @@ mocha.describe("/GET users/:id", () => {
   mocha.it("it should GET a user by the given id", (done) => {
     chai
       .request(app.default)
-      .get("/api/users/zJ1RwmVxCs9YUftL")
+      .get("/api/users/A6fXTzAGczB7ra3h")
       .end((_err, res) => {
         res.should.have.status(200);
         done();

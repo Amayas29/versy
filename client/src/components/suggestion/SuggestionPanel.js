@@ -20,7 +20,7 @@ class SuggestionPanel extends React.Component {
         this.setState({ users: res.data.users.slice(0, 4) });
       })
       .catch((err) => {
-        console.dir(err);
+        // console.dir(err);
       });
   }
 

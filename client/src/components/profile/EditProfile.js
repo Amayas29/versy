@@ -122,7 +122,7 @@ class EditProfile extends React.Component {
                   this.props.close();
                 })
                 .catch((err) => {
-                  console.dir(err);
+                  // console.dir(err);
                   this.setState({
                     errors: {
                       ...this.state.errors,

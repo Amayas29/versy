@@ -21,14 +21,12 @@ class UserBanner extends React.Component {
 
   UNSAFE_componentWillMount() {
     const token = Cookies.get("access_token");
-    axios
-      .get(`http://localhost:4000/api/token/${token}`)
-      .then((res) => {
-        this.setState({ sender: res.data.user });
-      })
-      .catch((err) => {
-        console.dir(err);
-      });
+
+    if (!token) return;
+
+    axios.get(`http://localhost:4000/api/token/${token}`).then((res) => {
+      this.setState({ sender: res.data.user });
+    });
   }
 
   render() {
@@ -91,9 +89,6 @@ class UserBanner extends React.Component {
                         sender: res.data.sender,
                         user: res.data.user,
                       });
-                    })
-                    .catch((err) => {
-                      console.dir(err);
                     });
 
                   axios
@@ -107,17 +102,9 @@ class UserBanner extends React.Component {
                     })
                     .then((res) => {
                       if (!res.data.id) return;
-                      axios
-                        .delete(
-                          `http://localhost:4000/api/notifications/${res.data.id}`
-                        )
-
-                        .catch((err) => {
-                          console.dir(err);
-                        });
-                    })
-                    .catch((err) => {
-                      console.dir(err);
+                      axios.delete(
+                        `http://localhost:4000/api/notifications/${res.data.id}`
+                      );
                     });
 
                   return;
@@ -134,26 +121,19 @@ class UserBanner extends React.Component {
                       sender: res.data.sender,
                       user: res.data.user,
                     });
-                  })
-                  .catch((err) => {
-                    console.dir(err);
                   });
 
-                axios
-                  .post(
-                    `http://localhost:4000/api/notifications/${this.state.user._id}`,
-                    {
-                      notification: {
-                        message: "",
-                        type: "follow",
-                        user_id: this.state.user._id,
-                        sender_id: this.state.sender._id,
-                      },
-                    }
-                  )
-                  .catch((err) => {
-                    console.dir(err);
-                  });
+                axios.post(
+                  `http://localhost:4000/api/notifications/${this.state.user._id}`,
+                  {
+                    notification: {
+                      message: "",
+                      type: "follow",
+                      user_id: this.state.user._id,
+                      sender_id: this.state.sender._id,
+                    },
+                  }
+                );
 
                 return;
               }

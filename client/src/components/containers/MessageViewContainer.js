@@ -22,14 +22,11 @@ class MessageViewContainer extends React.Component {
   UNSAFE_componentWillMount() {
     const token = Cookies.get("access_token");
 
-    axios
-      .get(`http://localhost:4000/api/token/${token}`)
-      .then((res) => {
-        this.setState({ user: res.data.user });
-      })
-      .catch((err) => {
-        console.dir(err);
-      });
+    if (!token) return;
+
+    axios.get(`http://localhost:4000/api/token/${token}`).then((res) => {
+      this.setState({ user: res.data.user });
+    });
 
     this.refresh();
   }
@@ -49,13 +46,7 @@ class MessageViewContainer extends React.Component {
               comments: res.data.comments,
               message: msg_res.data.msg,
             });
-          })
-          .catch((err) => {
-            console.dir(err);
           });
-      })
-      .catch((err) => {
-        console.dir(err);
       });
   }
 
@@ -69,26 +60,19 @@ class MessageViewContainer extends React.Component {
       )
       .then((_res) => {
         this.refresh();
-      })
-      .catch((err) => {
-        console.dir(err);
       });
 
     if (this.state.user._id === this.state.message.user) return;
 
-    axios
-      .post(
-        `http://localhost:4000/api/notifications/${this.state.message.user}`,
-        {
-          notification: {
-            message: this.state.message._id,
-            type: "comment",
-          },
-        }
-      )
-      .catch((err) => {
-        console.dir(err);
-      });
+    axios.post(
+      `http://localhost:4000/api/notifications/${this.state.message.user}`,
+      {
+        notification: {
+          message: this.state.message._id,
+          type: "comment",
+        },
+      }
+    );
   }
 
   render() {

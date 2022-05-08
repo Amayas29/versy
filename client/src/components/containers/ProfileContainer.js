@@ -19,15 +19,13 @@ class ProfileContainer extends React.Component {
 
   UNSAFE_componentWillMount() {
     const token = Cookies.get("access_token");
-    axios
-      .get(`http://localhost:4000/api/token/${token}`)
-      .then((res) => {
-        this.setState({ user: res.data.user });
-        this.refresh();
-      })
-      .catch((err) => {
-        console.dir(err);
-      });
+
+    if (!token) return;
+
+    axios.get(`http://localhost:4000/api/token/${token}`).then((res) => {
+      this.setState({ user: res.data.user });
+      this.refresh();
+    });
   }
 
   UNSAFE_componentWillReceiveProps(nextProps) {
@@ -46,24 +44,19 @@ class ProfileContainer extends React.Component {
         .then((res) => {
           this.setState({ user: res.data.user });
           this.fetchMessages(this.props.user._id);
-        })
-        .catch((err) => {
-          console.dir(err);
         });
 
       return;
     }
 
     const token = Cookies.get("access_token");
-    axios
-      .get(`http://localhost:4000/api/token/${token}`)
-      .then((res) => {
-        this.setState({ user: res.data.user });
-        this.fetchMessages(res.data.user._id);
-      })
-      .catch((err) => {
-        console.dir(err);
-      });
+
+    if (!token) return;
+
+    axios.get(`http://localhost:4000/api/token/${token}`).then((res) => {
+      this.setState({ user: res.data.user });
+      this.fetchMessages(res.data.user._id);
+    });
   }
 
   fetchMessages(id) {
@@ -71,14 +64,9 @@ class ProfileContainer extends React.Component {
       messages: [],
     });
 
-    axios
-      .get(`http://localhost:4000/api/messages/user/${id}`)
-      .then((res) => {
-        this.setState({ messages: res.data.messages });
-      })
-      .catch((err) => {
-        console.dir(err);
-      });
+    axios.get(`http://localhost:4000/api/messages/user/${id}`).then((res) => {
+      this.setState({ messages: res.data.messages });
+    });
   }
 
   render() {

@@ -80,9 +80,9 @@ router.put("/comment/:id", auth, async (req, res) => {
 });
 
 router.put("/like/:id", auth, async (req, res) => {
-  const liked = await messageModal.like(req.params.id, req.id);
+  const found = await messageModal.like(req.params.id, req.id);
 
-  if (!liked) {
+  if (!found) {
     res.status(404).send({
       message: "Message not found",
     });

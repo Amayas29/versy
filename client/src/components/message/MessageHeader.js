@@ -20,14 +20,12 @@ class MessageHeader extends React.Component {
 
   UNSAFE_componentWillMount() {
     const token = Cookies.get("access_token");
-    axios
-      .get(`http://localhost:4000/api/token/${token}`)
-      .then((res) => {
-        this.setState({ user: res.data.user });
-      })
-      .catch((err) => {
-        console.dir(err);
-      });
+
+    if (!token) return;
+
+    axios.get(`http://localhost:4000/api/token/${token}`).then((res) => {
+      this.setState({ user: res.data.user });
+    });
 
     axios
       .get(`http://localhost:4000/api/users/${this.props.message.user}`)

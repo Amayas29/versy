@@ -18,7 +18,7 @@ class NotificationsContainer extends React.Component {
         this.setState({ notifications: res.data.notifications });
       })
       .catch((err) => {
-        console.dir(err);
+        // console.dir(err);
       });
   }
 

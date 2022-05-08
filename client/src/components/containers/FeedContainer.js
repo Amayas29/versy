@@ -22,14 +22,11 @@ class FeedContainer extends React.Component {
   UNSAFE_componentWillMount() {
     const token = Cookies.get("access_token");
 
-    axios
-      .get(`http://localhost:4000/api/token/${token}`)
-      .then((res) => {
-        this.setState({ user: res.data.user });
-      })
-      .catch((err) => {
-        console.dir(err);
-      });
+    if (!token) return;
+
+    axios.get(`http://localhost:4000/api/token/${token}`).then((res) => {
+      this.setState({ user: res.data.user });
+    });
 
     this.refresh();
   }
@@ -39,14 +36,9 @@ class FeedContainer extends React.Component {
     const token = Cookies.get("access_token");
 
     if (token) {
-      axios
-        .get("http://localhost:4000/api/messages/feed")
-        .then((res) => {
-          this.setState({ messages: res.data.messages });
-        })
-        .catch((err) => {
-          console.dir(err);
-        });
+      axios.get("http://localhost:4000/api/messages/feed").then((res) => {
+        this.setState({ messages: res.data.messages });
+      });
 
       return;
     }
@@ -85,9 +77,6 @@ class FeedContainer extends React.Component {
       })
       .then((_res) => {
         this.refresh();
-      })
-      .catch((err) => {
-        console.dir(err);
       });
   }
 }

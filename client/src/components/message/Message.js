@@ -28,14 +28,12 @@ class Message extends React.Component {
 
   UNSAFE_componentWillMount() {
     const token = Cookies.get("access_token");
-    axios
-      .get(`http://localhost:4000/api/token/${token}`)
-      .then((res) => {
-        this.setState({ user: res.data.user });
-      })
-      .catch((err) => {
-        console.dir(err);
-      });
+
+    if (!token) return;
+
+    axios.get(`http://localhost:4000/api/token/${token}`).then((res) => {
+      this.setState({ user: res.data.user });
+    });
 
     if (!this.props.message) return;
 
@@ -43,9 +41,6 @@ class Message extends React.Component {
       .get(`http://localhost:4000/api/users/${this.props.message.user}`)
       .then((res) => {
         this.setState({ sender: res.data.user });
-      })
-      .catch((err) => {
-        console.dir(err);
       });
 
     this.refresh();
@@ -56,9 +51,6 @@ class Message extends React.Component {
       .get(`http://localhost:4000/api/messages/${this.state.message._id}`)
       .then((res) => {
         this.setState({ message: res.data.msg });
-      })
-      .catch((err) => {
-        console.dir(err);
       });
   }
 
@@ -68,9 +60,6 @@ class Message extends React.Component {
         .put(`http://localhost:4000/api/messages/unlike/${messageId}`)
         .then((_res) => {
           this.refresh();
-        })
-        .catch((err) => {
-          console.dir(err);
         });
 
       if (this.state.user._id === this.state.sender._id) return;
@@ -87,14 +76,9 @@ class Message extends React.Component {
         .then((res) => {
           if (!res.data.id) return;
 
-          axios
-            .delete(`http://localhost:4000/api/notifications/${res.data.id}`)
-            .catch((err) => {
-              console.dir(err);
-            });
-        })
-        .catch((err) => {
-          console.dir(err);
+          axios.delete(
+            `http://localhost:4000/api/notifications/${res.data.id}`
+          );
         });
 
       return;
@@ -104,9 +88,6 @@ class Message extends React.Component {
       .put(`http://localhost:4000/api/messages/like/${messageId}`)
       .then((_res) => {
         this.refresh();
-      })
-      .catch((err) => {
-        console.dir(err);
       });
 
     if (this.state.user._id === this.state.sender._id) return;

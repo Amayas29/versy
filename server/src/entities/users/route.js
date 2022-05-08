@@ -89,7 +89,7 @@ router.post("/register", async (req, res) => {
   }
 
   // Create the user
-  user = await userModel.insert(user);
+  await userModel.insert(user);
   res.status(200).send({
     message: "Successfully registered",
   });

@@ -34,7 +34,7 @@ class SearchContainer extends React.Component {
           this.setState({ results: res.data.users, users: true });
         })
         .catch((err) => {
-          console.dir(err);
+          // console.dir(err);
         });
     } else {
       axios
@@ -43,7 +43,7 @@ class SearchContainer extends React.Component {
           this.setState({ results: res.data.messages, users: false });
         })
         .catch((err) => {
-          console.dir(err);
+          // console.dir(err);
         });
     }
   }

@@ -7,12 +7,23 @@
 	"item": [
 		{
 			"name": "Signup request",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"user\": {\n    \"avatar\": \"\",\n    \"name\": \"Amayas\",\n    \"username\": \"amayas-29\",\n    \"email\": \"sadi.amayas29@gmail.com\",\n    \"password\": \"Amayas29@\",\n    \"bio\": \"NFTs hunter\" ,\n    \"birthday\": \"29/05/2001\",\n    \"joinedDate\": \"07/05/2022\",\n    \"followers\": [],\n    \"followings\": []\n    }\n}",
+					"raw": "{\n    \"user\": {\n    \"username\": \"Amayas29\",\n    \"email\": \"amayas29sd@gmail.com\",\n    \"password\": \"Amayas29@\",\n    \"birthday\": \"29/05/2001\"\n    }\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -105,7 +116,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"user\": {\n        \"_id\": \"PDkj3XmvrI4u2QYs\",\n        \"password\": \"47Dayane2001@\"\n    },\n    \"password\": \"47Dayane2001@\",\n    \"newPassword\": \"47dayanE2001@\"\n}",
+					"raw": "{\n    \"user\": {\n        \"_id\": \"vncUCV251pLAUslu\",\n        \"name\":\"Amayas\",\n        \"email\":\"amayas29sd@gmail.com\",\n        \"bio\": \"Nft hunter\",\n        \"birthday\": \"29/05/2001\",\n        \"password\": \"$2b$10$L6cRSL3SQ3fvXMTF6czFX.Bp6sEmzPOmMEn2wCTQrrLKf9YLoiOhm\"\n    },\n\n    \"password\": \"Amayas29@\",\n    \"newPassword\": \"Dayane47@\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -138,7 +149,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"params\": {\n        \"id\": \"PDkj3XmvrI4u2QYs\"\n    }\n}",
+					"raw": "{\n\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -146,7 +157,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:4000/api/users/PDkj3XmvrI4u2QYs",
+					"raw": "http://localhost:4000/api/users/vncUCV251pLAUslu",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -155,7 +166,7 @@
 					"path": [
 						"api",
 						"users",
-						"PDkj3XmvrI4u2QYs"
+						"vncUCV251pLAUslu"
 					]
 				}
 			},
@@ -171,7 +182,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"id\": \"PDkj3XmvrI4u2QYs\"\n}",
+					"raw": "{\n\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -201,7 +212,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n \"params\":\n {\n     \"id\": \"DjyYrHx5p4pFpCP0\"\n },\n \"id\": \"JynsIbqlYjJWWOvE\"    \n}",
+					"raw": "{\n\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -209,7 +220,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:4000/api/users/follow/DjyYrHx5p4pFpCP0",
+					"raw": "http://localhost:4000/api/users/follow/Yc56Etyghc56s",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -219,7 +230,7 @@
 						"api",
 						"users",
 						"follow",
-						"DjyYrHx5p4pFpCP0"
+						"Yc56Etyghc56s"
 					]
 				}
 			},
@@ -265,7 +276,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"message\": \"LFGGG!\"\n}",
+					"raw": "{\n    \"message\": {\n        \"content\": \"Just sending from postman guys !\",\n        \"image\": \"\",\n        \"user\": \"A6fXTzAGczB7ra3h\",\n        \"likes\": [],\n        \"isComment\": false,\n        \"comments\": []\n    }\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -294,7 +305,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:4000/api/messages/bhOVJWzOdJbMOqij",
+					"raw": "http://localhost:4000/api/messages/k420TUlp3o1b0xvm",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -303,7 +314,7 @@
 					"path": [
 						"api",
 						"messages",
-						"bhOVJWzOdJbMOqij"
+						"k420TUlp3o1b0xvm"
 					]
 				}
 			},
@@ -327,7 +338,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:4000/api/messages/user/bhOVJWzOdJbMOqij",
+					"raw": "http://localhost:4000/api/messages/user/vncUCV251pLAUslu",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -337,7 +348,7 @@
 						"api",
 						"messages",
 						"user",
-						"bhOVJWzOdJbMOqij"
+						"vncUCV251pLAUslu"
 					]
 				}
 			},
@@ -358,7 +369,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:4000/api/users/unfollow/DjyYrHx5p4pFpCP0",
+					"raw": "http://localhost:4000/api/users/unfollow/vsqncUCV251pLAUslu",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -368,7 +379,7 @@
 						"api",
 						"users",
 						"unfollow",
-						"DjyYrHx5p4pFpCP0"
+						"vsqncUCV251pLAUslu"
 					]
 				}
 			},
@@ -392,7 +403,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:4000/api/users/follows/DjyYrHx5p4pFpCP0",
+					"raw": "http://localhost:4000/api/users/follows/vncUCV251pLAUslu",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -402,7 +413,7 @@
 						"api",
 						"users",
 						"follows",
-						"DjyYrHx5p4pFpCP0"
+						"vncUCV251pLAUslu"
 					]
 				}
 			},

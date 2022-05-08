@@ -22,7 +22,7 @@ class Notification extends React.Component {
           this.setState({ message: res.data.msg });
         })
         .catch((err) => {
-          console.dir(err);
+          // console.dir(err);
         });
     }
 
@@ -33,7 +33,7 @@ class Notification extends React.Component {
           this.setState({ sender: res.data.user });
         })
         .catch((err) => {
-          console.dir(err);
+          // console.dir(err);
         });
     }
   }

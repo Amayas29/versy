@@ -18,7 +18,7 @@ class MessageLikes extends React.Component {
         this.setState({ users: res.data.likes });
       })
       .catch((err) => {
-        console.dir(err);
+        // console.dir(err);
       });
   }
 
