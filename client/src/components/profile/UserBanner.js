@@ -8,6 +8,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import FollowList from "./FollowList";
 import moment from "moment";
+import BanWords from "./BanWords";
 
 class UserBanner extends React.Component {
   constructor(props) {
@@ -55,97 +56,118 @@ class UserBanner extends React.Component {
       <div className="user-banner-container">
         <UserHeader user={this.state.user} />
 
-        {sender && sender._id === this.state.user._id ? (
-          <Popup
-            trigger={<div className="btn user-banner-btn">Edit profile</div>}
-            contentStyle={style}
-            modal
-            closeOnDocumentClick
-            closeOnEscape
-            lockScroll={true}
-          >
-            {(close) => (
-              <EditProfile
-                user={this.state.user}
-                setMainContainer={this.props.setMainContainer}
-                setPage={this.props.setPage}
-                close={close}
-              />
-            )}
-          </Popup>
-        ) : (
-          <div
-            className="btn user-banner-btn"
-            onClick={() => {
-              if (token) {
-                if (isFollowing) {
+        <div className="buttons-container">
+          {sender && sender._id === this.state.user._id && (
+            <Popup
+              trigger={<div className="btn user-banner-btn">Ban words</div>}
+              contentStyle={style}
+              modal
+              closeOnDocumentClick
+              closeOnEscape
+              lockScroll={true}
+            >
+              {(close) => (
+                <BanWords
+                  user={this.state.user}
+                  close={close}
+                  setMainContainer={this.props.setMainContainer}
+                />
+              )}
+            </Popup>
+          )}
+
+          {sender && sender._id === this.state.user._id ? (
+            <Popup
+              trigger={<div className="btn user-banner-btn">Edit profile</div>}
+              contentStyle={style}
+              modal
+              closeOnDocumentClick
+              closeOnEscape
+              lockScroll={true}
+            >
+              {(close) => (
+                <EditProfile
+                  user={this.state.user}
+                  setMainContainer={this.props.setMainContainer}
+                  setPage={this.props.setPage}
+                  close={close}
+                />
+              )}
+            </Popup>
+          ) : (
+            <div
+              className="btn user-banner-btn"
+              onClick={() => {
+                if (token) {
+                  if (isFollowing) {
+                    axios
+                      .patch(
+                        `http://localhost:4000/api/users/unfollow/${this.state.user._id}`
+                      )
+                      .then((res) => {
+                        this.setState({ user: null, sender: null });
+                        this.setState({
+                          sender: res.data.sender,
+                          user: res.data.user,
+                        });
+                      });
+
+                    axios
+                      .post("http://localhost:4000/api/notifications/search", {
+                        notification: {
+                          type: "follow",
+                          message: "",
+                          user_id: this.state.user._id,
+                          sender_id: this.state.sender._id,
+                        },
+                      })
+                      .then((res) => {
+                        if (!res.data.id) return;
+                        axios.delete(
+                          `http://localhost:4000/api/notifications/${res.data.id}`
+                        );
+                      });
+
+                    return;
+                  }
+
                   axios
                     .patch(
-                      `http://localhost:4000/api/users/unfollow/${this.state.user._id}`
+                      `http://localhost:4000/api/users/follow/${this.state.user._id}`
                     )
                     .then((res) => {
                       this.setState({ user: null, sender: null });
+
                       this.setState({
                         sender: res.data.sender,
                         user: res.data.user,
                       });
                     });
 
-                  axios
-                    .post("http://localhost:4000/api/notifications/search", {
+                  axios.post(
+                    `http://localhost:4000/api/notifications/${this.state.user._id}`,
+                    {
                       notification: {
-                        type: "follow",
                         message: "",
+                        type: "follow",
                         user_id: this.state.user._id,
                         sender_id: this.state.sender._id,
                       },
-                    })
-                    .then((res) => {
-                      if (!res.data.id) return;
-                      axios.delete(
-                        `http://localhost:4000/api/notifications/${res.data.id}`
-                      );
-                    });
+                    }
+                  );
 
                   return;
                 }
 
-                axios
-                  .patch(
-                    `http://localhost:4000/api/users/follow/${this.state.user._id}`
-                  )
-                  .then((res) => {
-                    this.setState({ user: null, sender: null });
-
-                    this.setState({
-                      sender: res.data.sender,
-                      user: res.data.user,
-                    });
-                  });
-
-                axios.post(
-                  `http://localhost:4000/api/notifications/${this.state.user._id}`,
-                  {
-                    notification: {
-                      message: "",
-                      type: "follow",
-                      user_id: this.state.user._id,
-                      sender_id: this.state.sender._id,
-                    },
-                  }
+                this.props.setPage(
+                  <AuthentificationLayout setPage={this.props.setPage} />
                 );
-
-                return;
-              }
-
-              this.props.setPage(
-                <AuthentificationLayout setPage={this.props.setPage} />
-              );
-            }}
-          >
-            {isFollowing ? "Unfollow" : "Follow"}
-          </div>
-        )}
+              }}
+            >
+              {isFollowing ? "Unfollow" : "Follow"}
+            </div>
+          )}
+        </div>
 
         <span className="user-bio break">
           {this.state.user && this.state.user.bio}

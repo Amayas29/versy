@@ -39,17 +39,29 @@ class MessageModel {
 
   getByUserId(id) {
     return new Promise((resolve, reject) => {
-      this.dt
-        .find({ user: id, isComment: false })
-        .sort({ publishDate: -1 })
-        .exec((err, msgs) => {
-          if (err) {
-            reject(err);
-            return;
-          }
+      userModel.getById(id).then((user) => {
+        this.dt
+          .find({ user: id, isComment: false })
+          .sort({ publishDate: -1 })
+          .exec((err, msgs) => {
+            if (err) {
+              reject(err);
+              return;
+            }
 
-          resolve(msgs);
-        });
+            // filter messages that not containes an baned word
+            const messages = [];
+            for (const msg of msgs) {
+              if (
+                !user.banWords.some((word) =>
+                  msg.content.toLowerCase().includes(word.toLowerCase())
+                )
+              )
+                messages.push(msg);
+            }
+            resolve(messages);
+          });
+      });
     });
   }
 
@@ -83,7 +95,18 @@ class MessageModel {
               return;
             }
 
-            resolve(msgs);
+            // filter messages that not containes an baned word
+            const messages = [];
+            for (const msg of msgs) {
+              if (
+                !user.banWords.some((word) =>
+                  msg.content.toLowerCase().includes(word.toLowerCase())
+                )
+              )
+                messages.push(msg);
+            }
+
+            resolve(messages);
           });
       });
     });
@@ -102,7 +125,17 @@ class MessageModel {
             return;
           }
 
-          resolve(res.comments);
+          // filter comments that not containes an baned word
+          const comments = [];
+          for (const cm of res.comments) {
+            if (
+              !user.banWords.some((word) =>
+                cm.content.toLowerCase().includes(word.toLowerCase())
+              )
+            )
+              comments.push(cm);
+          }
+          resolve(comments);
         }
       );
     });

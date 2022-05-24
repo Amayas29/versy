@@ -25,6 +25,7 @@ class UserModel {
       joinedDate: user.joinedDate || "",
       followers: user.followers || [],
       following: user.following || [],
+      banWords: user.banWords || [],
     };
 
     if (withId) userTemplate._id = user._id || "";

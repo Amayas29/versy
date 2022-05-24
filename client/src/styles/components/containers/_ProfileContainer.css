@@ -79,7 +79,14 @@
   font-size: 13px;
 }
 
+.buttons-container {
+  align-self: flex-end;
+  display: flex;
+  gap: 20px;
+}
+
 .edit-profile,
+.ban-words,
 .follow-list {
   background-color: #111827;
   color: #f3f4f6;
@@ -95,7 +102,8 @@
   position: relative;
 }
 
-.edit-profile .input-container {
+.edit-profile .input-container,
+.ban-words .input-container {
   width: 100%;
   color: #f3f4f6;
   display: flex;
@@ -104,7 +112,8 @@
   position: relative;
 }
 
-.edit-profile .input {
+.edit-profile .input,
+.ban-words .input {
   padding: 7px 10px;
   width: calc(100% - 20px) !important;
   font-size: 20px;
@@ -118,7 +127,8 @@
   letter-spacing: 1px;
 }
 
-.edit-profile .input:focus {
+.edit-profile .input:focus,
+.ban-words .input:focus {
   border: 1px solid #5a00ee;
 }
 
@@ -146,6 +156,25 @@
 .edit-save {
   position: absolute;
   right: 20px;
+}
+
+.ban-save {
+  align-self: flex-end;
+}
+
+.ban-input {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.ban-words-list {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .edit-avatar {
